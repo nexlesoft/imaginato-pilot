@@ -513,11 +513,13 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4g7-Ac-QNI">
                                                     <rect key="frame" x="214" y="110" width="136" height="51"/>
+                                                    <color key="backgroundColor" red="0.10196078431372549" green="0.17254901960784313" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="136" id="WL9-of-TZl"/>
                                                         <constraint firstAttribute="height" constant="51" id="htN-pU-iq5"/>
                                                     </constraints>
-                                                    <state key="normal" image="icon-buyTicket"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                    <state key="normal" title="BUY TICKET"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -577,7 +579,6 @@
     <resources>
         <image name="ic_search-iPhone6P" width="30" height="30"/>
         <image name="icon-back-2" width="13" height="23"/>
-        <image name="icon-buyTicket" width="272" height="100"/>
-        <image name="icon-rating" width="98" height="30"/>
+        <image name="icon-rating" width="49" height="15"/>
     </resources>
 </document>

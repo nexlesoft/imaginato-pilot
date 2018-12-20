@@ -20,6 +20,8 @@ class MovieListCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.buyTicketButton.layer.cornerRadius = self.buyTicketButton.frame.height / 2
+        self.buyTicketButton.clipsToBounds = true
         // Initialization code
     }
 
