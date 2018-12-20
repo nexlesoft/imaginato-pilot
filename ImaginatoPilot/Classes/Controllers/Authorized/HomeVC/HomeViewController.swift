@@ -25,6 +25,7 @@ class HomeViewController: BaseViewController {
     @IBOutlet fileprivate weak var btnSearch: UIButton!
     @IBOutlet fileprivate weak var lblMovieTitle: UILabel!
     @IBOutlet fileprivate weak var lblMovieGenre: UILabel!
+    @IBOutlet fileprivate weak var lctRatioCarousel: NSLayoutConstraint!
     
     fileprivate var arrMovie: [MovieDTO] = []
     
@@ -69,7 +70,7 @@ extension HomeViewController {
     fileprivate func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
         lctHeightHeader.constant = Application.sharedInstance.appTopOffset + 44
-        carousel.type = .rotary
+        carousel.type = .linear
         carousel.delegate = self
         carousel.dataSource = self
         lblMovieTitle.text = ""
@@ -118,6 +119,8 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         if let movieView = view as? MovieCarouselView {
             movieView.binData(arrMovie[index])
+            movieView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            movieView.hiddenBuyTicket(true)
             return movieView
         }
         else {
@@ -126,6 +129,8 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
             let height = carousel.frame.size.height
             movieView.frame = CGRect(x: 0, y: 0, width: width, height: height)
             movieView.binData(arrMovie[index])
+            movieView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            movieView.hiddenBuyTicket(true)
             return movieView
         }
     }
@@ -133,8 +138,8 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
         if carousel.currentItemIndex < arrMovie.count && carousel.currentItemIndex >= 0 {
             let movie = arrMovie[carousel.currentItemIndex]
             self.lblMovieTitle.text = movie.title
-            if let genre = movie.genreIds?.first {
-                self.lblMovieGenre.text = genre.name ?? ""
+            if let genreIds = movie.genreIds {
+                self.lblMovieGenre.text = genreIds.map{$0.name ?? ""}.joined(separator: ", ")
             }
         }
         
@@ -147,6 +152,10 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     }
     
     func carouselDidEndScrollingAnimation(_ carousel: iCarousel) {
+        if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
+            currentView.transform = .identity
+            currentView.hiddenBuyTicket(false)
+        }
         self.carousellScroll = true
         UIView.animate(withDuration: 0.5) {
             self.lblMovieTitle.alpha = 1
@@ -166,10 +175,18 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     func carouselWillBeginDragging(_ carousel: iCarousel) {
         self.carousellScroll = false
         //self.stopTimer()
+        if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
+            currentView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            currentView.hiddenBuyTicket(true)
+        }
     }
     
     func carouselWillBeginScrollingAnimation(_ carousel: iCarousel) {
         self.carousellScroll = false
+        if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
+            currentView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            currentView.hiddenBuyTicket(true)
+        }
     }
     
     func carouselDidEndDecelerating(_ carousel: iCarousel) {
