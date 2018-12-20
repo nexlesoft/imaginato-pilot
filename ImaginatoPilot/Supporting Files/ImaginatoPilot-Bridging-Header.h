@@ -9,5 +9,6 @@
 #ifndef ImaginatoPilot_Bridging_Header_h
 #define ImaginatoPilot_Bridging_Header_h
 #import <CommonCrypto/CommonCrypto.h>
+#import "iCarousel.h"
 
 #endif /* ProjectTemplate_Bridging_Header_h */

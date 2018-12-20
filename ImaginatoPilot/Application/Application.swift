@@ -54,5 +54,16 @@ extension Application {
         let mainNav = UINavigationController(rootViewController: mainViewController)
         self.animationSwitchScreen(nav: mainNav, animation: animation)
     }
+    
+    var appTopOffset: CGFloat {
+        var topOffset  = UIApplication.shared.statusBarFrame.size.height
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.keyWindow
+            if let constant = window?.safeAreaInsets.top, constant > 0 {
+                topOffset = constant
+            }
+        }
+        return topOffset
+    }
 }
 

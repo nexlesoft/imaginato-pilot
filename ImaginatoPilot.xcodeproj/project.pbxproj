@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		18A9ADDA21CB7C4E00CDFC5E /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9ADD921CB7C4E00CDFC5E /* MovieListViewModel.swift */; };
 		18A9ADDC21CB7C7700CDFC5E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9ADDB21CB7C7700CDFC5E /* Movie.swift */; };
+		841DA58121CB8C9300378D9E /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 841DA57E21CB8C9300378D9E /* iCarousel.m */; };
+		8476EFB621CB9282000149E3 /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476EFB421CB9282000149E3 /* MovieDTO.swift */; };
+		8476EFB721CB9282000149E3 /* GenreIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476EFB521CB9282000149E3 /* GenreIds.swift */; };
+		8476EFB921CB943D000149E3 /* MovieCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476EFB821CB943D000149E3 /* MovieCarouselView.swift */; };
+		8476EFBB21CB949A000149E3 /* MovieCarouselView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8476EFBA21CB949A000149E3 /* MovieCarouselView.xib */; };
 		B4554F6EEDA2F66A740C4A65 /* Pods_ImaginatoPilot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A691E1E0F802EA9236D79575 /* Pods_ImaginatoPilot.framework */; };
 		FB3F7BFB2106D9F5009D65AB /* UIImage+ReSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3F7BFA2106D9F5009D65AB /* UIImage+ReSize.swift */; };
 		FB42061E20CCC160003B785C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42061D20CCC160003B785C /* AppDelegate.swift */; };
@@ -39,6 +44,12 @@
 		18A9ADD921CB7C4E00CDFC5E /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		18A9ADDB21CB7C7700CDFC5E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		82ED7800453A1E56BF89525A /* Pods-ImaginatoPilot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImaginatoPilot.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImaginatoPilot/Pods-ImaginatoPilot.release.xcconfig"; sourceTree = "<group>"; };
+		841DA57E21CB8C9300378D9E /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		841DA57F21CB8C9300378D9E /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		8476EFB421CB9282000149E3 /* MovieDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
+		8476EFB521CB9282000149E3 /* GenreIds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreIds.swift; sourceTree = "<group>"; };
+		8476EFB821CB943D000149E3 /* MovieCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCarouselView.swift; sourceTree = "<group>"; };
+		8476EFBA21CB949A000149E3 /* MovieCarouselView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCarouselView.xib; sourceTree = "<group>"; };
 		96C939428DCF90A78F8FA36E /* Pods-ProjectTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTemplate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTemplate/Pods-ProjectTemplate.debug.xcconfig"; sourceTree = "<group>"; };
 		A691E1E0F802EA9236D79575 /* Pods_ImaginatoPilot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImaginatoPilot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67084655B449E763BB6F4BD /* Pods-ImaginatoPilot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImaginatoPilot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImaginatoPilot/Pods-ImaginatoPilot.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,6 +106,8 @@
 		18A9ADD821CB7B4F00CDFC5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8476EFB521CB9282000149E3 /* GenreIds.swift */,
+				8476EFB421CB9282000149E3 /* MovieDTO.swift */,
 				18A9ADDB21CB7C7700CDFC5E /* Movie.swift */,
 			);
 			path = Models;
@@ -118,6 +131,15 @@
 				82ED7800453A1E56BF89525A /* Pods-ImaginatoPilot.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		841DA57D21CB8C9300378D9E /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				841DA57E21CB8C9300378D9E /* iCarousel.m */,
+				841DA57F21CB8C9300378D9E /* iCarousel.h */,
+			);
+			path = iCarousel;
 			sourceTree = "<group>";
 		};
 		FB42061120CCC160003B785C = {
@@ -213,6 +235,7 @@
 		FBA5F1A920CE6DAB00D19C67 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				841DA57D21CB8C9300378D9E /* iCarousel */,
 			);
 			path = Thirdparty;
 			sourceTree = "<group>";
@@ -231,6 +254,8 @@
 				FBA5F23720CE733000D19C67 /* HomeViewController.swift */,
 				FBEE23AD21CB564D00D7AA44 /* SearchViewController.swift */,
 				FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */,
+				8476EFB821CB943D000149E3 /* MovieCarouselView.swift */,
+				8476EFBA21CB949A000149E3 /* MovieCarouselView.xib */,
 			);
 			path = Authorized;
 			sourceTree = "<group>";
@@ -330,6 +355,7 @@
 			files = (
 				FB42062820CCC162003B785C /* LaunchScreen.storyboard in Resources */,
 				FB42062520CCC162003B785C /* Assets.xcassets in Resources */,
+				8476EFBB21CB949A000149E3 /* MovieCarouselView.xib in Resources */,
 				FB42062320CCC160003B785C /* Main.storyboard in Resources */,
 				FBA5F19D20CE6CCA00D19C67 /* Splash.storyboard in Resources */,
 			);
@@ -402,13 +428,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBA5F23220CE708D00D19C67 /* UIApplication.swift in Sources */,
+				841DA58121CB8C9300378D9E /* iCarousel.m in Sources */,
 				FBA5F1A720CE6D7700D19C67 /* Utils.swift in Sources */,
+				8476EFB621CB9282000149E3 /* MovieDTO.swift in Sources */,
 				FB4B096020E878CB006D9AC3 /* NSString+Utilities.swift in Sources */,
 				FBA5F23420CE70A100D19C67 /* String.swift in Sources */,
 				FB4B095E20E87738006D9AC3 /* SwiftHEXColors.swift in Sources */,
 				FBA5F23820CE733000D19C67 /* HomeViewController.swift in Sources */,
 				FBA5F2C620CE760100D19C67 /* UIView.swift in Sources */,
 				FBA5F1A520CE6D5800D19C67 /* Application.swift in Sources */,
+				8476EFB721CB9282000149E3 /* GenreIds.swift in Sources */,
+				8476EFB921CB943D000149E3 /* MovieCarouselView.swift in Sources */,
 				FBA5F23620CE70EC00D19C67 /* UITableViewExtension.swift in Sources */,
 				FBA5F30520CE825C00D19C67 /* SplashViewController.swift in Sources */,
 				FB3F7BFB2106D9F5009D65AB /* UIImage+ReSize.swift in Sources */,
