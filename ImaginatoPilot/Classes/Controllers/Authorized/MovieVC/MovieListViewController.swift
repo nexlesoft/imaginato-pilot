@@ -41,6 +41,9 @@ class MovieListViewController: BaseViewController {
         
         self.addChildViewController(pageViewController!)
         self.pageView.addSubview((pageViewController?.view)!)
+        if let scrollView = self.pageViewController?.view.subviews.filter({$0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
+            scrollView.isScrollEnabled = false
+        }
         pageViewController?.didMove(toParentViewController: self)
         
 //        viewModel.showingData
