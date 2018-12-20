@@ -502,12 +502,6 @@
                                                     <color key="textColor" red="0.99822419881820679" green="0.74980431795120239" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xkb-BX-8mx">
-                                                    <rect key="frame" x="225" y="48" width="31.5" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9JG-qw-a9E">
                                                     <rect key="frame" x="113" y="72" width="78" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -536,6 +530,24 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <state key="normal" title="BUY TICKET"/>
                                                 </button>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ia-XB-H8W">
+                                                    <rect key="frame" x="222" y="47" width="45.5" height="20"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xkb-BX-8mx">
+                                                            <rect key="frame" x="7" y="1" width="31.5" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="xkb-BX-8mx" firstAttribute="top" secondItem="9Ia-XB-H8W" secondAttribute="top" constant="1" id="Lqj-52-Ier"/>
+                                                        <constraint firstItem="xkb-BX-8mx" firstAttribute="leading" secondItem="9Ia-XB-H8W" secondAttribute="leading" constant="7" id="ei5-Nj-cju"/>
+                                                        <constraint firstAttribute="trailing" secondItem="xkb-BX-8mx" secondAttribute="trailing" constant="7" id="jHs-1l-6dy"/>
+                                                        <constraint firstAttribute="bottom" secondItem="xkb-BX-8mx" secondAttribute="bottom" constant="1" id="ngL-j3-UMo"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Jfn-mu-qwh" firstAttribute="top" secondItem="9JG-qw-a9E" secondAttribute="bottom" constant="8" id="0T4-m4-bDH"/>
@@ -544,7 +556,7 @@
                                                 <constraint firstItem="KAQ-b8-mqU" firstAttribute="leading" secondItem="96m-8Q-qPq" secondAttribute="trailing" constant="8" id="9E2-Yf-rPv"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="4g7-Ac-QNI" secondAttribute="bottom" priority="248" constant="10" id="D0D-KB-Fsd"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="kTN-d5-AfS" secondAttribute="trailing" constant="10" id="Fyw-qb-Ciw"/>
-                                                <constraint firstItem="xkb-BX-8mx" firstAttribute="leading" secondItem="4cB-L2-hYv" secondAttribute="trailing" constant="8" id="MEW-rg-aDQ"/>
+                                                <constraint firstItem="9Ia-XB-H8W" firstAttribute="leading" secondItem="4cB-L2-hYv" secondAttribute="trailing" constant="5" id="LW8-Ks-DVv"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="4g7-Ac-QNI" secondAttribute="trailing" constant="10" id="PTr-Ta-mkw"/>
                                                 <constraint firstItem="96m-8Q-qPq" firstAttribute="top" secondItem="Rkp-Gg-0VC" secondAttribute="topMargin" constant="8" id="Pbr-nI-BGN"/>
                                                 <constraint firstItem="xMv-82-rhl" firstAttribute="leading" secondItem="9JG-qw-a9E" secondAttribute="trailing" constant="8" id="WHj-d6-6zN"/>
@@ -553,15 +565,16 @@
                                                 <constraint firstItem="KAQ-b8-mqU" firstAttribute="top" secondItem="kTN-d5-AfS" secondAttribute="bottom" constant="4" id="aAB-XC-kdA"/>
                                                 <constraint firstItem="9JG-qw-a9E" firstAttribute="leading" secondItem="96m-8Q-qPq" secondAttribute="trailing" constant="10" id="bVG-Pr-jMs"/>
                                                 <constraint firstItem="4cB-L2-hYv" firstAttribute="top" secondItem="kTN-d5-AfS" secondAttribute="bottom" constant="4" id="kxA-dh-Y1K"/>
-                                                <constraint firstItem="xkb-BX-8mx" firstAttribute="top" secondItem="kTN-d5-AfS" secondAttribute="bottom" constant="4" id="lsI-xX-tXG"/>
                                                 <constraint firstItem="96m-8Q-qPq" firstAttribute="leading" secondItem="Rkp-Gg-0VC" secondAttribute="leadingMargin" constant="8" id="oIL-JP-r0Q"/>
                                                 <constraint firstItem="Jfn-mu-qwh" firstAttribute="leading" secondItem="96m-8Q-qPq" secondAttribute="trailing" constant="10" id="oVq-fZ-XpJ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Jfn-mu-qwh" secondAttribute="trailing" constant="10" id="rE1-mR-NmF"/>
                                                 <constraint firstItem="4g7-Ac-QNI" firstAttribute="top" secondItem="Jfn-mu-qwh" secondAttribute="bottom" constant="10" id="sOJ-iC-dTw"/>
                                                 <constraint firstItem="xMv-82-rhl" firstAttribute="centerY" secondItem="9JG-qw-a9E" secondAttribute="centerY" id="y6L-fC-MLn"/>
+                                                <constraint firstItem="9Ia-XB-H8W" firstAttribute="centerY" secondItem="4cB-L2-hYv" secondAttribute="centerY" id="zZ5-Gi-0Ff"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ageCategoryContent" destination="9Ia-XB-H8W" id="3VC-8p-VO6"/>
                                             <outlet property="buyTicketButton" destination="4g7-Ac-QNI" id="tMT-rr-JXq"/>
                                             <outlet property="content" destination="Jfn-mu-qwh" id="8Ri-6F-pQN"/>
                                             <outlet property="posterImage" destination="96m-8Q-qPq" id="02f-it-6h9"/>
@@ -588,7 +601,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pN2-oK-2Br" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3566" y="51"/>
+            <point key="canvasLocation" x="3564.375" y="50.70422535211268"/>
         </scene>
     </scenes>
     <resources>

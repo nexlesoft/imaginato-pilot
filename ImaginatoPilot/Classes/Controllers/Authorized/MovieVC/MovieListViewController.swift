@@ -20,10 +20,6 @@ class MovieListViewController: BaseViewController {
     @IBOutlet weak var pageView: UIView!
     var pageViewController: UIPageViewController?
     var currentIndex = 0
-    
-//    @IBOutlet weak var tableView: UITableView!
-    
-//    @IBOutlet weak var tableView1: UITableView!
     var viewModel = MovieListViewModel()
     let disposeBag = DisposeBag()
     override func viewDidLoad() {
@@ -45,24 +41,6 @@ class MovieListViewController: BaseViewController {
             scrollView.isScrollEnabled = false
         }
         pageViewController?.didMove(toParentViewController: self)
-        
-//        viewModel.showingData
-//            .drive(tableView.rx.items(cellIdentifier: "Cell2")) { _, movie, cell in
-//                cell.textLabel?.text = movie.title
-//                cell.detailTextLabel?.text = movie.id
-//            }
-//            .disposed(by: disposeBag)
-
-//        viewModel.upcomingData
-//            .drive(tableView1.rx.items(cellIdentifier: "Cell3")) { _, movie, cell in
-//                cell.textLabel?.text = movie.title
-//                cell.detailTextLabel?.text = movie.id
-//            }
-//            .disposed(by: disposeBag)
-        
-//        let obsKeyword = Observable<String>.just("s")
-//        obsKeyword.bind(to: viewModel.searchText)
-//            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,9 +86,6 @@ class MovieListViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        let obsKeyword = Observable<String>.just(keyword)
-//        obsKeyword.bind(to: viewModel.searchText)
-//            .disposed(by: disposeBag)
     }
 }
 
@@ -164,7 +139,7 @@ extension MovieListViewController: UIPageViewControllerDataSource, UIPageViewCon
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        var index = (pendingViewControllers.first as! MovieListContentViewController).pageIndex
+        let index = (pendingViewControllers.first as! MovieListContentViewController).pageIndex
         selectSection(index: index)
         currentIndex = index
     }
