@@ -87,4 +87,13 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
             return movieView
         }
     }
+    func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
+        if carousel.currentItemIndex < arrMovie.count && carousel.currentItemIndex >= 0 {
+            let movie = arrMovie[carousel.currentItemIndex]
+            self.lblMovieTitle.text = movie.title
+            if let genre = movie.genreIds?.first {
+                self.lblMovieGenre.text = genre.name ?? ""
+            }
+        }
+    }
 }

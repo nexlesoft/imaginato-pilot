@@ -35,35 +35,10 @@ class HomeViewModel {
             else {
                 return []
         }
-//
-        if let response = json as? [String: Any] {
-            print("******response: \(response)")
-            if let results = response["results"] as? [JSON] {
-                print("*****results: \(results)")
-            }
-            if let results = response["results"] as? NSArray {
-                print("*****results2: \(results)")
-                for json in results{
-                    if let js = json as? JSON {
-                        print("*********json: \(js)")
-                    }
-                    if let js = json as? NSDictionary {
-                        print("*********json1: \(JSON(js))")
-                    }
-                }
-            }
-        }
         
         var movies = [MovieDTO]()
-//        print("********HomeResponse: \(results)")
         results.forEach{
-            guard let id = $0["id"] as? String,
-                let title = $0["title"] as? String else {
-                    return
-            }
-//            movies.append(Movie(id: id, title: title))
             movies.append(MovieDTO(json: JSON($0)))
-
         }
         return movies
     }
