@@ -39,6 +39,7 @@ class SearchViewController: BaseViewController {
     }
     deinit {
         print("Deinit SearchViewController")
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {

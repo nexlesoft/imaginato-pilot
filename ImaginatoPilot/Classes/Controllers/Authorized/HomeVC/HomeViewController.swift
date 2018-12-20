@@ -45,6 +45,8 @@ class HomeViewController: BaseViewController {
     }
     deinit {
         print("Deinit HomeViewController")
+        self.carouselTimer?.invalidate()
+        self.carouselTimer = nil
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,7 +79,9 @@ extension HomeViewController {
     @objc func autoscrollForBannerView() {
         func autoscroll(_ currentIndex: Int) {
             self.indexCarousel = currentIndex
-            self.carouselTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.autoscrollForBannerView), userInfo: nil, repeats: true)
+            if self.carouselTimer == nil {
+                 self.carouselTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.autoscrollForBannerView), userInfo: nil, repeats: true)
+            }
         }
         
         if self.carousellScroll == false {
