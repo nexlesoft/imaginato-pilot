@@ -7,10 +7,12 @@
 //
 
 import UIKit
-
+import RxSwift
 class HomeViewController: BaseViewController {
     @IBOutlet weak var btnSearch: UIButton!
-
+    @IBOutlet weak var tableView: UITableView!
+    var viewModel = HomeViewModel()
+    let disposeBag = DisposeBag()
     @IBAction func didTouchButton(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "MovieListViewController") as! MovieListViewController
         vc.keyword = "s"
@@ -18,6 +20,13 @@ class HomeViewController: BaseViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.Data
+            .drive(tableView.rx.items(cellIdentifier: "Cell4")) { _, movie, cell in
+                cell.textLabel?.text = movie.title
+                cell.detailTextLabel?.text = movie.id
+            }
+            .disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
