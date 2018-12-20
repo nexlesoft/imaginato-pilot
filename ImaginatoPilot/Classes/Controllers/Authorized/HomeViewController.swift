@@ -9,6 +9,11 @@
 import UIKit
 
 class HomeViewController: BaseViewController {
+    @IBAction func didTouchButton(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "MovieListViewController") as! MovieListViewController
+        vc.keyword = "s"
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
