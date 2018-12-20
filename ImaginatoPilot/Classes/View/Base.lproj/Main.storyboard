@@ -20,16 +20,6 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oku-GF-1o7">
-                                <rect key="frame" x="158" y="229" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="didTouchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X5d-WL-YYj"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
@@ -37,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-65" y="29"/>
         </scene>
-        <!--Movie List View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="bYx-tK-g89">
             <objects>
-                <viewController storyboardIdentifier="MovieListViewController" id="37i-VR-fhc" customClass="MovieListViewController" customModule="ImaginatoPilot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="37i-VR-fhc" customClass="SearchViewController" customModule="ImaginatoPilot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rcb-9c-r4e"/>
                         <viewControllerLayoutGuide type="bottom" id="Wrg-0b-i13"/>
@@ -48,26 +38,44 @@
                     <view key="view" contentMode="scaleToFill" id="xt8-fN-G06">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VrL-BG-KCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="660" y="28"/>
+        </scene>
+        <!--Movie List View Controller-->
+        <scene sceneID="a6L-rj-6LN">
+            <objects>
+                <viewController storyboardIdentifier="MovieListViewController" id="jWV-oC-3OG" customClass="MovieListViewController" customModule="ImaginatoPilot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7oh-Fq-HAX"/>
+                        <viewControllerLayoutGuide type="bottom" id="8vN-xH-vTi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oeE-9n-RpU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yri-dc-OMe">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iff-eh-hpL">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell2" textLabel="DVJ-DQ-zZb" detailTextLabel="l2j-Ck-y95" style="IBUITableViewCellStyleSubtitle" id="IsC-dz-jBp">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell2" textLabel="7lR-nC-2Te" detailTextLabel="P0P-EP-faW" style="IBUITableViewCellStyleSubtitle" id="mpZ-mj-KRv">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IsC-dz-jBp" id="uZ3-bO-1Ox">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mpZ-mj-KRv" id="gvf-fK-ACW">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DVJ-DQ-zZb">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7lR-nC-2Te">
                                                     <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l2j-Ck-y95">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P0P-EP-faW">
                                                     <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -82,19 +90,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Yri-dc-OMe" secondAttribute="trailing" id="8JT-oW-lvX"/>
-                            <constraint firstItem="Yri-dc-OMe" firstAttribute="top" secondItem="rcb-9c-r4e" secondAttribute="bottom" id="IHL-a1-4sc"/>
-                            <constraint firstItem="Yri-dc-OMe" firstAttribute="leading" secondItem="xt8-fN-G06" secondAttribute="leading" id="nfj-O8-09L"/>
-                            <constraint firstItem="Wrg-0b-i13" firstAttribute="top" secondItem="Yri-dc-OMe" secondAttribute="bottom" id="qqf-AO-quX"/>
+                            <constraint firstItem="iff-eh-hpL" firstAttribute="leading" secondItem="oeE-9n-RpU" secondAttribute="leading" id="0mQ-8g-nmf"/>
+                            <constraint firstItem="8vN-xH-vTi" firstAttribute="top" secondItem="iff-eh-hpL" secondAttribute="bottom" id="ByD-Wp-Keq"/>
+                            <constraint firstAttribute="trailing" secondItem="iff-eh-hpL" secondAttribute="trailing" id="My7-38-s9n"/>
+                            <constraint firstItem="iff-eh-hpL" firstAttribute="top" secondItem="7oh-Fq-HAX" secondAttribute="bottom" id="mzA-WZ-Pnc"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="Yri-dc-OMe" id="cJs-sE-uk1"/>
+                        <outlet property="tableView" destination="iff-eh-hpL" id="3ub-i4-Tpi"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VrL-BG-KCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e4s-PC-7Qg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="667" y="21"/>
+            <point key="canvasLocation" x="1364" y="28"/>
         </scene>
     </scenes>
 </document>
