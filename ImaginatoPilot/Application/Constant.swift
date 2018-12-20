@@ -35,4 +35,5 @@ let currentOsVersion = NSString(string: Device.systemVersion).doubleValue
 
 let appdelegate = UIApplication.shared.delegate as! AppDelegate
 let application = Application.sharedInstance
-
+let heightTable:CGFloat = 40.0
+let keyListHistory = "SavedListHistorySearch"
