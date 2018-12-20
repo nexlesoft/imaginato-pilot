@@ -219,6 +219,56 @@
             </objects>
             <point key="canvasLocation" x="1364" y="28"/>
         </scene>
+        <!--Page View Controller-->
+        <scene sceneID="OqR-zB-MHf">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="EgS-zC-0Hm" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qiP-W7-T96" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2156" y="28"/>
+        </scene>
+        <!--Movie List Content View Controller-->
+        <scene sceneID="WeT-52-cGc">
+            <objects>
+                <viewController storyboardIdentifier="MovieListContentViewController" id="M8e-T3-boB" customClass="MovieListContentViewController" customModule="ImaginatoPilot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pdd-pF-26P"/>
+                        <viewControllerLayoutGuide type="bottom" id="XWC-SK-tvw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3y0-Qo-cbf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kdH-Uk-4Ml">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XkZ-KQ-Efj">
+                                <rect key="frame" x="171" y="323" width="33.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XWC-SK-tvw" firstAttribute="top" secondItem="kdH-Uk-4Ml" secondAttribute="bottom" id="5sR-OM-2AM"/>
+                            <constraint firstItem="XkZ-KQ-Efj" firstAttribute="centerX" secondItem="3y0-Qo-cbf" secondAttribute="centerX" id="bHt-WR-upb"/>
+                            <constraint firstItem="kdH-Uk-4Ml" firstAttribute="top" secondItem="3y0-Qo-cbf" secondAttribute="top" id="fRw-uY-At2"/>
+                            <constraint firstItem="kdH-Uk-4Ml" firstAttribute="leading" secondItem="3y0-Qo-cbf" secondAttribute="leading" id="hKF-ey-h3T"/>
+                            <constraint firstItem="XkZ-KQ-Efj" firstAttribute="centerY" secondItem="3y0-Qo-cbf" secondAttribute="centerY" id="vj4-Ms-7M6"/>
+                            <constraint firstAttribute="trailing" secondItem="kdH-Uk-4Ml" secondAttribute="trailing" id="xfJ-zq-lYS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="kdH-Uk-4Ml" id="6F8-GJ-qy1"/>
+                        <outlet property="titleLabel" destination="XkZ-KQ-Efj" id="NSc-LF-uKc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pN2-oK-2Br" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2945" y="27"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ic_search-iPhone6P" width="30" height="30"/>
