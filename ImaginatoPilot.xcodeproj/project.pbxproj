@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		18A9ADDC21CB7C7700CDFC5E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9ADDB21CB7C7700CDFC5E /* Movie.swift */; };
-		8412114A21CB957E0005382D /* MovieListContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412114921CB957E0005382D /* MovieListContentViewController.swift */; };
 		18A9ADDE21CB8BFA00CDFC5E /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9ADDD21CB8BFA00CDFC5E /* MovieListViewModel.swift */; };
 		18A9ADE021CB8F8D00CDFC5E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9ADDF21CB8F8D00CDFC5E /* HomeViewModel.swift */; };
+		8412114A21CB957E0005382D /* MovieListContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412114921CB957E0005382D /* MovieListContentViewController.swift */; };
 		B4554F6EEDA2F66A740C4A65 /* Pods_ImaginatoPilot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A691E1E0F802EA9236D79575 /* Pods_ImaginatoPilot.framework */; };
 		FB3F7BFB2106D9F5009D65AB /* UIImage+ReSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3F7BFA2106D9F5009D65AB /* UIImage+ReSize.swift */; };
 		FB42061E20CCC160003B785C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42061D20CCC160003B785C /* AppDelegate.swift */; };
@@ -20,6 +20,8 @@
 		FB4B095E20E87738006D9AC3 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4B095D20E87738006D9AC3 /* SwiftHEXColors.swift */; };
 		FB4B096020E878CB006D9AC3 /* NSString+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4B095F20E878CA006D9AC3 /* NSString+Utilities.swift */; };
 		FB52001821CB9C45007CD973 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB52001721CB9C45007CD973 /* SearchViewController.swift */; };
+		FB52001C21CB9F4D007CD973 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB52001A21CB9F4D007CD973 /* MovieListViewModel.swift */; };
+		FB52001D21CB9F4D007CD973 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB52001B21CB9F4D007CD973 /* HomeViewModel.swift */; };
 		FBA5F19D20CE6CCA00D19C67 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA5F19C20CE6CCA00D19C67 /* Splash.storyboard */; };
 		FBA5F1A320CE6D4800D19C67 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F1A220CE6D4800D19C67 /* Constant.swift */; };
 		FBA5F1A520CE6D5800D19C67 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F1A420CE6D5800D19C67 /* Application.swift */; };
@@ -58,6 +60,8 @@
 		FB4B095D20E87738006D9AC3 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		FB4B095F20E878CA006D9AC3 /* NSString+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Utilities.swift"; sourceTree = "<group>"; };
 		FB52001721CB9C45007CD973 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		FB52001A21CB9F4D007CD973 /* MovieListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
+		FB52001B21CB9F4D007CD973 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FBA5F18620CE5F4D00D19C67 /* ImaginatoPilot-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImaginatoPilot-Bridging-Header.h"; sourceTree = "<group>"; };
 		FBA5F19C20CE6CCA00D19C67 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		FBA5F1A220CE6D4800D19C67 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -93,7 +97,8 @@
 		18A9ADD721CB7B2A00CDFC5E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				18A9ADD921CB7C4E00CDFC5E /* MovieListViewModel.swift */,
+				FB52001B21CB9F4D007CD973 /* HomeViewModel.swift */,
+				FB52001A21CB9F4D007CD973 /* MovieListViewModel.swift */,
 				FBEE23B621CB88CD00D7AA44 /* SearchListViewModel.swift */,
 			);
 			path = ViewModels;
@@ -134,6 +139,7 @@
 				FB42061B20CCC160003B785C /* Products */,
 				694386AEF006676A047B6317 /* Pods */,
 				5AC86EF0B6A3A5C283BC13F0 /* Frameworks */,
+				FB52001921CB9E8B007CD973 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,6 +162,15 @@
 				FB42062920CCC162003B785C /* Info.plist */,
 			);
 			path = ImaginatoPilot;
+			sourceTree = "<group>";
+		};
+		FB52001921CB9E8B007CD973 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				18A9ADDF21CB8F8D00CDFC5E /* HomeViewModel.swift */,
+				18A9ADDD21CB8BFA00CDFC5E /* MovieListViewModel.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		FBA5F17320CE5B0900D19C67 /* View */ = {
@@ -432,9 +447,11 @@
 				FBA5F2DA20CE789900D19C67 /* Font.swift in Sources */,
 				FBA5F23020CE707800D19C67 /* UIColor.swift in Sources */,
 				FBA5F1A320CE6D4800D19C67 /* Constant.swift in Sources */,
+				FB52001D21CB9F4D007CD973 /* HomeViewModel.swift in Sources */,
 				18A9ADDE21CB8BFA00CDFC5E /* MovieListViewModel.swift in Sources */,
 				FBA5F2C420CE75F800D19C67 /* UIImage.swift in Sources */,
 				FBA5F1B320CE6E1900D19C67 /* BaseViewController.swift in Sources */,
+				FB52001C21CB9F4D007CD973 /* MovieListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
