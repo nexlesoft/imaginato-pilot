@@ -11,7 +11,7 @@ import RxSwift
 
 class MovieListViewController: BaseViewController {
     
-    var keyword = ""
+    var keyword = "s"
     
     @IBOutlet weak var showingButton: UIButton!
     @IBOutlet weak var showingIndicatorLine: UIView!
@@ -56,9 +56,9 @@ class MovieListViewController: BaseViewController {
 //            }
 //            .disposed(by: disposeBag)
         
-        let obsKeyword = Observable<String>.just("s")
-        obsKeyword.bind(to: viewModel.searchText)
-            .disposed(by: disposeBag)
+//        let obsKeyword = Observable<String>.just("s")
+//        obsKeyword.bind(to: viewModel.searchText)
+//            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +84,7 @@ class MovieListViewController: BaseViewController {
             selectSection(index: 0)
             currentIndex = 0
             let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0)!
+            startingViewController.viewModel = self.viewModel
             let viewControllers = [startingViewController]
             self.pageViewController?.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
         }
@@ -94,6 +95,7 @@ class MovieListViewController: BaseViewController {
             selectSection(index: 1)
             currentIndex = 1
             let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 1)!
+            startingViewController.viewModel = self.viewModel
             let viewControllers = [startingViewController]
             self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
         }
@@ -132,6 +134,7 @@ extension MovieListViewController {
         }
         let vc = storyboard?.instantiateViewController(withIdentifier: "MovieListContentViewController") as! MovieListContentViewController
         vc.pageIndex = index
+        vc.keyword = self.keyword
         return vc
     }
 }

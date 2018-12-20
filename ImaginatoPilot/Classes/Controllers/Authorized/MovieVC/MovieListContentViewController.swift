@@ -14,7 +14,7 @@ class MovieListContentViewController: UIViewController {
     var pageIndex: Int = 0
     var viewModel = MovieListViewModel()
     let disposeBag = DisposeBag()
-
+    var keyword = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         if pageIndex == 0 {
@@ -22,10 +22,16 @@ class MovieListContentViewController: UIViewController {
         } else {
             
         }
-//        viewModel.showingData
-//            .drive(tableView.rx.items(cellIdentifier: "Cell2")) { _, movie, cell in
-//                cell.textLabel?.text = movie.title
-//                cell.detailTextLabel?.text = movie.id
+//        let obsKeyword = Observable<String>.just("s")
+//        obsKeyword.bind(to: viewModel.searchText)
+//            .disposed(by: disposeBag)
+//        viewModel?.showingData
+//            .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
+//                if let movieCell = cell as? MovieListCell {
+//                    movieCell.titleLabel.text = movie.title
+//                }
+////                cell.textLabel?.text = movie.title
+////                cell.detailTextLabel?.text = movie.id
 //            }
 //            .disposed(by: disposeBag)
         
@@ -36,5 +42,23 @@ class MovieListContentViewController: UIViewController {
 //        }, onCompleted: nil, onDisposed: nil)
 //        .disposed(by: disposeBag)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let obsKeyword = Observable<String>.just(self.keyword)
+        obsKeyword.bind(to: viewModel.searchText)
+            .disposed(by: disposeBag)
+        Utils.showIndicator()
+        viewModel.showingData
+            .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
+                if let movieCell = cell as? MovieListCell {
+                    movieCell.titleLabel.text = movie.title
+                }
+                Utils.dismissIndicator()
+                //                cell.textLabel?.text = movie.title
+                //                cell.detailTextLabel?.text = movie.id
+            }
+            .disposed(by: disposeBag)
     }
 }
