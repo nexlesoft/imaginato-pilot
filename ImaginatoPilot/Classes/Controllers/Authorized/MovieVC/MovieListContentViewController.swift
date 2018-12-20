@@ -19,7 +19,7 @@ class MovieListContentViewController: UIViewController {
         super.viewDidLoad()
         
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
-        self.tableView.rowHeight = 180
+        
         
 //        let obsKeyword = Observable<String>.just("s")
 //        obsKeyword.bind(to: viewModel.searchText)
