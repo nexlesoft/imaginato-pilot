@@ -37,8 +37,6 @@ class MovieListViewController: BaseViewController {
         
         self.addChildViewController(pageViewController!)
         self.pageView.addSubview((pageViewController?.view)!)
-        self.pageView.layer.borderWidth = 2
-        self.pageView.layer.borderColor = UIColor.red.cgColor
         if let scrollView = self.pageViewController?.view.subviews.filter({$0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
             scrollView.isScrollEnabled = false
         }
