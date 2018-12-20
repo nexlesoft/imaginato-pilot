@@ -136,7 +136,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tfSearch.text = self.listHistory[indexPath.row] as! String
+        self.tfSearch.text = self.listHistory[indexPath.row] as? String ?? ""
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
