@@ -27,7 +27,6 @@ class MovieListCell: UITableViewCell {
         self.ageCategoryContent.layer.cornerRadius = self.ageCategoryContent.frame.height / 2
         self.ageCategoryContent.layer.borderColor = UIColor.gray.cgColor
         self.ageCategoryContent.layer.borderWidth = 1
-        // Initialization code
     }
     
     func loadFromMovie(movie: MovieDTO) {
