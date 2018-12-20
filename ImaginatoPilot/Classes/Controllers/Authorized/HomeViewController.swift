@@ -9,12 +9,8 @@
 import UIKit
 
 class HomeViewController: BaseViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        WebServices.getRequest(urlApiString: "https://easy-mock.com/mock/5c19c6ff64b4573fc81a61f3/movieapp/home", paramters: nil) { (json, str, isSuccess) in
-            
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
