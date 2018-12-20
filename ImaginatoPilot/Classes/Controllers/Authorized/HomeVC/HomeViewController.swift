@@ -28,8 +28,9 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.Data.drive(onNext: { [weak self](movies) in
-            self?.arrMovie = movies
-            self?.carousel.reloadData()
+            guard let owner = self else { return }
+            owner.arrMovie = movies
+            owner.carousel.reloadData()
         }, onCompleted: nil, onDisposed: nil)
         .disposed(by: disposeBag)
         setupUI()
@@ -83,6 +84,9 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
         }
         else {
             let movieView = MovieCarouselView.loadNib()
+            let width = carousel.frame.size.width * 2.0 / 3.0
+            let height = carousel.frame.size.height
+            movieView.frame = CGRect(x: 0, y: 0, width: width, height: height)
             movieView.binData(arrMovie[index])
             return movieView
         }
@@ -94,6 +98,20 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
             if let genre = movie.genreIds?.first {
                 self.lblMovieGenre.text = genre.name ?? ""
             }
+        }
+        
+        if self.lblMovieTitle.alpha == 1 {
+            UIView.animate(withDuration: 0.2) {
+                self.lblMovieTitle.alpha = 0
+                self.lblMovieGenre.alpha = 0
+            }
+        }
+    }
+    
+    func carouselDidEndScrollingAnimation(_ carousel: iCarousel) {
+        UIView.animate(withDuration: 0.5) {
+            self.lblMovieTitle.alpha = 1
+            self.lblMovieGenre.alpha = 1
         }
     }
 }
