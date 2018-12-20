@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import BGTableViewRowActionWithImage
 class SearchViewController: BaseViewController {
     
     @IBOutlet weak var navibarCustom: UIView!
@@ -100,8 +100,24 @@ extension SearchViewController:UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)
+        cell.textLabel?.textColor = UIColor(hexString: "#A8A8A8")
         cell.textLabel?.text = "GPThanh + \( indexPath.row)"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = BGTableViewRowActionWithImage.rowAction(with: .default, title: "     ", backgroundColor: UIColor.gray, image: UIImage(named: "icon_delete"), forCellHeight: 40) { (action, indexPath) in
+            
+        }
+        return [delete!]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
     }
 }
 
@@ -114,4 +130,3 @@ extension SearchViewController:UITextFieldDelegate {
         return true
     }
 }
-
