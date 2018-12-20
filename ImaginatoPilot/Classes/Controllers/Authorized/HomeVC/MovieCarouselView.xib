@@ -58,6 +58,7 @@
                 <outlet property="btnBuyTicket" destination="gNm-Hq-id3" id="2Lo-w5-dzE"/>
                 <outlet property="imvPoster" destination="Jtg-kd-Jne" id="PMp-v4-dbC"/>
                 <outlet property="lblPreSale" destination="nw5-yd-wG7" id="s16-MU-XZ9"/>
+                <outlet property="lctHeightBuyTicket" destination="yq4-aH-z0G" id="Si8-SK-Nmy"/>
             </connections>
         </view>
     </objects>
