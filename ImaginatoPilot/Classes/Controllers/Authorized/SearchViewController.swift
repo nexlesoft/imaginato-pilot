@@ -136,15 +136,21 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        self.tfSearch.text = self.listHistory[indexPath.row] as! String
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+
 }
 
 // MARK: UITextFieldDelegate
 extension SearchViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        let movieListVC = self.getViewController(storyboardName: "Main", className: "MovieListViewController") as! MovieListViewController
-//        self.navigationController?.pushViewController(movieListVC, animated: true)
+        if textField.text == "" {
+            return false
+        }
+        let movieListVC = self.getViewController(storyboardName: "Main", className: "MovieListViewController") as! MovieListViewController
+        movieListVC.keyword = textField.text ?? ""
+        self.navigationController?.pushViewController(movieListVC, animated: true)
         if self.listHistory.count >= 10 {
             self.listHistory.removeLastObject()
         }
