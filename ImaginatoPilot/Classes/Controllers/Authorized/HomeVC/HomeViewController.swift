@@ -27,12 +27,11 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        viewModel.Data
-//            .drive(tableView.rx.items(cellIdentifier: "Cell4")) { _, movie, cell in
-//                cell.textLabel?.text = movie.title
-//                cell.detailTextLabel?.text = movie.id
-//            }
-//            .disposed(by: disposeBag)
+        viewModel.Data.drive(onNext: { [weak self](movies) in
+            self?.arrMovie = movies
+            self?.carousel.reloadData()
+        }, onCompleted: nil, onDisposed: nil)
+        .disposed(by: disposeBag)
         setupUI()
     }
 
