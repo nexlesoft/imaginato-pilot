@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import SwiftyJSON
 
 enum MovieListType: String {
     case Showing
@@ -18,27 +19,28 @@ enum MovieListType: String {
 class MovieListViewModel {
     
     let searchText = Variable("")
+    static var offset = 20
     
-    lazy var showingData: Driver<[Movie]> = {
+    lazy var showingData: Driver<[MovieDTO]> = {
         return self.searchText.asObservable()
-            .throttle(0.3, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .flatMapLatest(MovieListViewModel.showingBy)
             .asDriver(onErrorJustReturn: [])
     }()
     
-    lazy var upcomingData: Driver<[Movie]> = {
+    lazy var upcomingData: Driver<[MovieDTO]> = {
         
         return self.searchText.asObservable()
-            .throttle(0.3, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .flatMapLatest(MovieListViewModel.upcomingBy)
             .asDriver(onErrorJustReturn: [])
     }()
-    
-    static func showingBy(_ keyword: String) -> Observable<[Movie]> {
+    func resetOffset() {
+        MovieListViewModel.offset = 20
+    }
+    static func showingBy(_ keyword: String) -> Observable<[MovieDTO]> {
         guard !keyword.isEmpty,
-            let url = URL(string: "https://easy-mock.com/mock/5c19c6ff64b4573fc81a61f3/movieapp/search?keyword=\(keyword)&offset=20") else {
+            let url = URL(string: "https://easy-mock.com/mock/5c19c6ff64b4573fc81a61f3/movieapp/search?keyword=\(keyword)&offset=\(MovieListViewModel.offset)") else {
                 return Observable.just([])
         }
         
@@ -47,9 +49,9 @@ class MovieListViewModel {
             .map(parseShowing)
     }
     
-    static func upcomingBy(_ keyword: String) -> Observable<[Movie]> {
+    static func upcomingBy(_ keyword: String) -> Observable<[MovieDTO]> {
         guard !keyword.isEmpty,
-            let url = URL(string: "https://easy-mock.com/mock/5c19c6ff64b4573fc81a61f3/movieapp/search?keyword=\(keyword)&offset=20") else {
+            let url = URL(string: "https://easy-mock.com/mock/5c19c6ff64b4573fc81a61f3/movieapp/search?keyword=\(keyword)&offset=\(MovieListViewModel.offset)") else {
                 return Observable.just([])
         }
         
@@ -58,7 +60,7 @@ class MovieListViewModel {
             .map(parseUpcoming)
     }
     
-    static func parseShowing(json: Any) -> [Movie] {
+    static func parseShowing(json: Any) -> [MovieDTO] {
         guard let response = json as? [String: Any],
             let results = response["results"] as? [String: Any],
             let showing = results["showing"] as? [[String: Any]]
@@ -66,19 +68,14 @@ class MovieListViewModel {
                 return []
         }
         
-        var movies = [Movie]()
-        print("********showing: \(showing)")
+        var movies = [MovieDTO]()
         showing.forEach{
-            guard let id = $0["id"] as? String,
-                let title = $0["title"] as? String else {
-                    return
-            }
-            movies.append(Movie(id: id, title: title))
+            movies.append(MovieDTO(json: JSON($0)))
         }
         return movies
     }
     
-    static func parseUpcoming(json: Any) -> [Movie] {
+    static func parseUpcoming(json: Any) -> [MovieDTO] {
         guard let response = json as? [String: Any],
             let results = response["results"] as? [String: Any],
             let upcoming = results["upcoming"] as? [[String: Any]]
@@ -86,14 +83,9 @@ class MovieListViewModel {
                 return []
         }
         
-        var movies = [Movie]()
-        print("********upcoming: \(upcoming)")
+        var movies = [MovieDTO]()
         upcoming.forEach{
-            guard let id = $0["id"] as? String,
-                let title = $0["title"] as? String else {
-                    return
-            }
-            movies.append(Movie(id: id, title: title))
+            movies.append(MovieDTO(json: JSON($0)))
         }
         return movies
     }
