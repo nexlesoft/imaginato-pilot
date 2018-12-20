@@ -11,6 +11,9 @@ import RxSwift
 class HomeViewController: BaseViewController {
     var viewModel = HomeViewModel()
     let disposeBag = DisposeBag()
+    var carouselTimer : Timer?
+    fileprivate var indexCarousel : Int! = 0
+    var carousellScroll : Bool! = true
     @IBAction func didTouchButton(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "MovieListViewController") as! MovieListViewController
         vc.keyword = "s"
@@ -31,6 +34,7 @@ class HomeViewController: BaseViewController {
             guard let owner = self else { return }
             owner.arrMovie = movies
             owner.carousel.reloadData()
+            owner.autoscrollForBannerView()
         }, onCompleted: nil, onDisposed: nil)
         .disposed(by: disposeBag)
         setupUI()
@@ -68,6 +72,36 @@ extension HomeViewController {
         carousel.dataSource = self
         lblMovieTitle.text = ""
         lblMovieGenre.text = ""
+    }
+    
+    @objc func autoscrollForBannerView() {
+        func autoscroll(_ currentIndex: Int) {
+            self.indexCarousel = currentIndex
+            self.carouselTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.autoscrollForBannerView), userInfo: nil, repeats: true)
+        }
+        
+        if self.carousellScroll == false {
+            autoscroll(self.carousel.currentItemIndex)
+        } else if self.arrMovie.count > 0 && self.carousel.currentItemIndex < self.carousel.numberOfItems - 1 {
+            let nextIndex  = self.carousel.currentItemIndex + 1
+            // Get next view
+            let view = self.carousel.itemView(at: nextIndex) as? MovieCarouselView
+            if let view = view {
+                if view.imvPoster.image != nil {
+                    self.carousel.scrollToItem(at: nextIndex, animated: true)
+                    autoscroll(nextIndex)
+                }
+                else {
+                    autoscroll(nextIndex)
+                }
+            }
+            else {
+                autoscroll(nextIndex - 1)
+            }
+        } else {
+            autoscroll(0)
+            self.carousel.scrollToItem(at: 0, animated: true)
+        }
     }
 }
 
@@ -109,9 +143,37 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     }
     
     func carouselDidEndScrollingAnimation(_ carousel: iCarousel) {
+        self.carousellScroll = true
         UIView.animate(withDuration: 0.5) {
             self.lblMovieTitle.alpha = 1
             self.lblMovieGenre.alpha = 1
         }
+    }
+    
+    func carouselDidScroll(_ carousel: iCarousel) {
+        if self.arrMovie.count == 0 {return}
+        self.carousellScroll = false
+    }
+    
+    func carouselWillBeginDecelerating(_ carousel: iCarousel) {
+        self.carousellScroll = false
+    }
+    
+    func carouselWillBeginDragging(_ carousel: iCarousel) {
+        self.carousellScroll = false
+        //self.stopTimer()
+    }
+    
+    func carouselWillBeginScrollingAnimation(_ carousel: iCarousel) {
+        self.carousellScroll = false
+    }
+    
+    func carouselDidEndDecelerating(_ carousel: iCarousel) {
+        carousel.currentItemView?.alpha = 1
+        self.carousellScroll = true
+    }
+    
+    func carouselDidEndDragging(_ carousel: iCarousel, willDecelerate decelerate: Bool) {
+        self.carousellScroll = true
     }
 }

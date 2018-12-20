@@ -11,7 +11,7 @@ import SDWebImage
 
 class MovieCarouselView: UIView {
 
-    @IBOutlet fileprivate weak var imvPoster: UIImageView!
+    @IBOutlet weak var imvPoster: UIImageView!
     @IBOutlet fileprivate weak var lblPreSale: UILabel!
     @IBOutlet fileprivate weak var btnBuyTicket: UIButton!
     @IBOutlet weak var lctHeightBuyTicket: NSLayoutConstraint!
