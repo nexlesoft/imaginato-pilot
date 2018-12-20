@@ -24,9 +24,8 @@ class MovieCarouselView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.imvPoster.layer.masksToBounds = true
-        self.imvPoster.layer.cornerRadius = 10.0
-        
+        self.layer.cornerRadius = 10
+        self.clipsToBounds = true
         self.lblPreSale.layer.masksToBounds = true
         self.lblPreSale.layer.cornerRadius = 5.0
     }
