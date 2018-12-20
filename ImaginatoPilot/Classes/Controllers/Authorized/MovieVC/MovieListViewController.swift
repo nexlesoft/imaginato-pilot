@@ -11,7 +11,7 @@ import RxSwift
 
 class MovieListViewController: BaseViewController {
     
-    var keyword = "s"
+    var keyword = ""
     
     @IBOutlet weak var showingButton: UIButton!
     @IBOutlet weak var showingIndicatorLine: UIView!
