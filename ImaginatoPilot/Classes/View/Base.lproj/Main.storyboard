@@ -20,8 +20,21 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1H2-2x-2hN">
+                                <rect key="frame" x="163" y="355" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="didTouchSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ihf-Cv-QQQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="btnSearch" destination="1H2-2x-2hN" id="7Sc-YG-XRR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -38,12 +51,106 @@
                     <view key="view" contentMode="scaleToFill" id="xt8-fN-G06">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XP1-zZ-Rin">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eId-ed-ydp">
+                                        <rect key="frame" x="15" y="29.5" width="280" height="35"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search Movie" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b0D-xd-IYH">
+                                                <rect key="frame" x="40" y="5" width="230" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="hCH-YP-2UC"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_search-iPhone6P" translatesAutoresizingMaskIntoConstraints="NO" id="Eic-vH-5UZ">
+                                                <rect key="frame" x="5" y="2.5" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="0ZZ-eP-1Nc"/>
+                                                    <constraint firstAttribute="width" constant="30" id="0gK-j3-rPK"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="b0D-xd-IYH" firstAttribute="leading" secondItem="Eic-vH-5UZ" secondAttribute="trailing" constant="5" id="CSK-cH-eEA"/>
+                                            <constraint firstAttribute="height" constant="35" id="Fmp-0v-WIf"/>
+                                            <constraint firstAttribute="trailing" secondItem="b0D-xd-IYH" secondAttribute="trailing" constant="10" id="UaW-nE-Dy2"/>
+                                            <constraint firstItem="Eic-vH-5UZ" firstAttribute="leading" secondItem="eId-ed-ydp" secondAttribute="leading" constant="5" id="W4r-Zy-hVY"/>
+                                            <constraint firstItem="Eic-vH-5UZ" firstAttribute="centerY" secondItem="eId-ed-ydp" secondAttribute="centerY" id="XDr-c3-WV5"/>
+                                            <constraint firstItem="b0D-xd-IYH" firstAttribute="centerY" secondItem="eId-ed-ydp" secondAttribute="centerY" id="ZCh-CM-qE8"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtl-oJ-YzK">
+                                        <rect key="frame" x="305" y="32" width="50" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="eQD-2t-BKM"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didTouchCancel:" destination="37i-VR-fhc" eventType="touchUpInside" id="oS9-8i-Nj3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.098223991692066193" green="0.17327585816383362" blue="0.31023335456848145" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="eId-ed-ydp" firstAttribute="leading" secondItem="XP1-zZ-Rin" secondAttribute="leading" constant="15" id="6Oz-ne-ENV"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gtl-oJ-YzK" secondAttribute="trailing" constant="20" id="M1g-41-bi3"/>
+                                    <constraint firstItem="Gtl-oJ-YzK" firstAttribute="leading" secondItem="eId-ed-ydp" secondAttribute="trailing" constant="10" id="PDE-od-X0T"/>
+                                    <constraint firstItem="eId-ed-ydp" firstAttribute="centerY" secondItem="XP1-zZ-Rin" secondAttribute="centerY" constant="10" id="WrU-gc-XSR"/>
+                                    <constraint firstAttribute="height" constant="74" id="cch-BZ-a9y"/>
+                                    <constraint firstItem="Gtl-oJ-YzK" firstAttribute="centerY" secondItem="eId-ed-ydp" secondAttribute="centerY" id="uZb-wC-Gnd"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nlw-zb-gkG">
+                                <rect key="frame" x="0.0" y="74" width="375" height="593"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTableViewCell" id="mTE-eA-ils">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mTE-eA-ils" id="Xlr-Js-M0i">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="37i-VR-fhc" id="atJ-Wh-urW"/>
+                                    <outlet property="delegate" destination="37i-VR-fhc" id="S9n-yJ-kWT"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XP1-zZ-Rin" secondAttribute="trailing" id="D8b-fm-yiS"/>
+                            <constraint firstItem="XP1-zZ-Rin" firstAttribute="top" secondItem="xt8-fN-G06" secondAttribute="top" id="KKb-EU-7vj"/>
+                            <constraint firstItem="Nlw-zb-gkG" firstAttribute="leading" secondItem="xt8-fN-G06" secondAttribute="leading" id="SPo-cK-ZRf"/>
+                            <constraint firstItem="Nlw-zb-gkG" firstAttribute="top" secondItem="XP1-zZ-Rin" secondAttribute="bottom" id="X4w-5W-kRm"/>
+                            <constraint firstAttribute="trailing" secondItem="Nlw-zb-gkG" secondAttribute="trailing" id="ddr-V7-I6X"/>
+                            <constraint firstItem="XP1-zZ-Rin" firstAttribute="leading" secondItem="xt8-fN-G06" secondAttribute="leading" id="hEJ-HI-e4n"/>
+                            <constraint firstItem="Wrg-0b-i13" firstAttribute="top" secondItem="Nlw-zb-gkG" secondAttribute="bottom" id="j7Z-92-gOQ"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bottomTableViewContraint" destination="j7Z-92-gOQ" id="Phc-Yo-eV1"/>
+                        <outlet property="btnSearch" destination="Gtl-oJ-YzK" id="phe-3q-fWF"/>
+                        <outlet property="heightNavibarCustomContaint" destination="cch-BZ-a9y" id="mu0-4h-CPC"/>
+                        <outlet property="navibarCustom" destination="XP1-zZ-Rin" id="ifY-GI-DLF"/>
+                        <outlet property="tableView" destination="Nlw-zb-gkG" id="jdM-6I-y4M"/>
+                        <outlet property="tfSearch" destination="b0D-xd-IYH" id="b7f-7L-o9S"/>
+                        <outlet property="vSearch" destination="eId-ed-ydp" id="TMe-oH-WOr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VrL-BG-KCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="660" y="28"/>
+            <point key="canvasLocation" x="660" y="27.436281859070466"/>
         </scene>
         <!--Movie List View Controller-->
         <scene sceneID="a6L-rj-6LN">
@@ -105,4 +212,7 @@
             <point key="canvasLocation" x="1364" y="28"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_search-iPhone6P" width="30" height="30"/>
+    </resources>
 </document>
