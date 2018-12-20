@@ -9,6 +9,8 @@
 import UIKit
 
 class HomeViewController: BaseViewController {
+    
+    @IBOutlet weak var btnSearch: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -28,6 +30,10 @@ class HomeViewController: BaseViewController {
 
 // MARK: User Interaction
 extension HomeViewController {
+    @IBAction func didTouchSearch(_ sender : UIButton) {
+        let searchVC = self.getViewController(storyboardName: "Main", className: "SearchViewController") as! SearchViewController
+        self.navigationController?.pushViewController(searchVC, animated: true)
+    }
     
 }
 
