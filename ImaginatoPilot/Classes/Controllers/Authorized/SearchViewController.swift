@@ -7,7 +7,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import BGTableViewRowActionWithImage
+
 class SearchViewController: BaseViewController {
     
     @IBOutlet weak var navibarCustom: UIView!
@@ -17,7 +20,7 @@ class SearchViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightNavibarCustomContaint: NSLayoutConstraint!
     @IBOutlet weak var bottomTableViewContraint: NSLayoutConstraint!
-    
+    var listHistory:NSMutableArray = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
@@ -54,6 +57,18 @@ extension SearchViewController {
         let heightOfStatusBar = UIApplication.shared.statusBarFrame.size.height
         let heightOfNavibar = self.navigationController?.navigationBar.frame.size.height
         self.heightNavibarCustomContaint.constant = heightOfNavibar! + heightOfStatusBar
+        if let data = UserDefaults.standard.object(forKey: keyListHistory) as? Data {
+            if let array =  NSKeyedUnarchiver.unarchiveObject(with: data) as? NSMutableArray {
+                self.listHistory = array
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    private func saveDataSearch() {
+        let data = NSKeyedArchiver.archivedData(withRootObject: self.listHistory)
+        UserDefaults.standard.setValue(data, forKey: keyListHistory)
+        UserDefaults.standard.synchronize()
     }
     
     private func setupNotificationCenter() {
@@ -89,9 +104,9 @@ extension SearchViewController {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SearchViewController:UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.listHistory.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,7 +116,7 @@ extension SearchViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)
         cell.textLabel?.textColor = UIColor(hexString: "#A8A8A8")
-        cell.textLabel?.text = "GPThanh + \( indexPath.row)"
+        cell.textLabel?.text = self.listHistory[indexPath.row] as? String
         return cell
     }
     
@@ -110,22 +125,39 @@ extension SearchViewController:UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = BGTableViewRowActionWithImage.rowAction(with: .default, title: "     ", backgroundColor: UIColor.gray, image: UIImage(named: "icon_delete"), forCellHeight: UInt(heightTable)) { (action, indexPath) in
-            
+        let delete = BGTableViewRowActionWithImage.rowAction(with: .default, title: "     ", backgroundColor: UIColor.gray, image: UIImage(named: "icon_delete"), forCellHeight: UInt(heightTable)) {[weak self] (action, indexPath) in
+            if let indexPath = indexPath {
+                self?.listHistory.removeObject(at: indexPath.row)
+                self?.saveDataSearch()
+                self?.tableView.reloadData()
+            }
         }
         return [delete!]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+        self.tfSearch.text = self.listHistory[indexPath.row] as! String
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+
 }
 
 // MARK: UITextFieldDelegate
 extension SearchViewController:UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.text == "" {
+            return false
+        }
         let movieListVC = self.getViewController(storyboardName: "Main", className: "MovieListViewController") as! MovieListViewController
+        movieListVC.keyword = textField.text ?? ""
         self.navigationController?.pushViewController(movieListVC, animated: true)
+        if self.listHistory.count >= 10 {
+            self.listHistory.removeLastObject()
+        }
+        self.listHistory.insert(textField.text ?? "", at: 0)
+        self.tableView.reloadData()
+        self.tfSearch.text = ""
+        self.saveDataSearch()
         textField.resignFirstResponder()
         return true
     }

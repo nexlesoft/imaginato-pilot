@@ -210,12 +210,26 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mTE-eA-ils" id="Xlr-Js-M0i">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uaf-VC-RCi">
+                                                    <rect key="frame" x="0.0" y="56" width="375" height="1"/>
+                                                    <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Nmg-6g-6b3"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Uaf-VC-RCi" secondAttribute="trailing" id="3ap-Pi-dAQ"/>
+                                                <constraint firstItem="Uaf-VC-RCi" firstAttribute="leading" secondItem="Xlr-Js-M0i" secondAttribute="leading" id="Jmd-8e-nNf"/>
+                                                <constraint firstAttribute="bottom" secondItem="Uaf-VC-RCi" secondAttribute="bottom" constant="1" id="Sq7-7Q-plc"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="37i-VR-fhc" id="atJ-Wh-urW"/>
-                                    <outlet property="delegate" destination="37i-VR-fhc" id="S9n-yJ-kWT"/>
+                                    <outlet property="dataSource" destination="37i-VR-fhc" id="9YK-Qs-KWY"/>
+                                    <outlet property="delegate" destination="37i-VR-fhc" id="Yry-HK-aX8"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -242,7 +256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VrL-BG-KCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1260" y="27"/>
+            <point key="canvasLocation" x="1260" y="26.53673163418291"/>
         </scene>
         <!--Movie List View Controller-->
         <scene sceneID="a6L-rj-6LN">
