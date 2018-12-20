@@ -37,6 +37,8 @@ class MovieListViewController: BaseViewController {
         
         self.addChildViewController(pageViewController!)
         self.pageView.addSubview((pageViewController?.view)!)
+        self.pageView.layer.borderWidth = 2
+        self.pageView.layer.borderColor = UIColor.red.cgColor
         if let scrollView = self.pageViewController?.view.subviews.filter({$0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
             scrollView.isScrollEnabled = false
         }
@@ -142,13 +144,5 @@ extension MovieListViewController: UIPageViewControllerDataSource, UIPageViewCon
         let index = (pendingViewControllers.first as! MovieListContentViewController).pageIndex
         selectSection(index: index)
         currentIndex = index
-    }
-    
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 2
-    }
-    
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return 0
     }
 }
