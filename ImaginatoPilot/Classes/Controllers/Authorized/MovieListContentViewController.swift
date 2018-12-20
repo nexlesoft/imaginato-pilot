@@ -11,7 +11,6 @@ import RxSwift
 class MovieListContentViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var titleLabel: UILabel!
     var pageIndex: Int = 0
     var viewModel = MovieListViewModel()
     let disposeBag = DisposeBag()
@@ -19,9 +18,9 @@ class MovieListContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if pageIndex == 0 {
-            titleLabel.text = "Showing"
+            
         } else {
-            titleLabel.text = "Coming soon"
+            
         }
 //        viewModel.showingData
 //            .drive(tableView.rx.items(cellIdentifier: "Cell2")) { _, movie, cell in
@@ -38,16 +37,4 @@ class MovieListContentViewController: UIViewController {
 //        .disposed(by: disposeBag)
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

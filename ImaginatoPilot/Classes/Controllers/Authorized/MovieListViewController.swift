@@ -19,6 +19,7 @@ class MovieListViewController: BaseViewController {
     @IBOutlet weak var comingSoonIndicatorLine: UIView!
     @IBOutlet weak var pageView: UIView!
     var pageViewController: UIPageViewController?
+    var currentIndex = 0
     
 //    @IBOutlet weak var tableView: UITableView!
     
@@ -32,6 +33,7 @@ class MovieListViewController: BaseViewController {
         
         pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") as? UIPageViewController
         pageViewController?.dataSource = self
+        pageViewController?.delegate = self
         let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0)!
         let viewControllers = [startingViewController]
         self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
@@ -78,11 +80,23 @@ class MovieListViewController: BaseViewController {
     }
     
     @IBAction func touchShowing(_ sender: Any) {
-        selectSection(index: 0)
+        if currentIndex != 0 {
+            selectSection(index: 0)
+            currentIndex = 0
+            let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0)!
+            let viewControllers = [startingViewController]
+            self.pageViewController?.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
+        }
     }
     
     @IBAction func touchComingSoon(_ sender: Any) {
-        selectSection(index: 1)
+        if currentIndex != 1 {
+            selectSection(index: 1)
+            currentIndex = 1
+            let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 1)!
+            let viewControllers = [startingViewController]
+            self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+        }
     }
     
     
@@ -123,7 +137,7 @@ extension MovieListViewController {
 }
 
 // MARK: Page View Controller Data Source
-extension MovieListViewController: UIPageViewControllerDataSource {
+extension MovieListViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         var index = (viewController as! MovieListContentViewController).pageIndex
         index += 1
@@ -134,12 +148,18 @@ extension MovieListViewController: UIPageViewControllerDataSource {
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-          var index = (viewController as! MovieListContentViewController).pageIndex
+        var index = (viewController as! MovieListContentViewController).pageIndex
         index -= 1
         if index < 0 {
             return nil
         }
         return self.viewControllerAtIndex(index: index)
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        var index = (pendingViewControllers.first as! MovieListContentViewController).pageIndex
+        selectSection(index: index)
+        currentIndex = index
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
