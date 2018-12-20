@@ -169,6 +169,7 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
             self.lblMovieTitle.alpha = 1
             self.lblMovieGenre.alpha = 1
         }
+        self.createTimerAutoScroll()
     }
     
     func carouselDidScroll(_ carousel: iCarousel) {
@@ -182,7 +183,6 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     
     func carouselWillBeginDragging(_ carousel: iCarousel) {
         self.carousellScroll = false
-        self.carouselTimer?.invalidate()
         if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
             if currentView.transform != scalesMin {
                 currentView.transform = scalesMin
@@ -199,6 +199,7 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
             }
             currentView.hiddenBuyTicket(true)
         }
+        self.carouselTimer?.invalidate()
     }
     
     func carouselDidEndDecelerating(_ carousel: iCarousel) {
@@ -208,6 +209,5 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     
     func carouselDidEndDragging(_ carousel: iCarousel, willDecelerate decelerate: Bool) {
         self.carousellScroll = true
-        self.createTimerAutoScroll()
     }
 }
