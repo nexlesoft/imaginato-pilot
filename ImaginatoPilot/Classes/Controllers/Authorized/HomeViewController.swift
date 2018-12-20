@@ -9,6 +9,8 @@
 import UIKit
 
 class HomeViewController: BaseViewController {
+    @IBOutlet weak var btnSearch: UIButton!
+
     @IBAction func didTouchButton(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "MovieListViewController") as! MovieListViewController
         vc.keyword = "s"
