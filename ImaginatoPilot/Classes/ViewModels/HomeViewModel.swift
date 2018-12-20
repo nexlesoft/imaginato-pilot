@@ -12,8 +12,6 @@ import RxCocoa
 
 class HomeViewModel {
     
-    let searchText = Variable("")
-    
     lazy var Data: Driver<[Movie]> = {
         return HomeViewModel.moviesBy()
             .asDriver(onErrorJustReturn: [])

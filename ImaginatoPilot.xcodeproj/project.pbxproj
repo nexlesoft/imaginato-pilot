@@ -147,6 +147,16 @@
 			path = iCarousel;
 			sourceTree = "<group>";
 		};
+		84B04A8621CBA2FA005AC1BD /* HomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				FBA5F23720CE733000D19C67 /* HomeViewController.swift */,
+				8476EFB821CB943D000149E3 /* MovieCarouselView.swift */,
+				8476EFBA21CB949A000149E3 /* MovieCarouselView.xib */,
+			);
+			path = HomeVC;
+			sourceTree = "<group>";
+		};
 		FB42061120CCC160003B785C = {
 			isa = PBXGroup;
 			children = (
@@ -264,12 +274,10 @@
 		FBA5F1AC20CE6DD000D19C67 /* Authorized */ = {
 			isa = PBXGroup;
 			children = (
-				FBA5F23720CE733000D19C67 /* HomeViewController.swift */,
+				84B04A8621CBA2FA005AC1BD /* HomeVC */,
 				FB52001721CB9C45007CD973 /* SearchViewController.swift */,
 				FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */,
 				8412114921CB957E0005382D /* MovieListContentViewController.swift */,
-				8476EFB821CB943D000149E3 /* MovieCarouselView.swift */,
-				8476EFBA21CB949A000149E3 /* MovieCarouselView.xib */,
 			);
 			path = Authorized;
 			sourceTree = "<group>";
