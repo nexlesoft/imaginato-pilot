@@ -212,7 +212,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uaf-VC-RCi">
-                                                    <rect key="frame" x="0.0" y="56" width="375" height="1"/>
+                                                    <rect key="frame" x="0.0" y="55.5" width="375" height="1"/>
                                                     <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="Nmg-6g-6b3"/>
@@ -571,14 +571,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pN2-oK-2Br" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2944.8000000000002" y="26.53673163418291"/>
-            <point key="canvasLocation" x="2914" y="-376"/>
+            <point key="canvasLocation" x="2913" y="-418"/>
         </scene>
     </scenes>
     <resources>
         <image name="ic_search-iPhone6P" width="30" height="30"/>
         <image name="icon-back-2" width="13" height="23"/>
-        <image name="icon-buyTicket" width="136" height="50"/>
-        <image name="icon-rating" width="49" height="15"/>
+        <image name="icon-buyTicket" width="272" height="100"/>
+        <image name="icon-rating" width="98" height="30"/>
     </resources>
 </document>
