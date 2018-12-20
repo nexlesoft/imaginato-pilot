@@ -1657,7 +1657,12 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
 {
     if (!_timer)
     {
-        self.timer = [NSTimer timerWithTimeInterval:1.0/60.0
+//        self.timer = [NSTimer timerWithTimeInterval:1.0/60.0
+//                                             target:self
+//                                           selector:@selector(step)
+//                                           userInfo:nil
+//                                            repeats:YES];
+        self.timer = [NSTimer timerWithTimeInterval: _autoscroll/60.0
                                              target:self
                                            selector:@selector(step)
                                            userInfo:nil
