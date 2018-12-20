@@ -49,12 +49,13 @@ class MovieListContentViewController: UIViewController {
         let obsKeyword = Observable<String>.just(self.keyword)
         obsKeyword.bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
-
+        Utils.showIndicator()
         viewModel.showingData
             .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
                 if let movieCell = cell as? MovieListCell {
                     movieCell.titleLabel.text = movie.title
                 }
+                Utils.dismissIndicator()
                 //                cell.textLabel?.text = movie.title
                 //                cell.detailTextLabel?.text = movie.id
             }
