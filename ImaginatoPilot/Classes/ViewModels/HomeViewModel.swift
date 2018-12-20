@@ -9,18 +9,17 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import SwiftyJSON
 
 class HomeViewModel {
     
-    let searchText = Variable("")
-    
-    lazy var Data: Driver<[Movie]> = {
+    lazy var Data: Driver<[MovieDTO]> = {
         return HomeViewModel.moviesBy()
             .asDriver(onErrorJustReturn: [])
     }()
     
     
-    static func moviesBy() -> Observable<[Movie]> {
+    static func moviesBy() -> Observable<[MovieDTO]> {
         if let url = URL(string: "https://easy-mock.com/mock/5c19c6ff64b4573fc81a61f3/movieapp/home"){
             return URLSession.shared.rx.json(url: url)
                 .retry(3)
@@ -30,21 +29,16 @@ class HomeViewModel {
         }
     }
     
-    static func parse(json: Any) -> [Movie] {
+    static func parse(json: Any) -> [MovieDTO] {
         guard let response = json as? [String: Any],
             let results = response["results"] as? [[String: Any]]
             else {
                 return []
         }
         
-        var movies = [Movie]()
-        print("********HomeResponse: \(results)")
+        var movies = [MovieDTO]()
         results.forEach{
-            guard let id = $0["id"] as? String,
-                let title = $0["title"] as? String else {
-                    return
-            }
-            movies.append(Movie(id: id, title: title))
+            movies.append(MovieDTO(json: JSON($0)))
         }
         return movies
     }
