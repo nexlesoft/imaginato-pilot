@@ -37,3 +37,4 @@ let appdelegate = UIApplication.shared.delegate as! AppDelegate
 let application = Application.sharedInstance
 let heightTable:CGFloat = 40.0
 let keyListHistory = "SavedListHistorySearch"
+let scalesMin: CGAffineTransform = CGAffineTransform(scaleX: 0.9, y: 0.9)
