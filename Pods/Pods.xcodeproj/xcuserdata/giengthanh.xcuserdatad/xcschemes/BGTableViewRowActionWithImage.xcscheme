@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2DA37123005CBF8FEF71F0CE3AD56B3"
-               BlueprintName = "SVProgressHUD"
+               BlueprintIdentifier = "CF0BD3A12DFE2C755AE9AA4169DB17EB"
+               BlueprintName = "BGTableViewRowActionWithImage"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SVProgressHUD.framework">
+               BuildableName = "BGTableViewRowActionWithImage.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

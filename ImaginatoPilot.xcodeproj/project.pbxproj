@@ -17,6 +17,7 @@
 		FB42062820CCC162003B785C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB42062620CCC162003B785C /* LaunchScreen.storyboard */; };
 		FB4B095E20E87738006D9AC3 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4B095D20E87738006D9AC3 /* SwiftHEXColors.swift */; };
 		FB4B096020E878CB006D9AC3 /* NSString+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4B095F20E878CA006D9AC3 /* NSString+Utilities.swift */; };
+		FB52001821CB9C45007CD973 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB52001721CB9C45007CD973 /* SearchViewController.swift */; };
 		FBA5F19D20CE6CCA00D19C67 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA5F19C20CE6CCA00D19C67 /* Splash.storyboard */; };
 		FBA5F1A320CE6D4800D19C67 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F1A220CE6D4800D19C67 /* Constant.swift */; };
 		FBA5F1A520CE6D5800D19C67 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F1A420CE6D5800D19C67 /* Application.swift */; };
@@ -31,8 +32,8 @@
 		FBA5F2C620CE760100D19C67 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F2C520CE760100D19C67 /* UIView.swift */; };
 		FBA5F2DA20CE789900D19C67 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F2D920CE789900D19C67 /* Font.swift */; };
 		FBA5F30520CE825C00D19C67 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F30420CE825C00D19C67 /* SplashViewController.swift */; };
-		FBEE23AE21CB564D00D7AA44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEE23AD21CB564D00D7AA44 /* SearchViewController.swift */; };
 		FBEE23B021CB566300D7AA44 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */; };
+		FBEE23B721CB88CD00D7AA44 /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEE23B621CB88CD00D7AA44 /* SearchListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		FB42062920CCC162003B785C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB4B095D20E87738006D9AC3 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		FB4B095F20E878CA006D9AC3 /* NSString+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Utilities.swift"; sourceTree = "<group>"; };
+		FB52001721CB9C45007CD973 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FBA5F18620CE5F4D00D19C67 /* ImaginatoPilot-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImaginatoPilot-Bridging-Header.h"; sourceTree = "<group>"; };
 		FBA5F19C20CE6CCA00D19C67 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		FBA5F1A220CE6D4800D19C67 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -67,8 +69,8 @@
 		FBA5F2C520CE760100D19C67 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FBA5F2D920CE789900D19C67 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		FBA5F30420CE825C00D19C67 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		FBEE23AD21CB564D00D7AA44 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
+		FBEE23B621CB88CD00D7AA44 /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		FCB40C6D93D4270F96C45E33 /* Pods-ProjectTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTemplate.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTemplate/Pods-ProjectTemplate.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				18A9ADD921CB7C4E00CDFC5E /* MovieListViewModel.swift */,
+				FBEE23B621CB88CD00D7AA44 /* SearchListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -229,7 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				FBA5F23720CE733000D19C67 /* HomeViewController.swift */,
-				FBEE23AD21CB564D00D7AA44 /* SearchViewController.swift */,
+				FB52001721CB9C45007CD973 /* SearchViewController.swift */,
 				FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */,
 			);
 			path = Authorized;
@@ -364,6 +367,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ImaginatoPilot/Pods-ImaginatoPilot-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BGTableViewRowActionWithImage/BGTableViewRowActionWithImage.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
@@ -378,6 +382,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BGTableViewRowActionWithImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
@@ -413,8 +418,9 @@
 				FBA5F30520CE825C00D19C67 /* SplashViewController.swift in Sources */,
 				FB3F7BFB2106D9F5009D65AB /* UIImage+ReSize.swift in Sources */,
 				FBEE23B021CB566300D7AA44 /* MovieListViewController.swift in Sources */,
+				FB52001821CB9C45007CD973 /* SearchViewController.swift in Sources */,
+				FBEE23B721CB88CD00D7AA44 /* SearchListViewModel.swift in Sources */,
 				FB42061E20CCC160003B785C /* AppDelegate.swift in Sources */,
-				FBEE23AE21CB564D00D7AA44 /* SearchViewController.swift in Sources */,
 				18A9ADDC21CB7C7700CDFC5E /* Movie.swift in Sources */,
 				FBA5F2DA20CE789900D19C67 /* Font.swift in Sources */,
 				FBA5F23020CE707800D19C67 /* UIColor.swift in Sources */,

@@ -14,4 +14,5 @@ pod 'RxSwift'
 pod 'RxCocoa'
 pod 'RxAlamofire'
 pod 'iCarousel'
+pod 'BGTableViewRowActionWithImage'
 end
