@@ -37,7 +37,8 @@ class MovieListViewController: BaseViewController {
         let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0)!
         let viewControllers = [startingViewController]
         self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
-        self.pageViewController?.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: pageView.frame.size.height)
+        self.pageViewController?.view.frame = CGRect(x: 0, y: 0, width: 320, height: pageView.frame.size.height)
+        
         self.addChildViewController(pageViewController!)
         self.pageView.addSubview((pageViewController?.view)!)
         pageViewController?.didMove(toParentViewController: self)
