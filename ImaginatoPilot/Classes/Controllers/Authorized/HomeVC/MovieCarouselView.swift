@@ -14,6 +14,8 @@ class MovieCarouselView: UIView {
     @IBOutlet fileprivate weak var imvPoster: UIImageView!
     @IBOutlet fileprivate weak var lblPreSale: UILabel!
     @IBOutlet fileprivate weak var btnBuyTicket: UIButton!
+    @IBOutlet weak var lctHeightBuyTicket: NSLayoutConstraint!
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -24,10 +26,15 @@ class MovieCarouselView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 20
         self.clipsToBounds = true
         self.lblPreSale.layer.masksToBounds = true
         self.lblPreSale.layer.cornerRadius = 5.0
+        self.lblPreSale.isHidden = true
+        self.imvPoster.layer.masksToBounds = true
+        self.imvPoster.layer.cornerRadius = 20
+        self.lctHeightBuyTicket.constant = 40
+        self.btnBuyTicket.isHidden = false
     }
     
     func binData(_ movie: MovieDTO) {
@@ -40,6 +47,23 @@ class MovieCarouselView: UIView {
         }
         else {
             self.imvPoster.image = UIImage(named: "ic_placeholder")
+        }
+        if movie.presaleFlag == 1 {
+            self.lblPreSale.isHidden = false
+        }
+        else {
+            self.lblPreSale.isHidden = true
+        }
+    }
+    
+    func hiddenBuyTicket(_ isHidden: Bool) {
+        if isHidden == true {
+            self.lctHeightBuyTicket.constant = 0
+            self.btnBuyTicket.isHidden = isHidden
+        }
+        else {
+            self.lctHeightBuyTicket.constant = 40
+            self.btnBuyTicket.isHidden = isHidden
         }
     }
 }

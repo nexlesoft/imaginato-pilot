@@ -50,12 +50,14 @@ class MovieListContentViewController: UIViewController {
         obsKeyword.bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
         
+        Utils.showIndicator()
         if pageIndex == 0 {
             viewModel.showingData
                 .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
                     if let movieCell = cell as? MovieListCell {
                         movieCell.titleLabel.text = movie.title
                     }
+                    Utils.dismissIndicator()
                 }
                 .disposed(by: disposeBag)
         } else {
@@ -64,6 +66,7 @@ class MovieListContentViewController: UIViewController {
                     if let movieCell = cell as? MovieListCell {
                         movieCell.titleLabel.text = movie.title
                     }
+                    Utils.dismissIndicator()
                 }
                 .disposed(by: disposeBag)
         }
