@@ -11,10 +11,11 @@ import SDWebImage
 
 class MovieCarouselView: UIView {
 
+    @IBOutlet fileprivate weak var vwMain: UIView!
     @IBOutlet fileprivate weak var imvPoster: UIImageView!
     @IBOutlet fileprivate weak var lblPreSale: UILabel!
     @IBOutlet fileprivate weak var btnBuyTicket: UIButton!
-    @IBOutlet weak var lctHeightBuyTicket: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var lctHeightBuyTicket: NSLayoutConstraint!
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -26,8 +27,8 @@ class MovieCarouselView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 20
-        self.clipsToBounds = true
+        self.vwMain.layer.cornerRadius = 20
+        self.vwMain.clipsToBounds = true
         self.lblPreSale.layer.masksToBounds = true
         self.lblPreSale.layer.cornerRadius = 5.0
         self.lblPreSale.isHidden = true
