@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		18A9ADDC21CB7C7700CDFC5E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9ADDB21CB7C7700CDFC5E /* Movie.swift */; };
 		18A9ADDE21CB8BFA00CDFC5E /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9ADDD21CB8BFA00CDFC5E /* MovieListViewModel.swift */; };
+		18A9ADE021CB8F8D00CDFC5E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9ADDF21CB8F8D00CDFC5E /* HomeViewModel.swift */; };
 		B4554F6EEDA2F66A740C4A65 /* Pods_ImaginatoPilot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A691E1E0F802EA9236D79575 /* Pods_ImaginatoPilot.framework */; };
 		FB3F7BFB2106D9F5009D65AB /* UIImage+ReSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3F7BFA2106D9F5009D65AB /* UIImage+ReSize.swift */; };
 		FB42061E20CCC160003B785C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42061D20CCC160003B785C /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		18A9ADDB21CB7C7700CDFC5E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		18A9ADDD21CB8BFA00CDFC5E /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
+		18A9ADDF21CB8F8D00CDFC5E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		82ED7800453A1E56BF89525A /* Pods-ImaginatoPilot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImaginatoPilot.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImaginatoPilot/Pods-ImaginatoPilot.release.xcconfig"; sourceTree = "<group>"; };
 		96C939428DCF90A78F8FA36E /* Pods-ProjectTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTemplate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTemplate/Pods-ProjectTemplate.debug.xcconfig"; sourceTree = "<group>"; };
 		A691E1E0F802EA9236D79575 /* Pods_ImaginatoPilot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImaginatoPilot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				18A9ADDD21CB8BFA00CDFC5E /* MovieListViewModel.swift */,
+				18A9ADDF21CB8F8D00CDFC5E /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBA5F23220CE708D00D19C67 /* UIApplication.swift in Sources */,
+				18A9ADE021CB8F8D00CDFC5E /* HomeViewModel.swift in Sources */,
 				FBA5F1A720CE6D7700D19C67 /* Utils.swift in Sources */,
 				FB4B096020E878CB006D9AC3 /* NSString+Utilities.swift in Sources */,
 				FBA5F23420CE70A100D19C67 /* String.swift in Sources */,
