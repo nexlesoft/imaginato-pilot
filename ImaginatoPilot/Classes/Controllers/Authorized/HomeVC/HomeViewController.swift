@@ -76,11 +76,15 @@ extension HomeViewController {
         lblMovieGenre.text = ""
     }
     
+    private func createTimerAutoScroll() {
+        self.carouselTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.autoscrollForBannerView), userInfo: nil, repeats: true)
+    }
+    
     @objc func autoscrollForBannerView() {
         func autoscroll(_ currentIndex: Int) {
             self.indexCarousel = currentIndex
             if self.carouselTimer == nil {
-                 self.carouselTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.autoscrollForBannerView), userInfo: nil, repeats: true)
+                 self.createTimerAutoScroll()
             }
         }
         
@@ -165,7 +169,7 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     
     func carouselWillBeginDragging(_ carousel: iCarousel) {
         self.carousellScroll = false
-        //self.stopTimer()
+        self.carouselTimer?.invalidate()
     }
     
     func carouselWillBeginScrollingAnimation(_ carousel: iCarousel) {
@@ -179,5 +183,6 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     
     func carouselDidEndDragging(_ carousel: iCarousel, willDecelerate decelerate: Bool) {
         self.carousellScroll = true
+        self.createTimerAutoScroll()
     }
 }
