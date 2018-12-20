@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 class HomeViewController: BaseViewController {
-    @IBOutlet weak var tableView: UITableView!
     var viewModel = HomeViewModel()
     let disposeBag = DisposeBag()
     @IBAction func didTouchButton(_ sender: Any) {
@@ -28,12 +27,12 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.Data
-            .drive(tableView.rx.items(cellIdentifier: "Cell4")) { _, movie, cell in
-                cell.textLabel?.text = movie.title
-                cell.detailTextLabel?.text = movie.id
-            }
-            .disposed(by: disposeBag)
+//        viewModel.Data
+//            .drive(tableView.rx.items(cellIdentifier: "Cell4")) { _, movie, cell in
+//                cell.textLabel?.text = movie.title
+//                cell.detailTextLabel?.text = movie.id
+//            }
+//            .disposed(by: disposeBag)
         setupUI()
     }
 
@@ -62,6 +61,7 @@ extension HomeViewController {
 //MARK: - Private Func
 extension HomeViewController {
     fileprivate func setupUI() {
+        self.navigationController?.isNavigationBarHidden = true
         lctHeightHeader.constant = Application.sharedInstance.appTopOffset + 44
         carousel.type = .rotary
         carousel.delegate = self
