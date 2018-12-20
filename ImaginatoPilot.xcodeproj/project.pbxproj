@@ -29,6 +29,8 @@
 		FBA5F2C620CE760100D19C67 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F2C520CE760100D19C67 /* UIView.swift */; };
 		FBA5F2DA20CE789900D19C67 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F2D920CE789900D19C67 /* Font.swift */; };
 		FBA5F30520CE825C00D19C67 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F30420CE825C00D19C67 /* SplashViewController.swift */; };
+		FBEE23AE21CB564D00D7AA44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEE23AD21CB564D00D7AA44 /* SearchViewController.swift */; };
+		FBEE23B021CB566300D7AA44 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		FBA5F2C520CE760100D19C67 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FBA5F2D920CE789900D19C67 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		FBA5F30420CE825C00D19C67 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		FBEE23AD21CB564D00D7AA44 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		FCB40C6D93D4270F96C45E33 /* Pods-ProjectTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTemplate.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTemplate/Pods-ProjectTemplate.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,7 +121,7 @@
 		FB42061C20CCC160003B785C /* ImaginatoPilot */ = {
 			isa = PBXGroup;
 			children = (
-				FBA5F17320CE5B0900D19C67 /* Storyboards */,
+				FBA5F1A120CE6D2A00D19C67 /* Application */,
 				FBA5F19720CE6C5500D19C67 /* Classes */,
 				FBA5F17520CE5C5D00D19C67 /* Supporting Files */,
 				FB42062420CCC162003B785C /* Assets.xcassets */,
@@ -127,13 +131,13 @@
 			path = ImaginatoPilot;
 			sourceTree = "<group>";
 		};
-		FBA5F17320CE5B0900D19C67 /* Storyboards */ = {
+		FBA5F17320CE5B0900D19C67 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				FB42062120CCC160003B785C /* Main.storyboard */,
 				FBA5F19C20CE6CCA00D19C67 /* Splash.storyboard */,
 			);
-			path = Storyboards;
+			path = View;
 			sourceTree = "<group>";
 		};
 		FBA5F17520CE5C5D00D19C67 /* Supporting Files */ = {
@@ -147,11 +151,11 @@
 		FBA5F19720CE6C5500D19C67 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FBA5F1A120CE6D2A00D19C67 /* Application */,
 				FBEE23AB21CB4F9000D7AA44 /* Web Services */,
+				FBA5F17320CE5B0900D19C67 /* View */,
+				FBEE23AC21CB4FCA00D7AA44 /* View Models */,
 				FBA5F1A020CE6D1C00D19C67 /* Models */,
 				FBA5F19F20CE6D0F00D19C67 /* Controllers */,
-				FBEE23AC21CB4FCA00D7AA44 /* View Models */,
 				FBA5F19E20CE6D0200D19C67 /* Util */,
 			);
 			path = Classes;
@@ -213,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				FBA5F23720CE733000D19C67 /* HomeViewController.swift */,
+				FBEE23AD21CB564D00D7AA44 /* SearchViewController.swift */,
+				FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */,
 			);
 			path = Authorized;
 			sourceTree = "<group>";
@@ -408,7 +414,9 @@
 				FBA5F23620CE70EC00D19C67 /* UITableViewExtension.swift in Sources */,
 				FBA5F30520CE825C00D19C67 /* SplashViewController.swift in Sources */,
 				FB3F7BFB2106D9F5009D65AB /* UIImage+ReSize.swift in Sources */,
+				FBEE23B021CB566300D7AA44 /* MovieListViewController.swift in Sources */,
 				FB42061E20CCC160003B785C /* AppDelegate.swift in Sources */,
+				FBEE23AE21CB564D00D7AA44 /* SearchViewController.swift in Sources */,
 				FBA5F2DA20CE789900D19C67 /* Font.swift in Sources */,
 				FBA5F23020CE707800D19C67 /* UIColor.swift in Sources */,
 				FBA5F1A320CE6D4800D19C67 /* Constant.swift in Sources */,

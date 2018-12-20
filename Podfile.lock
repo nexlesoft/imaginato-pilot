@@ -20,6 +20,7 @@ PODS:
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
+  - Alamofire
   - iCarousel
   - IQKeyboardManagerSwift
   - Masonry
@@ -65,6 +66,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 72c1037724b913dfd4a41268d647e34d6760ace2
+PODFILE CHECKSUM: 6e071d932796f419fb414d8cfa2c67f732c49641
 
 COCOAPODS: 1.5.3
