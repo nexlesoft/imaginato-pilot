@@ -15,16 +15,25 @@ class MovieListViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableView1: UITableView!
     var viewModel = MovieListViewModel()
     let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.data
+        viewModel.showingData
             .drive(tableView.rx.items(cellIdentifier: "Cell2")) { _, movie, cell in
                 cell.textLabel?.text = movie.title
                 cell.detailTextLabel?.text = movie.id
             }
             .disposed(by: disposeBag)
+
+        viewModel.upcomingData
+            .drive(tableView1.rx.items(cellIdentifier: "Cell3")) { _, movie, cell in
+                cell.textLabel?.text = movie.title
+                cell.detailTextLabel?.text = movie.id
+            }
+            .disposed(by: disposeBag)
+        
         let obsKeyword = Observable<String>.just("s")
         obsKeyword.bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
