@@ -73,14 +73,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfn-Gk-eR8" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="99" width="320" height="400"/>
+                                <rect key="frame" x="0.0" y="99" width="320" height="320"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="wfn-Gk-eR8" secondAttribute="height" multiplier="4:5" id="oS6-iH-Sg4"/>
+                                    <constraint firstAttribute="width" secondItem="wfn-Gk-eR8" secondAttribute="height" multiplier="1:1" id="oS6-iH-Sg4"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgQ-AZ-fDO">
-                                <rect key="frame" x="0.0" y="499" width="320" height="120"/>
+                                <rect key="frame" x="0.0" y="419" width="320" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dm3-fF-QHs">
                                         <rect key="frame" x="133.5" y="8" width="53.5" height="25.5"/>

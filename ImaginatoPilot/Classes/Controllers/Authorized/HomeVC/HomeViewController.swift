@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+
 class HomeViewController: BaseViewController {
     var viewModel = HomeViewModel()
     let disposeBag = DisposeBag()
@@ -123,17 +124,18 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         if let movieView = view as? MovieCarouselView {
             movieView.binData(arrMovie[index])
-            movieView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             movieView.hiddenBuyTicket(true)
             return movieView
         }
         else {
             let movieView = MovieCarouselView.loadNib()
-            let width = carousel.frame.size.width * 2.0 / 3.0
+            let width = carousel.frame.size.width * 2.0 / 3.0 - 20
             let height = carousel.frame.size.height
             movieView.frame = CGRect(x: 0, y: 0, width: width, height: height)
             movieView.binData(arrMovie[index])
-            movieView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            if movieView.transform != scalesMin {
+                movieView.transform = scalesMin
+            }
             movieView.hiddenBuyTicket(true)
             return movieView
         }
@@ -157,7 +159,9 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     
     func carouselDidEndScrollingAnimation(_ carousel: iCarousel) {
         if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
-            currentView.transform = .identity
+            UIView.animate(withDuration: 0.3) {
+                currentView.transform = .identity
+            }
             currentView.hiddenBuyTicket(false)
         }
         self.carousellScroll = true
@@ -180,7 +184,9 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
         self.carousellScroll = false
         self.carouselTimer?.invalidate()
         if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
-            currentView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            if currentView.transform != scalesMin {
+                currentView.transform = scalesMin
+            }
             currentView.hiddenBuyTicket(true)
         }
     }
@@ -188,7 +194,9 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     func carouselWillBeginScrollingAnimation(_ carousel: iCarousel) {
         self.carousellScroll = false
         if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
-            currentView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            if currentView.transform != scalesMin {
+                currentView.transform = scalesMin
+            }
             currentView.hiddenBuyTicket(true)
         }
     }
