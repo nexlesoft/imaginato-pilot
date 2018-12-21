@@ -33,6 +33,10 @@ class MovieListContentViewController: UIViewController {
                     Utils.dismissIndicator()
                 }
                 .disposed(by: disposeBag)
+            viewModel.showingData.drive(onNext: nil, onCompleted: {
+                Utils.dismissIndicator()
+            }, onDisposed: nil)
+            .disposed(by: self.disposeBag)
         } else {
             viewModel.upcomingData
                 .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
@@ -42,6 +46,10 @@ class MovieListContentViewController: UIViewController {
                     Utils.dismissIndicator()
                 }
                 .disposed(by: disposeBag)
+            viewModel.upcomingData.drive(onNext: nil, onCompleted: {
+                Utils.dismissIndicator()
+            }, onDisposed: nil)
+                .disposed(by: self.disposeBag)
         }
     }
     
