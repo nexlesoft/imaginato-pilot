@@ -72,6 +72,24 @@ extension SearchViewController {
         UserDefaults.standard.synchronize()
     }
     
+    private func moveToMovieList(strSearch:String) {
+        let movieListVC = self.getViewController(storyboardName: "Main", className: "MovieListViewController") as! MovieListViewController
+        movieListVC.keyword = strSearch.trim()
+        self.navigationController?.pushViewController(movieListVC, animated: true)
+        let index = self.listHistory.index(of: strSearch)
+        if index != NSNotFound {
+            self.listHistory.removeObject(at: index)
+        }
+        if self.listHistory.count >= 10 {
+            self.listHistory.removeLastObject()
+        }
+        self.listHistory.insert(strSearch.trim(), at: 0)
+        self.tableView.reloadData()
+        self.tfSearch.text = ""
+        self.saveDataSearch()
+        self.tfSearch.resignFirstResponder()
+    }
+    
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
@@ -137,7 +155,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tfSearch.text = self.listHistory[indexPath.row] as? String ?? ""
+        let strSearch = self.listHistory[indexPath.row] as? String ?? ""
+        self.tfSearch.text = ""
+        self.moveToMovieList(strSearch: strSearch)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -149,17 +169,7 @@ extension SearchViewController:UITextFieldDelegate {
         if textField.text == "" {
             return false
         }
-        let movieListVC = self.getViewController(storyboardName: "Main", className: "MovieListViewController") as! MovieListViewController
-        movieListVC.keyword = textField.text ?? ""
-        self.navigationController?.pushViewController(movieListVC, animated: true)
-        if self.listHistory.count >= 10 {
-            self.listHistory.removeLastObject()
-        }
-        self.listHistory.insert(textField.text ?? "", at: 0)
-        self.tableView.reloadData()
-        self.tfSearch.text = ""
-        self.saveDataSearch()
-        textField.resignFirstResponder()
+        self.moveToMovieList(strSearch: textField.text ?? "")
         return true
     }
 }
