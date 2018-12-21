@@ -67,6 +67,7 @@ extension HomeViewController {
         self.navigationController?.isNavigationBarHidden = true
         lctHeightHeader.constant = Application.sharedInstance.appTopOffset + 44
         carousel.type = .rotary
+        carousel.isPagingEnabled = true
         carousel.delegate = self
         carousel.dataSource = self
         lblMovieTitle.text = ""
