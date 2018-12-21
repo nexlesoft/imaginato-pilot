@@ -71,7 +71,7 @@ extension HomeViewController {
     fileprivate func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
         lctHeightHeader.constant = Application.sharedInstance.appTopOffset + 44
-        carousel.type = .linear
+        carousel.type = .rotary
         carousel.delegate = self
         carousel.dataSource = self
         lblMovieTitle.text = ""
@@ -133,9 +133,6 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
             let height = carousel.frame.size.height
             movieView.frame = CGRect(x: 0, y: 0, width: width, height: height)
             movieView.binData(arrMovie[index])
-            if movieView.transform != scalesMin {
-                movieView.transform = scalesMin
-            }
             movieView.hiddenBuyTicket(true)
             return movieView
         }
@@ -148,27 +145,29 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
                 self.lblMovieGenre.text = genreIds.map{$0.name ?? ""}.joined(separator: ", ")
             }
         }
-        
         if self.lblMovieTitle.alpha == 1 {
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
                 self.lblMovieTitle.alpha = 0
                 self.lblMovieGenre.alpha = 0
-            }
+                self.lblMovieTitle.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
+                self.lblMovieGenre.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
+            }, completion: nil)
         }
     }
     
     func carouselDidEndScrollingAnimation(_ carousel: iCarousel) {
         if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
-            UIView.animate(withDuration: 0.3) {
-                currentView.transform = .identity
-            }
             currentView.hiddenBuyTicket(false)
+            self.lblMovieTitle.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
+            self.lblMovieGenre.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
+            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
+                self.lblMovieTitle.alpha = 1
+                self.lblMovieGenre.alpha = 1
+                self.lblMovieTitle.transform = .identity
+                self.lblMovieGenre.transform = .identity
+            }, completion: nil)
         }
         self.carousellScroll = true
-        UIView.animate(withDuration: 0.5) {
-            self.lblMovieTitle.alpha = 1
-            self.lblMovieGenre.alpha = 1
-        }
         self.createTimerAutoScroll()
     }
     
@@ -184,9 +183,6 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     func carouselWillBeginDragging(_ carousel: iCarousel) {
         self.carousellScroll = false
         if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
-            if currentView.transform != scalesMin {
-                currentView.transform = scalesMin
-            }
             currentView.hiddenBuyTicket(true)
         }
     }
@@ -194,12 +190,17 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     func carouselWillBeginScrollingAnimation(_ carousel: iCarousel) {
         self.carousellScroll = false
         if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
-            if currentView.transform != scalesMin {
-                currentView.transform = scalesMin
-            }
             currentView.hiddenBuyTicket(true)
         }
         self.carouselTimer?.invalidate()
+        if self.lblMovieTitle.alpha == 1 {
+            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
+                self.lblMovieTitle.alpha = 0
+                self.lblMovieGenre.alpha = 0
+                self.lblMovieTitle.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
+                self.lblMovieGenre.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
+            }, completion: nil)
+        }
     }
     
     func carouselDidEndDecelerating(_ carousel: iCarousel) {
@@ -209,5 +210,12 @@ extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
     
     func carouselDidEndDragging(_ carousel: iCarousel, willDecelerate decelerate: Bool) {
         self.carousellScroll = true
+    }
+    
+    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+        if option == .spacing {
+            return 3
+        }
+        return value
     }
 }

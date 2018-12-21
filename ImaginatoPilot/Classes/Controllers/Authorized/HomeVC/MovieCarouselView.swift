@@ -65,6 +65,10 @@ class MovieCarouselView: UIView {
         else {
             self.lctHeightBuyTicket.constant = 40
             self.btnBuyTicket.isHidden = isHidden
+            btnBuyTicket.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
+            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
+                self.btnBuyTicket.transform = .identity
+            }, completion: nil)
         }
     }
 }
