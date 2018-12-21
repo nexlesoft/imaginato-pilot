@@ -20,7 +20,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jtg-kd-Jne">
-                            <rect key="frame" x="0.0" y="0.0" width="200" height="260"/>
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRE-SALE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nw5-yd-wG7">
                             <rect key="frame" x="10" y="10" width="70" height="25"/>
@@ -35,6 +35,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNm-Hq-id3">
                             <rect key="frame" x="0.0" y="260" width="200" height="40"/>
+                            <color key="backgroundColor" red="0.078431372550000003" green="0.12549019610000001" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="yq4-aH-z0G"/>
                             </constraints>
@@ -45,7 +46,6 @@
                     </subviews>
                     <color key="backgroundColor" red="0.078431372550000003" green="0.12549019610000001" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="gNm-Hq-id3" firstAttribute="top" secondItem="Jtg-kd-Jne" secondAttribute="bottom" id="4X5-hX-Tak"/>
                         <constraint firstItem="gNm-Hq-id3" firstAttribute="leading" secondItem="b2M-Yp-sat" secondAttribute="leading" id="5eS-Lz-yca"/>
                         <constraint firstAttribute="trailing" secondItem="Jtg-kd-Jne" secondAttribute="trailing" id="AMC-Ru-nTi"/>
                         <constraint firstItem="Jtg-kd-Jne" firstAttribute="top" secondItem="b2M-Yp-sat" secondAttribute="top" id="BVc-wP-SiY"/>
@@ -53,6 +53,7 @@
                         <constraint firstAttribute="trailing" secondItem="gNm-Hq-id3" secondAttribute="trailing" id="Jru-v7-TW6"/>
                         <constraint firstItem="Jtg-kd-Jne" firstAttribute="leading" secondItem="b2M-Yp-sat" secondAttribute="leading" id="QSd-ss-R8e"/>
                         <constraint firstItem="nw5-yd-wG7" firstAttribute="leading" secondItem="b2M-Yp-sat" secondAttribute="leading" constant="10" id="SNZ-Ws-eYq"/>
+                        <constraint firstAttribute="bottom" secondItem="Jtg-kd-Jne" secondAttribute="bottom" id="kFp-cX-hAT"/>
                         <constraint firstItem="nw5-yd-wG7" firstAttribute="top" secondItem="b2M-Yp-sat" secondAttribute="top" constant="10" id="xyU-XD-KU2"/>
                     </constraints>
                 </view>
