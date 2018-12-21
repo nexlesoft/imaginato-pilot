@@ -37,9 +37,9 @@ class MovieListViewController: BaseViewController {
         
         self.addChildViewController(pageViewController!)
         self.pageView.addSubview((pageViewController?.view)!)
-        if let scrollView = self.pageViewController?.view.subviews.filter({$0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
-            scrollView.isScrollEnabled = false
-        }
+//        if let scrollView = self.pageViewController?.view.subviews.filter({$0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
+//            scrollView.isScrollEnabled = false
+//        }
         pageViewController?.didMove(toParentViewController: self)
     }
     
@@ -139,8 +139,11 @@ extension MovieListViewController: UIPageViewControllerDataSource, UIPageViewCon
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        let index = (pendingViewControllers.first as! MovieListContentViewController).pageIndex
+        guard let viewController = (pendingViewControllers.first as? MovieListContentViewController) else { return }
+        let index = viewController.pageIndex
         selectSection(index: index)
         currentIndex = index
+//        viewController.tableView.delegate = nil
+//        viewController.tableView.dataSource = nil
     }
 }
