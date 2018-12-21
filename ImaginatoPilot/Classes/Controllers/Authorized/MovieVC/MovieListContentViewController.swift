@@ -18,16 +18,12 @@ class MovieListContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         let obsKeyword = Observable<String>.just(self.keyword)
         obsKeyword.bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
-
+        
         Utils.showIndicator()
-
+        
         if pageIndex == 0 {
             viewModel.showingData
                 .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
@@ -47,6 +43,35 @@ class MovieListContentViewController: UIViewController {
                 }
                 .disposed(by: disposeBag)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        let obsKeyword = Observable<String>.just(self.keyword)
+//        obsKeyword.bind(to: viewModel.searchText)
+//            .disposed(by: disposeBag)
+//
+//        Utils.showIndicator()
+//
+//        if pageIndex == 0 {
+//            viewModel.showingData
+//                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
+//                    if let movieCell = cell as? MovieListCell {
+//                        movieCell.loadFromMovie(movie: movie)
+//                    }
+//                    Utils.dismissIndicator()
+//                }
+//                .disposed(by: disposeBag)
+//        } else {
+//            viewModel.upcomingData
+//                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
+//                    if let movieCell = cell as? MovieListCell {
+//                        movieCell.loadFromMovie(movie: movie)
+//                    }
+//                    Utils.dismissIndicator()
+//                }
+//                .disposed(by: disposeBag)
+//        }
     }
     
 }
