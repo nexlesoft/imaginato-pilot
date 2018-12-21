@@ -15,11 +15,6 @@ class HomeViewController: BaseViewController {
     var carouselTimer : Timer?
     fileprivate var indexCarousel : Int! = 0
     var carousellScroll : Bool! = true
-    @IBAction func didTouchButton(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "MovieListViewController") as! MovieListViewController
-        vc.keyword = "s"
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
     
     @IBOutlet fileprivate weak var carousel: iCarousel!
     @IBOutlet fileprivate weak var lctHeightHeader: NSLayoutConstraint!
