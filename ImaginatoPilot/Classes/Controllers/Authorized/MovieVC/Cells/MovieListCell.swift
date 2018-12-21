@@ -32,6 +32,8 @@ class MovieListCell: UITableViewCell {
     func loadFromMovie(movie: MovieDTO) {
         self.titleLabel.text = movie.title
         self.posterImage.sd_setImage(with: URL(string: movie.posterPath!), completed: nil)
+        self.posterImage.layer.cornerRadius = 8
+        self.posterImage.layer.masksToBounds = true
         self.ratingLabel.text = "\(movie.rate!)"
         self.ratingDescription.text = movie.ageCategory
         self.releaseDate.text = self.getDateFrom(timeStamp: movie.releaseDate)
