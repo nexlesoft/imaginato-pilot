@@ -22,11 +22,11 @@ extension Application {
         IQKeyboardManager.shared.enableAutoToolbar = true
     }
 
-    func animationSwitchScreen(nav: UIViewController!, animation: Bool!) {
+    func animationSwitchScreen(nav: UIViewController?, animation: Bool) {
         appdelegate.window?.rootViewController = nav
         if animation == true {
             let snapShot = appdelegate.window?.snapshotView(afterScreenUpdates: true)
-            nav.view.addSubview(snapShot!)
+            nav?.view.addSubview(snapShot!)
             UIView.animate(withDuration: 0.3, animations: { () -> Void in
                 snapShot?.layer.opacity = 0
                 snapShot?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
@@ -40,17 +40,17 @@ extension Application {
         application.switchToMainScreen(animation: true)
     }
     
-    func switchToMainScreen(animation: Bool!) {
+    func switchToMainScreen(animation: Bool) {
         let presentedVC = UIApplication.shared.keyWindow?.rootViewController
         if let vC = presentedVC as? UINavigationController {
-            if vC.visibleViewController!.isKind(of: UIAlertController.self) {
+            if vC.visibleViewController?.isKind(of: UIAlertController.self) ?? false {
                 vC.dismiss(animated: true, completion: {
                     print("dismissViewControllerAnimated")
                 })
             }
         }
         let story = UIStoryboard(name: "Main", bundle: nil)
-        let mainViewController = story.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        let mainViewController = story.instantiateViewController(withIdentifier: "HomeViewController")
         let mainNav = UINavigationController(rootViewController: mainViewController)
         self.animationSwitchScreen(nav: mainNav, animation: animation)
     }

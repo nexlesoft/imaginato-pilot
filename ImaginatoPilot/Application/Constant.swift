@@ -28,10 +28,7 @@ struct ScreenSize
     static let ScaleWidth3x = ScreenSize.SCREEN_WIDTH / 414
 }
 
-let kUserFilename = "client.usr"
-let kEncodeUsers_Client = "kEncodeUsers_Client"
-let Device = UIDevice.current
-let currentOsVersion = NSString(string: Device.systemVersion).doubleValue
+
 
 let appdelegate = UIApplication.shared.delegate as! AppDelegate
 let application = Application.sharedInstance

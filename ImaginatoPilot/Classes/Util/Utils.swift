@@ -21,16 +21,5 @@ class Utils: NSObject {
     class func dismissIndicator() {
         HUD.hide()
     }
-    
-    class func isEmpty(_ stringCheck:String)->Bool {
-        if stringCheck.isEmpty || stringCheck.isBlank() {
-            return true
-        }
-        let stringTemp =  stringCheck.replacingOccurrences(of: " ", with: "", options: [], range: nil)
-        if stringTemp == "" {
-            return true
-        }
-        return false
-    }
 }
 
