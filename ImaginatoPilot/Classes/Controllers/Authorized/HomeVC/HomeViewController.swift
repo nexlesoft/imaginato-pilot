@@ -8,7 +8,7 @@
 
 import UIKit
 import RxSwift
-
+import iCarousel
 class HomeViewController: BaseViewController {
     var viewModel = HomeViewModel()
     let disposeBag = DisposeBag()
