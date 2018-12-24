@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18A9ADDC21CB7C7700CDFC5E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9ADDB21CB7C7700CDFC5E /* Movie.swift */; };
-		18A9ADE021CB8F8D00CDFC5E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		18A9ADE021CB8F8D00CDFC5E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		8412114A21CB957E0005382D /* MovieListContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412114921CB957E0005382D /* MovieListContentViewController.swift */; };
 		8412114D21CBD9C40005382D /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412114C21CBD9C40005382D /* MovieListCell.swift */; };
 		8476EFB621CB9282000149E3 /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476EFB421CB9282000149E3 /* MovieDTO.swift */; };
@@ -36,6 +36,7 @@
 		FBA5F30520CE825C00D19C67 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA5F30420CE825C00D19C67 /* SplashViewController.swift */; };
 		FBA69F4021D0AA660058319A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F3F21D0AA650058319A /* UIView.swift */; };
 		FBA69F4221D0AAA40058319A /* NSString+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F4121D0AAA40058319A /* NSString+Utilities.swift */; };
+		FBA69F4621D0BD410058319A /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F4521D0BD410058319A /* SearchTableViewCell.swift */; };
 		FBEE23B021CB566300D7AA44 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		FBA5F30420CE825C00D19C67 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		FBA69F3F21D0AA650058319A /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FBA69F4121D0AAA40058319A /* NSString+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Utilities.swift"; sourceTree = "<group>"; };
+		FBA69F4521D0BD410058319A /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		FCB40C6D93D4270F96C45E33 /* Pods-ProjectTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTemplate.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTemplate/Pods-ProjectTemplate.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -300,9 +302,18 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		FBA69F4421D0BD2D0058319A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FBA69F4521D0BD410058319A /* SearchTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		FBE7D02E21CBE45E00A0CBF7 /* SearchVC */ = {
 			isa = PBXGroup;
 			children = (
+				FBA69F4421D0BD2D0058319A /* Cells */,
 				FB52001721CB9C45007CD973 /* SearchViewController.swift */,
 			);
 			path = SearchVC;
@@ -415,30 +426,28 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ImaginatoPilot/Pods-ImaginatoPilot-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/BGTableViewRowActionWithImage/BGTableViewRowActionWithImage.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BGTableViewRowActionWithImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 			);
@@ -455,7 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBA5F23220CE708D00D19C67 /* UIApplication.swift in Sources */,
-				18A9ADE021CB8F8D00CDFC5E /* (null) in Sources */,
+				18A9ADE021CB8F8D00CDFC5E /* BuildFile in Sources */,
 				8412114D21CBD9C40005382D /* MovieListCell.swift in Sources */,
 				FBA5F1A720CE6D7700D19C67 /* Utils.swift in Sources */,
 				8476EFB621CB9282000149E3 /* MovieDTO.swift in Sources */,
@@ -473,6 +482,7 @@
 				FB42061E20CCC160003B785C /* AppDelegate.swift in Sources */,
 				18A9ADDC21CB7C7700CDFC5E /* Movie.swift in Sources */,
 				FBA5F23020CE707800D19C67 /* UIColor.swift in Sources */,
+				FBA69F4621D0BD410058319A /* SearchTableViewCell.swift in Sources */,
 				FBA5F1A320CE6D4800D19C67 /* Constant.swift in Sources */,
 				FB52001D21CB9F4D007CD973 /* HomeViewModel.swift in Sources */,
 				FBA5F2C420CE75F800D19C67 /* UIImage.swift in Sources */,
@@ -626,7 +636,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ImaginatoPilot/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -649,7 +659,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ImaginatoPilot/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

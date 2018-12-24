@@ -9,18 +9,17 @@
 
 import UIKit
 import CoreImage
-import SVProgressHUD
+import PKHUD
 
 class Utils: NSObject {
     class func showIndicator() {
-        SVProgressHUD.setBackgroundColor(UIColor.clear)
-        SVProgressHUD.setForegroundColor(UIColor(hex: "#f2645a"))
-        SVProgressHUD.setDefaultMaskType(.clear)
-        SVProgressHUD.show()
+        HUD.dimsBackground = true
+        HUD.allowsInteraction = false
+        HUD.show(.rotatingImage(UIImage(named: "progress_circular")))
     }
     
     class func dismissIndicator() {
-        SVProgressHUD.dismiss()
+        HUD.hide()
     }
     
     class func isEmpty(_ stringCheck:String)->Bool {

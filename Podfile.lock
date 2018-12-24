@@ -1,9 +1,9 @@
 PODS:
   - Alamofire (4.7.3)
-  - BGTableViewRowActionWithImage (0.4.5)
   - iCarousel (1.8.3)
   - IQKeyboardManagerSwift (6.2.0)
-  - Masonry (1.1.0)
+  - Kingfisher (4.10.1)
+  - PKHUD (5.2.0)
   - RxAlamofire (4.3.0):
     - RxAlamofire/Core (= 4.3.0)
   - RxAlamofire/Core (4.3.0):
@@ -17,29 +17,27 @@ PODS:
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
-  - SVProgressHUD (2.2.5)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
-  - BGTableViewRowActionWithImage
   - iCarousel
   - IQKeyboardManagerSwift
-  - Masonry
+  - Kingfisher
+  - PKHUD (~> 5.0)
   - RxAlamofire
   - RxCocoa
   - RxSwift
   - SDWebImage
-  - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - BGTableViewRowActionWithImage
     - iCarousel
     - IQKeyboardManagerSwift
-    - Masonry
+    - Kingfisher
+    - PKHUD
     - RxAlamofire
     - RxAtomic
     - RxCocoa
@@ -47,29 +45,19 @@ SPEC REPOS:
     - SDWebImage
     - SwiftyJSON
 
-EXTERNAL SOURCES:
-  SVProgressHUD:
-    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
-
-CHECKOUT OPTIONS:
-  SVProgressHUD:
-    :commit: 7f676d51905ede045ca5dcaf82d4ba0d9f96addf
-    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
-
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  BGTableViewRowActionWithImage: aa5ef7340267b35248c610f17c6d088d7c9c49d0
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
-  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  PKHUD: dd5357ac65f26115c35c4a68e9b328053326c5fe
   RxAlamofire: 09624d0f2d48ed8b686e4eb4cf68e28cbd2df556
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 47576c999ef020822d865aa282788ea790052652
+PODFILE CHECKSUM: 3051cc5e662f67c846d1d8b1a2f379c25fd4c531
 
 COCOAPODS: 1.5.3

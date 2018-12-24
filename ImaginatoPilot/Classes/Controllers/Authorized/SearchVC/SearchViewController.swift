@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import BGTableViewRowActionWithImage
+
 
 class SearchViewController: BaseViewController {
     
@@ -133,9 +133,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)
-        cell.textLabel?.textColor = UIColor(hex: "#A8A8A8")
-        cell.textLabel?.text = self.listHistory[indexPath.row] as? String
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
+//        cell.textLabel?.textColor = UIColor(hex: "#A8A8A8")
+        cell.titleLabel.text = self.listHistory[indexPath.row] as? String
+
         return cell
     }
     
@@ -143,24 +144,25 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = BGTableViewRowActionWithImage.rowAction(with: .default, title: "     ", backgroundColor: UIColor.gray, image: UIImage(named: "icon_delete"), forCellHeight: UInt(heightTable)) {[weak self] (action, indexPath) in
-            if let indexPath = indexPath {
-                self?.listHistory.removeObject(at: indexPath.row)
-                self?.saveDataSearch()
-                self?.tableView.reloadData()
-            }
-        }
-        return [delete!]
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action =  UIContextualAction(style: .normal, title: "", handler: { [weak self](action,view,completionHandler ) in
+            self?.listHistory.removeObject(at: indexPath.row)
+            self?.saveDataSearch()
+            self?.tableView.reloadData()
+        })
+        action.image = UIImage(named: "icon_delete")
+        action.backgroundColor = .gray
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        
+        return configuration
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let strSearch = self.listHistory[indexPath.row] as? String ?? ""
         self.tfSearch.text = ""
         self.moveToMovieList(strSearch: strSearch)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
 }
 
 // MARK: UITextFieldDelegate

@@ -6,13 +6,12 @@ use_frameworks!
   # Pods for ImaginatoPilot
 pod 'Alamofire'
 pod 'SDWebImage'
-pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
-pod 'Masonry'
+pod 'Kingfisher'
+pod 'PKHUD', '~> 5.0'
 pod 'SwiftyJSON'
 pod 'IQKeyboardManagerSwift'
 pod 'RxSwift'
 pod 'RxCocoa'
 pod 'RxAlamofire'
 pod 'iCarousel'
-pod 'BGTableViewRowActionWithImage'
 end
