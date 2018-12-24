@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieListCell: UITableViewCell {
 
@@ -31,7 +32,7 @@ class MovieListCell: UITableViewCell {
     
     func loadFromMovie(movie: MovieDTO) {
         self.titleLabel.text = movie.title
-        self.posterImage.sd_setImage(with: URL(string: movie.posterPath!), completed: nil)
+        self.posterImage.kf.setImage(with: URL(string: movie.posterPath!))
         self.posterImage.layer.cornerRadius = 8
         self.posterImage.layer.masksToBounds = true
         self.ratingLabel.text = "\(movie.rate!)"
