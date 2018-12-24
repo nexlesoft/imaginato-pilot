@@ -21,10 +21,18 @@ class SearchViewController: BaseViewController {
     @IBOutlet weak var heightNavibarCustomContaint: NSLayoutConstraint!
     @IBOutlet weak var bottomTableViewContraint: NSLayoutConstraint!
     var listHistory:NSMutableArray = NSMutableArray()
+    var searchViewModel:HistorySearchViewModel?
+    let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
         self.setupNotificationCenter()
+        self.searchViewModel = HistorySearchViewModel()
+        if let viewModel = self.searchViewModel {
+            self.bindHistorySearchList(with: viewModel)
+            self.setupTableViewCellWhenTapped(with: viewModel)
+            self.setupTableViewCellWhenDeleted(with: viewModel)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -58,12 +66,6 @@ extension SearchViewController {
         let heightOfStatusBar = UIApplication.shared.statusBarFrame.size.height
         let heightOfNavibar = self.navigationController?.navigationBar.frame.size.height
         self.heightNavibarCustomContaint.constant = heightOfNavibar! + heightOfStatusBar
-        if let data = UserDefaults.standard.object(forKey: keyListHistory) as? Data {
-            if let array =  NSKeyedUnarchiver.unarchiveObject(with: data) as? NSMutableArray {
-                self.listHistory = array
-                self.tableView.reloadData()
-            }
-        }
     }
     
     private func saveDataSearch() {
@@ -73,21 +75,43 @@ extension SearchViewController {
     }
     
     private func moveToMovieList(strSearch:String) {
-        let movieListVC = self.getViewController(storyboardName: "Main", className: "MovieListViewController") as! MovieListViewController
-        movieListVC.keyword = strSearch.trim()
-        self.navigationController?.pushViewController(movieListVC, animated: true)
-        let index = self.listHistory.index(of: strSearch)
-        if index != NSNotFound {
-            self.listHistory.removeObject(at: index)
+        if let movieListVC = self.getViewController(storyboardName: "Main", className: "MovieListViewController") as? MovieListViewController {
+            let keyword = strSearch
+            movieListVC.keyword = keyword
+            self.navigationController?.pushViewController(movieListVC, animated: true)
+            self.searchViewModel?.addTodo(withStr: keyword)
         }
-        if self.listHistory.count >= 10 {
-            self.listHistory.removeLastObject()
-        }
-        self.listHistory.insert(strSearch.trim(), at: 0)
-        self.tableView.reloadData()
         self.tfSearch.text = ""
-        self.saveDataSearch()
         self.tfSearch.resignFirstResponder()
+    }
+    
+    private func bindHistorySearchList(with viewModel: HistorySearchViewModel) {
+        viewModel.listSearchHistorys.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "SearchTableViewCell", cellType: SearchTableViewCell.self)) { (row, element, cell) in
+            print("element === >>>> ",element)
+            cell.titleLabel.text = element as? String
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func setupTableViewCellWhenTapped(with viewModel: HistorySearchViewModel) {
+        self.tableView.rx.itemSelected
+            .subscribe(onNext: {[weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: false)
+                let keyword = viewModel.listSearchHistorys.value[indexPath.row] as? String ?? ""
+                self?.moveToMovieList(strSearch: keyword)
+                
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func setupTableViewCellWhenDeleted(with viewModel: HistorySearchViewModel) {
+        self.tableView.rx.itemDeleted
+            .subscribe(onNext : {[weak self] indexPath in
+                print(indexPath)
+                guard let owner = self else {return}
+                owner.searchViewModel?.removeHistorySearch(withIndex: indexPath.row)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setupNotificationCenter() {
@@ -123,31 +147,22 @@ extension SearchViewController {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.listHistory.count
-    }
-    
+extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightTable
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
-        cell.titleLabel.text = self.listHistory[indexPath.row] as? String
 
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action =  UIContextualAction(style: .normal, title: "", handler: { [weak self](action,view,completionHandler ) in
-            self?.listHistory.removeObject(at: indexPath.row)
-            self?.saveDataSearch()
-            self?.tableView.reloadData()
+            guard let owner = self else {return}
+//            self?.listHistory.removeObject(at: indexPath.row)
+//            self?.saveDataSearch()
+//            self?.tableView.reloadData()
+            owner.tableView.dataSource?.tableView!(owner.tableView , commit: .delete, forRowAt: indexPath)
         })
         action.image = UIImage(named: "icon_delete")
         action.backgroundColor = .gray
@@ -156,12 +171,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return configuration
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let strSearch = self.listHistory[indexPath.row] as? String ?? ""
-        self.tfSearch.text = ""
-        self.moveToMovieList(strSearch: strSearch)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let strSearch = self.listHistory[indexPath.row] as? String ?? ""
+//        self.tfSearch.text = ""
+//        self.moveToMovieList(strSearch: strSearch)
+//        tableView.deselectRow(at: indexPath, animated: true)
+//    }
 }
 
 // MARK: UITextFieldDelegate

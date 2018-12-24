@@ -12,7 +12,6 @@
 		8412114D21CBD9C40005382D /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412114C21CBD9C40005382D /* MovieListCell.swift */; };
 		842F1BF821D09C1400E718E6 /* MovieCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F1BF621D09C1400E718E6 /* MovieCarouselCell.swift */; };
 		842F1BF921D09C1400E718E6 /* MovieCarouselCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842F1BF721D09C1400E718E6 /* MovieCarouselCell.xib */; };
-		8476EFB621CB9282000149E3 /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476EFB421CB9282000149E3 /* MovieDTO.swift */; };
 		8476EFB721CB9282000149E3 /* GenreIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476EFB521CB9282000149E3 /* GenreIds.swift */; };
 		84ECCAA021CBE1AF00DF1233 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECCA9F21CBE1AE00DF1233 /* HomeViewController.swift */; };
 		B4554F6EEDA2F66A740C4A65 /* Pods_ImaginatoPilot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A691E1E0F802EA9236D79575 /* Pods_ImaginatoPilot.framework */; };
@@ -34,6 +33,8 @@
 		FBA69F4021D0AA660058319A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F3F21D0AA650058319A /* UIView.swift */; };
 		FBA69F4221D0AAA40058319A /* NSString+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F4121D0AAA40058319A /* NSString+Utilities.swift */; };
 		FBA69F4621D0BD410058319A /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F4521D0BD410058319A /* SearchTableViewCell.swift */; };
+		FBA69F4C21D0D7420058319A /* HistorySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F4B21D0D7420058319A /* HistorySearchViewModel.swift */; };
+		FBA69F5021D0DF290058319A /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F4F21D0DF280058319A /* MovieDTO.swift */; };
 		FBEE23B021CB566300D7AA44 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +44,6 @@
 		8412114C21CBD9C40005382D /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
 		842F1BF621D09C1400E718E6 /* MovieCarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCarouselCell.swift; sourceTree = "<group>"; };
 		842F1BF721D09C1400E718E6 /* MovieCarouselCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCarouselCell.xib; sourceTree = "<group>"; };
-		8476EFB421CB9282000149E3 /* MovieDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
 		8476EFB521CB9282000149E3 /* GenreIds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreIds.swift; sourceTree = "<group>"; };
 		84ECCA9F21CBE1AE00DF1233 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		96C939428DCF90A78F8FA36E /* Pods-ProjectTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTemplate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTemplate/Pods-ProjectTemplate.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +71,8 @@
 		FBA69F3F21D0AA650058319A /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FBA69F4121D0AAA40058319A /* NSString+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Utilities.swift"; sourceTree = "<group>"; };
 		FBA69F4521D0BD410058319A /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		FBA69F4B21D0D7420058319A /* HistorySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchViewModel.swift; sourceTree = "<group>"; };
+		FBA69F4F21D0DF280058319A /* MovieDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
 		FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		FCB40C6D93D4270F96C45E33 /* Pods-ProjectTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTemplate.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTemplate/Pods-ProjectTemplate.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +94,7 @@
 			children = (
 				FB52001B21CB9F4D007CD973 /* HomeViewModel.swift */,
 				FB52001A21CB9F4D007CD973 /* MovieListViewModel.swift */,
+				FBA69F4B21D0D7420058319A /* HistorySearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -99,8 +102,8 @@
 		18A9ADD821CB7B4F00CDFC5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FBA69F4F21D0DF280058319A /* MovieDTO.swift */,
 				8476EFB521CB9282000149E3 /* GenreIds.swift */,
-				8476EFB421CB9282000149E3 /* MovieDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -455,11 +458,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A9ADE021CB8F8D00CDFC5E /* (null) in Sources */,
+				FBA69F5021D0DF290058319A /* MovieDTO.swift in Sources */,
 				8412114D21CBD9C40005382D /* MovieListCell.swift in Sources */,
 				FBA5F1A720CE6D7700D19C67 /* Utils.swift in Sources */,
-				8476EFB621CB9282000149E3 /* MovieDTO.swift in Sources */,
 				FBA69F4021D0AA660058319A /* UIView.swift in Sources */,
 				FBA5F23420CE70A100D19C67 /* String.swift in Sources */,
+				FBA69F4C21D0D7420058319A /* HistorySearchViewModel.swift in Sources */,
 				FBA69F4221D0AAA40058319A /* NSString+Utilities.swift in Sources */,
 				8412114A21CB957E0005382D /* MovieListContentViewController.swift in Sources */,
 				FBA5F1A520CE6D5800D19C67 /* Application.swift in Sources */,

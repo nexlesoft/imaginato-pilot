@@ -276,7 +276,6 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="37i-VR-fhc" id="9YK-Qs-KWY"/>
                                     <outlet property="delegate" destination="37i-VR-fhc" id="Yry-HK-aX8"/>
                                 </connections>
                             </tableView>
