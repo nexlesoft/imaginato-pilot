@@ -134,7 +134,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
-//        cell.textLabel?.textColor = UIColor(hex: "#A8A8A8")
         cell.titleLabel.text = self.listHistory[indexPath.row] as? String
 
         return cell
