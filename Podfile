@@ -13,5 +13,5 @@ pod 'IQKeyboardManagerSwift'
 pod 'RxSwift'
 pod 'RxCocoa'
 pod 'RxAlamofire'
-pod 'iCarousel'
+pod 'ScalingCarousel'
 end

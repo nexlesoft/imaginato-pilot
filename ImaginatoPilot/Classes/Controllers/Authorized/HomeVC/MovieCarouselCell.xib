@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCarouselCell" id="gTV-IL-0wX" customClass="MovieCarouselCell" customModule="ImaginatoPilot" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9f-0p-6ze">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZYj-8w-kA4">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRE-SALE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lF7-r9-t1r">
+                                <rect key="frame" x="10" y="10" width="70" height="25"/>
+                                <color key="backgroundColor" red="0.69411764710000001" green="0.56078431370000004" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="ph6-dB-WGL"/>
+                                    <constraint firstAttribute="height" constant="25" id="tcC-p8-3Tn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vA-Jw-mT8">
+                                <rect key="frame" x="0.0" y="260" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.12549019610000001" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="PgN-zG-dtx"/>
+                                </constraints>
+                                <state key="normal" title="BUY TICKET">
+                                    <color key="titleColor" red="0.69411764710000001" green="0.56078431370000004" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.078431372550000003" green="0.12549019610000001" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZYj-8w-kA4" firstAttribute="top" secondItem="u9f-0p-6ze" secondAttribute="top" id="0G9-JI-Odu"/>
+                            <constraint firstAttribute="bottom" secondItem="ZYj-8w-kA4" secondAttribute="bottom" id="84U-co-CQ1"/>
+                            <constraint firstItem="6vA-Jw-mT8" firstAttribute="leading" secondItem="u9f-0p-6ze" secondAttribute="leading" id="Hkf-h6-MsP"/>
+                            <constraint firstAttribute="bottom" secondItem="6vA-Jw-mT8" secondAttribute="bottom" id="Pd6-TO-fXk"/>
+                            <constraint firstItem="lF7-r9-t1r" firstAttribute="leading" secondItem="u9f-0p-6ze" secondAttribute="leading" constant="10" id="X0z-Ag-zK5"/>
+                            <constraint firstItem="lF7-r9-t1r" firstAttribute="top" secondItem="u9f-0p-6ze" secondAttribute="top" constant="10" id="ajH-9u-uR1"/>
+                            <constraint firstItem="ZYj-8w-kA4" firstAttribute="leading" secondItem="u9f-0p-6ze" secondAttribute="leading" id="c6l-UK-rDa"/>
+                            <constraint firstAttribute="trailing" secondItem="ZYj-8w-kA4" secondAttribute="trailing" id="jmQ-6K-J4a"/>
+                            <constraint firstAttribute="trailing" secondItem="6vA-Jw-mT8" secondAttribute="trailing" id="txd-I4-M10"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="u9f-0p-6ze" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Sm4-eq-BDl"/>
+                <constraint firstItem="u9f-0p-6ze" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="WRl-ei-zvJ"/>
+                <constraint firstAttribute="trailing" secondItem="u9f-0p-6ze" secondAttribute="trailing" id="uLa-jP-e0r"/>
+                <constraint firstAttribute="bottom" secondItem="u9f-0p-6ze" secondAttribute="bottom" id="zmc-Ue-eRS"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="btnBuyTicket" destination="6vA-Jw-mT8" id="kQR-MP-xmb"/>
+                <outlet property="imvPoster" destination="ZYj-8w-kA4" id="8pz-Sc-4Zv"/>
+                <outlet property="lblPreSale" destination="lF7-r9-t1r" id="Qwc-sZ-96x"/>
+                <outlet property="lctHeightBuyTicket" destination="PgN-zG-dtx" id="vui-kM-RUu"/>
+                <outlet property="mainView" destination="u9f-0p-6ze" id="CSH-UY-gsM"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -18,6 +18,7 @@ class MovieListContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        self.tableView.delegate = self
         let obsKeyword = Observable<String>.just(self.keyword)
         obsKeyword.bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
@@ -57,4 +58,11 @@ class MovieListContentViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
+}
+
+extension MovieListContentViewController: UITableViewDelegate {
+    // Remove separator lines in empty table view
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }

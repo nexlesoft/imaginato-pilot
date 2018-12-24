@@ -10,8 +10,7 @@
 #endif
 #endif
 
-#import "iCarousel.h"
 
-FOUNDATION_EXPORT double iCarouselVersionNumber;
-FOUNDATION_EXPORT const unsigned char iCarouselVersionString[];
+FOUNDATION_EXPORT double ScalingCarouselVersionNumber;
+FOUNDATION_EXPORT const unsigned char ScalingCarouselVersionString[];
 
