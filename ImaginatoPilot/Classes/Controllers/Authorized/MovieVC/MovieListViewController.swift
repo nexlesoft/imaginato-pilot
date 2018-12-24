@@ -35,8 +35,8 @@ class MovieListViewController: BaseViewController {
         self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         self.pageViewController?.view.frame = CGRect(x: 0, y: 0, width: 320, height: pageView.frame.size.height)
         
-        self.addChildViewController(pageViewController!)
-        self.pageView.addSubview((pageViewController?.view)!)
+        self.addChildViewController(pageViewController ?? UIPageViewController())
+        self.pageView.addSubview(pageViewController?.view ?? UIView())
         pageViewController?.didMove(toParentViewController: self)
     }
     
@@ -62,7 +62,7 @@ class MovieListViewController: BaseViewController {
         if currentIndex != 0 {
             selectSection(index: 0)
             currentIndex = 0
-            let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0)!
+            guard let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0) else { return }
             startingViewController.viewModel = self.viewModel
             let viewControllers = [startingViewController]
             self.pageViewController?.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
@@ -73,7 +73,7 @@ class MovieListViewController: BaseViewController {
         if currentIndex != 1 {
             selectSection(index: 1)
             currentIndex = 1
-            let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 1)!
+            guard let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 1) else { return }
             startingViewController.viewModel = self.viewModel
             let viewControllers = [startingViewController]
             self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
@@ -108,9 +108,9 @@ extension MovieListViewController {
         if index < 0 || index > 1 {
             return nil
         }
-        let vc = storyboard?.instantiateViewController(withIdentifier: "MovieListContentViewController") as! MovieListContentViewController
-        vc.pageIndex = index
-        vc.keyword = self.keyword
+        let vc = storyboard?.instantiateViewController(withIdentifier: "MovieListContentViewController") as? MovieListContentViewController
+        vc?.pageIndex = index
+        vc?.keyword = self.keyword
         return vc
     }
 }
@@ -118,7 +118,8 @@ extension MovieListViewController {
 // MARK: Page View Controller Data Source
 extension MovieListViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        var index = (viewController as! MovieListContentViewController).pageIndex
+        guard let movieViewController = viewController as? MovieListContentViewController else { return nil }
+        var index = movieViewController.pageIndex
         index += 1
         if index == 2 {
             return nil
@@ -127,7 +128,8 @@ extension MovieListViewController: UIPageViewControllerDataSource, UIPageViewCon
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        var index = (viewController as! MovieListContentViewController).pageIndex
+        guard let movieViewController = viewController as? MovieListContentViewController else { return nil }
+        var index = movieViewController.pageIndex
         index -= 1
         if index < 0 {
             return nil
