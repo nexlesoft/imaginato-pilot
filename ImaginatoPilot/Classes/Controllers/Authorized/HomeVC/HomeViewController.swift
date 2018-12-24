@@ -21,6 +21,7 @@ class HomeViewController: BaseViewController {
     fileprivate var previousCenterIndexPath: IndexPath?
     fileprivate var carousellScroll : Bool = true
     fileprivate var carouselTimer : Timer?
+    fileprivate var movingToSearchPage: Bool = false
     
     let disposeBag = DisposeBag()
     var viewModel = HomeViewModel()
@@ -42,8 +43,20 @@ class HomeViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        movingToSearchPage = false
+        if let previoursIndexPath = self.previousCenterIndexPath {
+            print("previours IndexPath: \(previoursIndexPath.row)")
+            self.carousel.scrollToItem(at: previoursIndexPath, at: .centeredHorizontally, animated: false)
+        }
+        if self.arrMovie.count > 0 {
+            self.createTimerAutoScroll()
+        }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.carouselTimer?.invalidate()
+    }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         carousel.deviceRotated()
@@ -65,6 +78,7 @@ class HomeViewController: BaseViewController {
 extension HomeViewController {
     @IBAction func didTouchSearch(_ sender : UIButton) {
         let searchVC = self.getViewController(storyboardName: "Main", className: "SearchViewController") as! SearchViewController
+        self.movingToSearchPage = true
         self.navigationController?.pushViewController(searchVC, animated: true)
     }
     
@@ -130,7 +144,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.previousCenterIndexPath == carousel.currentCenterCellIndex {
+        if self.previousCenterIndexPath == carousel.currentCenterCellIndex ||
+            self.movingToSearchPage == true {
             return
         }
         guard let currentCenterIndex = carousel.currentCenterCellIndex?.row else { return }
@@ -155,8 +170,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }, completion: nil)
             self.carousellScroll = true
             self.createTimerAutoScroll()
+            self.previousCenterIndexPath = carousel.currentCenterCellIndex
+            if let previoursIndexPath = self.previousCenterIndexPath {
+                print("previours IndexPath: \(previoursIndexPath.row)")
+            }
         }
-        self.previousCenterIndexPath = carousel.currentCenterCellIndex
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
