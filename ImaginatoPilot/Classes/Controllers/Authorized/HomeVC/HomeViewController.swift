@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import ScalingCarousel
-
 class HomeViewController: BaseViewController {
     
     @IBOutlet fileprivate weak var carousel: ScalingCarouselView!
