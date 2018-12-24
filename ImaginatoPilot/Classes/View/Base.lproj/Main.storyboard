@@ -69,13 +69,38 @@
                                     <constraint firstItem="b9y-hQ-1yW" firstAttribute="leading" secondItem="EiV-3h-k1C" secondAttribute="leading" id="w24-4z-fKa"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfn-Gk-eR8" customClass="iCarousel">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="87F-Ph-aPD" customClass="ScalingCarouselView" customModule="ScalingCarousel">
                                 <rect key="frame" x="0.0" y="99" width="320" height="320"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="wfn-Gk-eR8" secondAttribute="height" multiplier="1:1" id="oS6-iH-Sg4"/>
+                                    <constraint firstAttribute="width" secondItem="87F-Ph-aPD" secondAttribute="height" multiplier="1:1" id="Yel-Of-zqY"/>
                                 </constraints>
-                            </view>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="A8w-Tj-cdO">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="oKJ-zO-ftb">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="inset">
+                                        <real key="value" value="70"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="H9d-4M-WSw"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="4hf-iZ-RLB"/>
+                                </connections>
+                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgQ-AZ-fDO">
                                 <rect key="frame" x="0.0" y="419" width="320" height="120"/>
                                 <subviews>
@@ -117,15 +142,15 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EiV-3h-k1C" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3OZ-dZ-8OB"/>
+                            <constraint firstItem="87F-Ph-aPD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5dH-3D-eBK"/>
                             <constraint firstItem="UgQ-AZ-fDO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5gI-Gw-her"/>
                             <constraint firstItem="a4o-lG-ZUz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="Cec-Um-pz0"/>
-                            <constraint firstItem="wfn-Gk-eR8" firstAttribute="top" secondItem="a4o-lG-ZUz" secondAttribute="bottom" id="K53-jK-CWw"/>
+                            <constraint firstAttribute="trailing" secondItem="87F-Ph-aPD" secondAttribute="trailing" id="LTm-1Z-yfi"/>
+                            <constraint firstItem="UgQ-AZ-fDO" firstAttribute="top" secondItem="87F-Ph-aPD" secondAttribute="bottom" id="SpK-94-CbT"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a4o-lG-ZUz" secondAttribute="trailing" constant="16" id="X4W-fk-hL5"/>
-                            <constraint firstItem="UgQ-AZ-fDO" firstAttribute="top" secondItem="wfn-Gk-eR8" secondAttribute="bottom" id="ecn-F5-lMy"/>
                             <constraint firstItem="EiV-3h-k1C" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hzq-bV-T8q"/>
                             <constraint firstAttribute="trailing" secondItem="UgQ-AZ-fDO" secondAttribute="trailing" id="jB0-zi-OpE"/>
-                            <constraint firstItem="wfn-Gk-eR8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jfV-8f-Wlc"/>
-                            <constraint firstAttribute="trailing" secondItem="wfn-Gk-eR8" secondAttribute="trailing" id="r5v-eH-0Yo"/>
+                            <constraint firstItem="87F-Ph-aPD" firstAttribute="top" secondItem="a4o-lG-ZUz" secondAttribute="bottom" id="tlr-gR-XRY"/>
                             <constraint firstAttribute="trailing" secondItem="EiV-3h-k1C" secondAttribute="trailing" id="vLa-gf-hUd"/>
                             <constraint firstItem="a4o-lG-ZUz" firstAttribute="top" secondItem="EiV-3h-k1C" secondAttribute="bottom" id="zHt-bH-eRT"/>
                         </constraints>
@@ -133,11 +158,10 @@
                     <navigationItem key="navigationItem" id="CUF-46-y9K"/>
                     <connections>
                         <outlet property="btnSearch" destination="1H2-2x-2hN" id="7Sc-YG-XRR"/>
-                        <outlet property="carousel" destination="wfn-Gk-eR8" id="DNP-vv-Pk6"/>
+                        <outlet property="carousel" destination="87F-Ph-aPD" id="0Hl-JX-GSs"/>
                         <outlet property="lblMovieGenre" destination="axC-8u-dZN" id="XC3-88-4Br"/>
                         <outlet property="lblMovieTitle" destination="Dm3-fF-QHs" id="Rte-yK-meo"/>
                         <outlet property="lctHeightHeader" destination="Io8-X3-Hrw" id="XuJ-aV-7f4"/>
-                        <outlet property="lctRatioCarousel" destination="oS6-iH-Sg4" id="z8C-mE-ERm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

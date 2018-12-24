@@ -8,22 +8,23 @@
 
 import UIKit
 import RxSwift
+import ScalingCarousel
 
 class HomeViewController: BaseViewController {
-    var viewModel = HomeViewModel()
-    let disposeBag = DisposeBag()
-    var carouselTimer : Timer?
-    fileprivate var indexCarousel : Int! = 0
-    var carousellScroll : Bool! = true
     
-    @IBOutlet fileprivate weak var carousel: iCarousel!
+    @IBOutlet fileprivate weak var carousel: ScalingCarouselView!
     @IBOutlet fileprivate weak var lctHeightHeader: NSLayoutConstraint!
     @IBOutlet fileprivate weak var btnSearch: UIButton!
     @IBOutlet fileprivate weak var lblMovieTitle: UILabel!
     @IBOutlet fileprivate weak var lblMovieGenre: UILabel!
-    @IBOutlet fileprivate weak var lctRatioCarousel: NSLayoutConstraint!
     
     fileprivate var arrMovie: [MovieDTO] = []
+    fileprivate var previousCenterIndexPath: IndexPath?
+    fileprivate var carousellScroll : Bool = true
+    fileprivate var carouselTimer : Timer?
+    
+    let disposeBag = DisposeBag()
+    var viewModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,10 @@ class HomeViewController: BaseViewController {
             guard let owner = self else { return }
             owner.arrMovie = movies
             owner.carousel.reloadData()
-            owner.autoscrollForBannerView()
+            var offset = owner.carousel.contentOffset
+            offset.x += 1
+            owner.carousel.setContentOffset(offset, animated: true)
+            owner.createTimerAutoScroll()
         }, onCompleted: nil, onDisposed: nil)
         .disposed(by: disposeBag)
         setupUI()
@@ -40,6 +44,12 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        carousel.deviceRotated()
+    }
+    
     deinit {
         print("Deinit HomeViewController")
         self.carouselTimer?.invalidate()
@@ -66,152 +76,95 @@ extension HomeViewController {
     fileprivate func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
         lctHeightHeader.constant = Application.sharedInstance.appTopOffset + 44
-        carousel.type = .rotary
-        carousel.isPagingEnabled = true
-        carousel.delegate = self
-        carousel.dataSource = self
         lblMovieTitle.text = ""
         lblMovieGenre.text = ""
+        carousel.register(UINib(nibName: "MovieCarouselCell", bundle: nil), forCellWithReuseIdentifier: "MovieCarouselCell")
     }
     
     private func createTimerAutoScroll() {
+        if let timer = self.carouselTimer {
+            timer.invalidate()
+        }
         self.carouselTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.autoscrollForBannerView), userInfo: nil, repeats: true)
     }
     
     @objc func autoscrollForBannerView() {
-        func autoscroll(_ currentIndex: Int) {
-            self.indexCarousel = currentIndex
-            if self.carouselTimer == nil {
-                 self.createTimerAutoScroll()
-            }
+        guard let currentIndex = self.carousel.currentCenterCellIndex, self.arrMovie.count > 0 else {
+            return
         }
-        
         if self.carousellScroll == false {
-            autoscroll(self.carousel.currentItemIndex)
-        } else if self.arrMovie.count > 0 && self.carousel.currentItemIndex < self.carousel.numberOfItems - 1 {
-            let nextIndex  = self.carousel.currentItemIndex + 1
-            // Get next view
-            let view = self.carousel.itemView(at: nextIndex) as? MovieCarouselView
-            if let view = view {
-                if view.imvPoster.image != nil {
-                    self.carousel.scrollToItem(at: nextIndex, animated: true)
-                    autoscroll(nextIndex)
-                }
-                else {
-                    autoscroll(nextIndex)
-                }
-            }
-            else {
-                autoscroll(nextIndex - 1)
-            }
-        } else {
-            autoscroll(0)
-            self.carousel.scrollToItem(at: 0, animated: true)
+            self.carousel.scrollToItem(at: IndexPath(row: currentIndex.row, section: 0), at: .centeredHorizontally, animated: true)
+        } else if self.arrMovie.count > 0 && currentIndex.row < self.arrMovie.count - 1 {
+            let nextIndex  = currentIndex.row + 1
+            self.carousel.scrollToItem(at: IndexPath(row: nextIndex, section: 0), at: .centeredHorizontally, animated: true)
+            
+        }
+        else {
+            self.carousel.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
         }
     }
 }
 
-//MARK: - iCarousel
-extension HomeViewController: iCarouselDelegate, iCarouselDataSource {
-    func numberOfItems(in carousel: iCarousel) -> Int {
+//MARK: - UICollectionView
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrMovie.count
     }
     
-    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        if let movieView = view as? MovieCarouselView {
-            movieView.binData(arrMovie[index])
-            movieView.hiddenBuyTicket(true)
-            return movieView
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCarouselCell", for: indexPath)
+        
+        if let scalingCell = cell as? MovieCarouselCell {
+            scalingCell.binData(arrMovie[indexPath.row])
         }
-        else {
-            let movieView = MovieCarouselView.loadNib()
-            let width = carousel.frame.size.width * 2.0 / 3.0 - 20
-            let height = carousel.frame.size.height
-            movieView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-            movieView.binData(arrMovie[index])
-            movieView.hiddenBuyTicket(true)
-            return movieView
+        
+        DispatchQueue.main.async {
+            cell.setNeedsLayout()
+            cell.layoutIfNeeded()
         }
-    }
-    func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
-        if carousel.currentItemIndex < arrMovie.count && carousel.currentItemIndex >= 0 {
-            let movie = arrMovie[carousel.currentItemIndex]
-            self.lblMovieTitle.text = movie.title
-            if let genreIds = movie.genreIds {
-                self.lblMovieGenre.text = genreIds.map{$0.name ?? ""}.joined(separator: ", ")
-            }
-        }
-        if self.lblMovieTitle.alpha == 1 {
-            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
-                self.lblMovieTitle.alpha = 0
-                self.lblMovieGenre.alpha = 0
-                self.lblMovieTitle.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
-                self.lblMovieGenre.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
-            }, completion: nil)
-        }
+        
+        return cell
     }
     
-    func carouselDidEndScrollingAnimation(_ carousel: iCarousel) {
-        if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
-            currentView.hiddenBuyTicket(false)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        carousel.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.previousCenterIndexPath == carousel.currentCenterCellIndex {
+            return
+        }
+        guard let currentCenterIndex = carousel.currentCenterCellIndex?.row else { return }
+        let movie = arrMovie[currentCenterIndex]
+        self.lblMovieTitle.text = movie.title
+        if let genreIds = movie.genreIds {
+            self.lblMovieGenre.text = genreIds.map{$0.name ?? ""}.joined(separator: ", ")
+        }
+        
+        if let previousCenterIndexPath = self.previousCenterIndexPath, let cell = carousel.cellForItem(at: previousCenterIndexPath) as? MovieCarouselCell {
+            cell.hiddenBuyTicket(true)
+            self.carousellScroll = false
+            self.carouselTimer?.invalidate()
+        }
+        if let cell = carousel.currentCenterCell as? MovieCarouselCell {
+            cell.hiddenBuyTicket(false)
             self.lblMovieTitle.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
             self.lblMovieGenre.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
             UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
-                self.lblMovieTitle.alpha = 1
-                self.lblMovieGenre.alpha = 1
                 self.lblMovieTitle.transform = .identity
                 self.lblMovieGenre.transform = .identity
             }, completion: nil)
+            self.carousellScroll = true
+            self.createTimerAutoScroll()
         }
-        self.carousellScroll = true
-        self.createTimerAutoScroll()
+        self.previousCenterIndexPath = carousel.currentCenterCellIndex
     }
     
-    func carouselDidScroll(_ carousel: iCarousel) {
-        if self.arrMovie.count == 0 {return}
-        self.carousellScroll = false
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
-    func carouselWillBeginDecelerating(_ carousel: iCarousel) {
-        self.carousellScroll = false
-    }
-    
-    func carouselWillBeginDragging(_ carousel: iCarousel) {
-        self.carousellScroll = false
-        if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
-            currentView.hiddenBuyTicket(true)
-        }
-    }
-    
-    func carouselWillBeginScrollingAnimation(_ carousel: iCarousel) {
-        self.carousellScroll = false
-        if let currentView = carousel.itemView(at: carousel.currentItemIndex) as? MovieCarouselView {
-            currentView.hiddenBuyTicket(true)
-        }
-        self.carouselTimer?.invalidate()
-        if self.lblMovieTitle.alpha == 1 {
-            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
-                self.lblMovieTitle.alpha = 0
-                self.lblMovieGenre.alpha = 0
-                self.lblMovieTitle.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
-                self.lblMovieGenre.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
-            }, completion: nil)
-        }
-    }
-    
-    func carouselDidEndDecelerating(_ carousel: iCarousel) {
-        carousel.currentItemView?.alpha = 1
-        self.carousellScroll = true
-    }
-    
-    func carouselDidEndDragging(_ carousel: iCarousel, willDecelerate decelerate: Bool) {
-        self.carousellScroll = true
-    }
-    
-    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if option == .spacing {
-            return 3
-        }
-        return value
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }

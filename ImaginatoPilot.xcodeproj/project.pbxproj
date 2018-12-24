@@ -11,11 +11,10 @@
 		18A9ADE021CB8F8D00CDFC5E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8412114A21CB957E0005382D /* MovieListContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412114921CB957E0005382D /* MovieListContentViewController.swift */; };
 		8412114D21CBD9C40005382D /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412114C21CBD9C40005382D /* MovieListCell.swift */; };
-		841DA58121CB8C9300378D9E /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 841DA57E21CB8C9300378D9E /* iCarousel.m */; };
+		842F1BF821D09C1400E718E6 /* MovieCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F1BF621D09C1400E718E6 /* MovieCarouselCell.swift */; };
+		842F1BF921D09C1400E718E6 /* MovieCarouselCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842F1BF721D09C1400E718E6 /* MovieCarouselCell.xib */; };
 		8476EFB621CB9282000149E3 /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476EFB421CB9282000149E3 /* MovieDTO.swift */; };
 		8476EFB721CB9282000149E3 /* GenreIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476EFB521CB9282000149E3 /* GenreIds.swift */; };
-		8476EFB921CB943D000149E3 /* MovieCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476EFB821CB943D000149E3 /* MovieCarouselView.swift */; };
-		8476EFBB21CB949A000149E3 /* MovieCarouselView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8476EFBA21CB949A000149E3 /* MovieCarouselView.xib */; };
 		84ECCAA021CBE1AF00DF1233 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECCA9F21CBE1AE00DF1233 /* HomeViewController.swift */; };
 		B4554F6EEDA2F66A740C4A65 /* Pods_ImaginatoPilot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A691E1E0F802EA9236D79575 /* Pods_ImaginatoPilot.framework */; };
 		FB3F7BFB2106D9F5009D65AB /* UIImage+ReSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3F7BFA2106D9F5009D65AB /* UIImage+ReSize.swift */; };
@@ -49,12 +48,10 @@
 		82ED7800453A1E56BF89525A /* Pods-ImaginatoPilot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImaginatoPilot.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImaginatoPilot/Pods-ImaginatoPilot.release.xcconfig"; sourceTree = "<group>"; };
 		8412114921CB957E0005382D /* MovieListContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListContentViewController.swift; sourceTree = "<group>"; };
 		8412114C21CBD9C40005382D /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
-		841DA57E21CB8C9300378D9E /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
-		841DA57F21CB8C9300378D9E /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		842F1BF621D09C1400E718E6 /* MovieCarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCarouselCell.swift; sourceTree = "<group>"; };
+		842F1BF721D09C1400E718E6 /* MovieCarouselCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCarouselCell.xib; sourceTree = "<group>"; };
 		8476EFB421CB9282000149E3 /* MovieDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
 		8476EFB521CB9282000149E3 /* GenreIds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreIds.swift; sourceTree = "<group>"; };
-		8476EFB821CB943D000149E3 /* MovieCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCarouselView.swift; sourceTree = "<group>"; };
-		8476EFBA21CB949A000149E3 /* MovieCarouselView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCarouselView.xib; sourceTree = "<group>"; };
 		84ECCA9F21CBE1AE00DF1233 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		96C939428DCF90A78F8FA36E /* Pods-ProjectTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTemplate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTemplate/Pods-ProjectTemplate.debug.xcconfig"; sourceTree = "<group>"; };
 		A691E1E0F802EA9236D79575 /* Pods_ImaginatoPilot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImaginatoPilot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,21 +146,12 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		841DA57D21CB8C9300378D9E /* iCarousel */ = {
-			isa = PBXGroup;
-			children = (
-				841DA57E21CB8C9300378D9E /* iCarousel.m */,
-				841DA57F21CB8C9300378D9E /* iCarousel.h */,
-			);
-			path = iCarousel;
-			sourceTree = "<group>";
-		};
 		84B04A8621CBA2FA005AC1BD /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
 				84ECCA9F21CBE1AE00DF1233 /* HomeViewController.swift */,
-				8476EFB821CB943D000149E3 /* MovieCarouselView.swift */,
-				8476EFBA21CB949A000149E3 /* MovieCarouselView.xib */,
+				842F1BF621D09C1400E718E6 /* MovieCarouselCell.swift */,
+				842F1BF721D09C1400E718E6 /* MovieCarouselCell.xib */,
 			);
 			path = HomeVC;
 			sourceTree = "<group>";
@@ -269,7 +257,6 @@
 		FBA5F1A920CE6DAB00D19C67 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
-				841DA57D21CB8C9300378D9E /* iCarousel */,
 			);
 			path = Thirdparty;
 			sourceTree = "<group>";
@@ -403,9 +390,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842F1BF921D09C1400E718E6 /* MovieCarouselCell.xib in Resources */,
 				FB42062820CCC162003B785C /* LaunchScreen.storyboard in Resources */,
 				FB42062520CCC162003B785C /* Assets.xcassets in Resources */,
-				8476EFBB21CB949A000149E3 /* MovieCarouselView.xib in Resources */,
 				FB42062320CCC160003B785C /* Main.storyboard in Resources */,
 				FBA5F19D20CE6CCA00D19C67 /* Splash.storyboard in Resources */,
 			);
@@ -449,8 +436,8 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/ScalingCarousel/ScalingCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -464,8 +451,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScalingCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -482,7 +469,6 @@
 				FBA5F23220CE708D00D19C67 /* UIApplication.swift in Sources */,
 				18A9ADE021CB8F8D00CDFC5E /* (null) in Sources */,
 				8412114D21CBD9C40005382D /* MovieListCell.swift in Sources */,
-				841DA58121CB8C9300378D9E /* iCarousel.m in Sources */,
 				FBA5F1A720CE6D7700D19C67 /* Utils.swift in Sources */,
 				8476EFB621CB9282000149E3 /* MovieDTO.swift in Sources */,
 				FB4B096020E878CB006D9AC3 /* NSString+Utilities.swift in Sources */,
@@ -492,9 +478,9 @@
 				FBA5F2C620CE760100D19C67 /* UIView.swift in Sources */,
 				FBA5F1A520CE6D5800D19C67 /* Application.swift in Sources */,
 				8476EFB721CB9282000149E3 /* GenreIds.swift in Sources */,
-				8476EFB921CB943D000149E3 /* MovieCarouselView.swift in Sources */,
 				FBA5F23620CE70EC00D19C67 /* UITableViewExtension.swift in Sources */,
 				FBA5F30520CE825C00D19C67 /* SplashViewController.swift in Sources */,
+				842F1BF821D09C1400E718E6 /* MovieCarouselCell.swift in Sources */,
 				FB3F7BFB2106D9F5009D65AB /* UIImage+ReSize.swift in Sources */,
 				FBEE23B021CB566300D7AA44 /* MovieListViewController.swift in Sources */,
 				FB52001821CB9C45007CD973 /* SearchViewController.swift in Sources */,

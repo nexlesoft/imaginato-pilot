@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (4.7.3)
   - BGTableViewRowActionWithImage (0.4.5)
-  - iCarousel (1.8.3)
   - IQKeyboardManagerSwift (6.2.0)
   - Masonry (1.1.0)
   - RxAlamofire (4.3.0):
@@ -14,6 +13,7 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
+  - ScalingCarousel (2.3)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
@@ -23,12 +23,12 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - BGTableViewRowActionWithImage
-  - iCarousel
   - IQKeyboardManagerSwift
   - Masonry
   - RxAlamofire
   - RxCocoa
   - RxSwift
+  - ScalingCarousel
   - SDWebImage
   - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
   - SwiftyJSON
@@ -37,13 +37,13 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - BGTableViewRowActionWithImage
-    - iCarousel
     - IQKeyboardManagerSwift
     - Masonry
     - RxAlamofire
     - RxAtomic
     - RxCocoa
     - RxSwift
+    - ScalingCarousel
     - SDWebImage
     - SwiftyJSON
 
@@ -59,17 +59,17 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   BGTableViewRowActionWithImage: aa5ef7340267b35248c610f17c6d088d7c9c49d0
-  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   RxAlamofire: 09624d0f2d48ed8b686e4eb4cf68e28cbd2df556
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  ScalingCarousel: ee866c34c01b784b6edf9009f12ea73935517e3e
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 47576c999ef020822d865aa282788ea790052652
+PODFILE CHECKSUM: 45becae67e5f434e05e732a9450dd6fb921b2324
 
 COCOAPODS: 1.5.3

@@ -1,43 +1,34 @@
 //
-//  MovieCarouselView.swift
+//  MovieCarouselCell.swift
 //  ImaginatoPilot
 //
-//  Created by Trai on 12/20/18.
+//  Created by Trai on 12/24/18.
 //  Copyright © 2018 GPThanh. All rights reserved.
 //
 
 import UIKit
 import SDWebImage
+import ScalingCarousel
 
-class MovieCarouselView: UIView {
-
-    @IBOutlet fileprivate weak var vwMain: UIView!
-    @IBOutlet weak var imvPoster: UIImageView!
+class MovieCarouselCell: ScalingCarouselCell {
+    @IBOutlet fileprivate weak var imvPoster: UIImageView!
     @IBOutlet fileprivate weak var lblPreSale: UILabel!
     @IBOutlet fileprivate weak var btnBuyTicket: UIButton!
     @IBOutlet fileprivate weak var lctHeightBuyTicket: NSLayoutConstraint!
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.vwMain.layer.cornerRadius = 20
-        self.vwMain.clipsToBounds = true
+        self.mainView.layer.cornerRadius = 20
+        self.mainView.clipsToBounds = true
         self.lblPreSale.layer.masksToBounds = true
         self.lblPreSale.layer.cornerRadius = 5.0
         self.lblPreSale.isHidden = true
         self.imvPoster.layer.masksToBounds = true
         self.imvPoster.layer.cornerRadius = 20
-        self.lctHeightBuyTicket.constant = 40
-        self.btnBuyTicket.isHidden = false
+        self.lctHeightBuyTicket.constant = 0
+        self.btnBuyTicket.isHidden = true
     }
-    
+
     func binData(_ movie: MovieDTO) {
         self.imvPoster.contentMode = .center
         if let posterPath = movie.posterPath {
