@@ -17,39 +17,33 @@ class MovieViewModel {
     
     init(movie: MovieDTO) {
         self.movie = movie
+        id = BehaviorSubject<String>(value: movie.id ?? "")
+        displayTitle = BehaviorSubject<String>(value: movie.title ?? "")
+        releaseDate = BehaviorSubject<Int>(value: movie.releaseDate ?? 0)
         presaleFlag = BehaviorRelay<Bool>(value: !(movie.presaleFlag ?? false))
         presaleFlag.subscribe(onNext: { (presaleFlag) in
             movie.presaleFlag = !presaleFlag
         }).disposed(by: disposeBag)
+        ageCategory = BehaviorSubject<String>(value: movie.ageCategory ?? "")
+        descriptionValue = BehaviorSubject<String>(value: movie.descriptionValue ?? "")
+        rate = BehaviorSubject<String>(value: "\(movie.rate ?? 0.0)")
     }
     
-    var displayTitle: String {
-        return movie.title ?? ""
-    }
-    
+    let displayTitle: BehaviorSubject<String>
     var posterPath: String {
         return movie.posterPath ?? ""
     }
     
-    var releaseDate: Int {
-        return movie.releaseDate ?? 0
-    }
-    var id: String {
-        return movie.id ?? ""
-    }
-    
+    let releaseDate: BehaviorSubject<Int>
+
+    let id: BehaviorSubject<String>
     let presaleFlag: BehaviorRelay<Bool>
     
     var genreIds: [GenreIdsDTO] {
         return movie.genreIds ?? []
     }
-    var ageCategory: String {
-        return movie.ageCategory ?? ""
-    }
-    var descriptionValue: String {
-        return movie.descriptionValue ?? ""
-    }
-    var rate: Float {
-        return movie.rate ?? 0.0
-    }
+
+    let ageCategory: BehaviorSubject<String>
+    let descriptionValue: BehaviorSubject<String>
+    let rate: BehaviorSubject<String>
 }

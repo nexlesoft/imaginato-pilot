@@ -29,7 +29,7 @@ class HomeViewModel {
                 let value = try centeredIndex.value() as Int
                 if (value > -1) && (value < self.arrMovie.value.count) {
                     let movie = arrMovie.value[value]
-                    centeredTitle.onNext(movie.displayTitle)
+                    try centeredTitle.onNext(movie.displayTitle.value())
                     let type: String = movie.genreIds.map{$0.name ?? ""}.joined(separator: ", ")
                     centeredType.onNext(type)
                 }

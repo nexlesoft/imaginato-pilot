@@ -152,7 +152,7 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action =  UIContextualAction(style: .normal, title: "", handler: { [weak self](action,view,completionHandler ) in
             guard let owner = self else {return}
-            owner.tableView.dataSource?.tableView!(owner.tableView , commit: .delete, forRowAt: indexPath)
+            owner.tableView.dataSource?.tableView?(owner.tableView , commit: .delete, forRowAt: indexPath)
         })
         action.image = UIImage(named: "icon_delete")
         action.backgroundColor = .gray

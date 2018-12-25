@@ -8,6 +8,8 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
+import RxCocoa
 
 class MovieListCell: UITableViewCell {
 
@@ -19,6 +21,7 @@ class MovieListCell: UITableViewCell {
     @IBOutlet weak var releaseDate: UILabel!
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var buyTicketButton: UIButton!
+    let disposeBag = DisposeBag()
     
     var viewModel: MovieViewModel? {
         didSet {
@@ -28,14 +31,14 @@ class MovieListCell: UITableViewCell {
     
     private func bindViewModel() {
         if let viewModel = viewModel {
-            self.titleLabel.text = viewModel.displayTitle
+            viewModel.displayTitle.asObserver().bind(to: self.titleLabel.rx.text).disposed(by: self.disposeBag)
+            viewModel.rate.asObserver().bind(to: self.ratingLabel.rx.text).disposed(by: self.disposeBag)
             self.posterImage.kf.setImage(with: URL(string: viewModel.posterPath))
-            self.posterImage.layer.cornerRadius = 8
-            self.posterImage.layer.masksToBounds = true
-            self.ratingLabel.text = "\(viewModel.rate)"
-            self.ratingDescription.text = viewModel.ageCategory
-            self.releaseDate.text = self.getDateFrom(timeStamp: viewModel.releaseDate)
-            self.content.text = viewModel.descriptionValue
+            viewModel.ageCategory.asObserver().bind(to: self.ratingDescription.rx.text).disposed(by: self.disposeBag)
+            viewModel.releaseDate.asObserver().map { (date) -> String in
+                return self.getDateFrom(timeStamp: date)
+            }.bind(to: self.releaseDate.rx.text).disposed(by: self.disposeBag)
+            viewModel.descriptionValue.asObserver().bind(to: self.content.rx.text).disposed(by: self.disposeBag)
         }
     }
     
@@ -47,17 +50,8 @@ class MovieListCell: UITableViewCell {
         self.ageCategoryContent.layer.cornerRadius = self.ageCategoryContent.frame.height / 2
         self.ageCategoryContent.layer.borderColor = UIColor.gray.cgColor
         self.ageCategoryContent.layer.borderWidth = 1
-    }
-    
-    func loadFromViewModel(viewModel: MovieViewModel) {
-        self.titleLabel.text = viewModel.displayTitle
-        self.posterImage.kf.setImage(with: URL(string: viewModel.posterPath))
         self.posterImage.layer.cornerRadius = 8
         self.posterImage.layer.masksToBounds = true
-        self.ratingLabel.text = "\(viewModel.rate)"
-        self.ratingDescription.text = viewModel.ageCategory
-        self.releaseDate.text = self.getDateFrom(timeStamp: viewModel.releaseDate)
-        self.content.text = viewModel.descriptionValue
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
