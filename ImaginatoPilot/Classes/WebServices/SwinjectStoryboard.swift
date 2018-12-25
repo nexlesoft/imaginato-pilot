@@ -23,6 +23,9 @@ extension SwinjectStoryboard {
             defaultContainer.register(HomeViewModel.self, factory: { _ in
                 HomeViewModel(baseWebServices: baseWebServices)
             })
+            defaultContainer.register(MovieListViewModel.self, factory: { _ in
+                MovieListViewModel(baseWebServices: baseWebServices)
+            })
         }
     }
 

@@ -54,6 +54,14 @@ class BaseWebServices {
                     return jsonDict
                 }
                 .subscribe(onNext: { jsonDict in
+                    if let success = jsonDict["success"] {
+                        print("Get movie list success")
+                    } else {
+                        // Currently there's no error message returned from API so we use default description
+                        let error = NSError(domain: "FailureResponse", code: 201, userInfo: nil)
+                        observer.onError(error)
+                        return
+                    }
                     guard let results = jsonDict["results"] as? [String: Any],
                     let showing = results["showing"] as? [[String: Any]]
                         else {

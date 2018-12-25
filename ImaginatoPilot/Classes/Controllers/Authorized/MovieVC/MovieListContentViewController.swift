@@ -24,36 +24,6 @@ class MovieListContentViewController: UIViewController {
             .disposed(by: disposeBag)
         self.bindViewModel()
         viewModel.fetchMovieList()
-//        Utils.showIndicator()
-//
-//        if pageIndex == 0 {
-//            viewModel.showingData
-//                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movieViewModel, cell in
-//                    if let movieCell = cell as? MovieListCell {
-//                        movieCell.loadFromViewModel(viewModel: movieViewModel)
-//                    }
-//                    Utils.dismissIndicator()
-//                }
-//                .disposed(by: disposeBag)
-//            viewModel.showingData.drive(onNext: nil, onCompleted: {
-//                Utils.dismissIndicator()
-//            }, onDisposed: nil)
-//                .disposed(by: self.disposeBag)
-//        } else {
-//            viewModel.upcomingData
-//                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movieViewModel, cell in
-//                    if let movieCell = cell as? MovieListCell {
-//
-//                        movieCell.loadFromViewModel(viewModel: movieViewModel)
-//                    }
-//                    Utils.dismissIndicator()
-//                }
-//                .disposed(by: disposeBag)
-//            viewModel.upcomingData.drive(onNext: nil, onCompleted: {
-//                Utils.dismissIndicator()
-//            }, onDisposed: nil)
-//                .disposed(by: self.disposeBag)
-//        }
     }
     
     func bindViewModel() {
