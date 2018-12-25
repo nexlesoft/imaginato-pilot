@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.7.3)
+  - Alamofire (4.8.0)
   - IQKeyboardManagerSwift (6.2.0)
   - Kingfisher (4.10.1)
   - PKHUD (5.2.0)
@@ -14,13 +14,12 @@ PODS:
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
   - ScalingCarousel (2.3)
-  - SDWebImage (4.4.2):
-    - SDWebImage/Core (= 4.4.2)
-  - SDWebImage/Core (4.4.2)
   - SwiftyJSON (4.2.0)
+  - Swinject (2.5.0)
+  - SwinjectStoryboard (2.1.0):
+    - Swinject (~> 2.5)
 
 DEPENDENCIES:
-  - Alamofire
   - IQKeyboardManagerSwift
   - Kingfisher
   - PKHUD (~> 5.0)
@@ -28,8 +27,9 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - ScalingCarousel
-  - SDWebImage
   - SwiftyJSON
+  - Swinject
+  - SwinjectStoryboard
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -42,11 +42,12 @@ SPEC REPOS:
     - RxCocoa
     - RxSwift
     - ScalingCarousel
-    - SDWebImage
     - SwiftyJSON
+    - Swinject
+    - SwinjectStoryboard
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   PKHUD: dd5357ac65f26115c35c4a68e9b328053326c5fe
@@ -55,9 +56,10 @@ SPEC CHECKSUMS:
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   ScalingCarousel: ee866c34c01b784b6edf9009f12ea73935517e3e
-  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
+  SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: 95cf072f59e7f951862a375bd20e9f8e5bf44f3a
+PODFILE CHECKSUM: 9808672c2582c6584634e4a797bb572355c35c51
 
 COCOAPODS: 1.5.3

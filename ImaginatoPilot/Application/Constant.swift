@@ -35,3 +35,5 @@ let application = Application.sharedInstance
 let heightTable:CGFloat = 40.0
 let keyListHistory = "SavedListHistorySearch"
 let scalesMin: CGAffineTransform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+
+let baseURL = "https://easy-mock.com/mock/5c19c6ff64b4573fc81a61f3/movieapp/"

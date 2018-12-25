@@ -4,8 +4,6 @@ target 'ImaginatoPilot' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
 use_frameworks!
   # Pods for ImaginatoPilot
-pod 'Alamofire'
-pod 'SDWebImage'
 pod 'Kingfisher'
 pod 'PKHUD', '~> 5.0'
 pod 'SwiftyJSON'
@@ -14,4 +12,6 @@ pod 'RxSwift'
 pod 'RxCocoa'
 pod 'RxAlamofire'
 pod 'ScalingCarousel'
+pod 'Swinject'
+pod 'SwinjectStoryboard'
 end

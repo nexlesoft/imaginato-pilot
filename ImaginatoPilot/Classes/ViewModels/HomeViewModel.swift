@@ -14,25 +14,35 @@ import SwiftyJSON
 class HomeViewModel {
     var arrMovie = Variable<[MovieDTO]>([])
     var completionFetchData: (()->())?
-    
-    init() {
-        fetchAndUpdateObservableMovieList()
+    let baseWebServices: BaseWebServices
+    init(baseWebServices: BaseWebServices) {
+        self.baseWebServices = baseWebServices
+//        fetchAndUpdateObservableMovieList()
     }
     
     public func fetchAndUpdateObservableMovieList() {
-        _ = self.fetchMovieList().map({$0})
-            .observeOn(MainScheduler.instance)
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onNext: { [weak self](list) in
-            self?.arrMovie.value = list
-            }, onError: { (error: Error) in
-                print("Error ==> ",error)
-        }, onCompleted: { [weak self] in
-            print("onCompleted")
-            if let completion = self?.completionFetchData {
-                completion()
-            }
-            }, onDisposed: nil)
+//        BaseWebServices.getMovieList(path: "home", success: { (arrMovie) in
+//            self.arrMovie.value = arrMovie
+//            if let completion = self.completionFetchData {
+//                completion()
+//            }
+//        }) { (errorMsg) in
+//            Utils.showAlert(message: errorMsg)
+//        }
+        
+//        _ = self.fetchMovieList().map({$0})
+//            .observeOn(MainScheduler.instance)
+//            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+//            .subscribe(onNext: { [weak self](list) in
+//            self?.arrMovie.value = list
+//            }, onError: { (error: Error) in
+//                print("Error ==> ",error)
+//        }, onCompleted: { [weak self] in
+//            print("onCompleted")
+//            if let completion = self?.completionFetchData {
+//                completion()
+//            }
+//            }, onDisposed: nil)
     }
     
     public func fetchMovieList() -> Observable<[MovieDTO]> {

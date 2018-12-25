@@ -28,7 +28,7 @@ class MovieViewModel {
     var presaleFlag: Int {
         return movie?.presaleFlag ?? 0
     }
-    var genreIds: [GenreIds] {
+    var genreIds: [GenreIdsDTO] {
         return movie?.genreIds ?? []
     }
     var ageCategory: String {

@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import ScalingCarousel
 import RxCocoa
+import Swinject
+import SwinjectStoryboard
 
 class HomeViewController: BaseViewController {
     
@@ -25,14 +27,16 @@ class HomeViewController: BaseViewController {
     fileprivate var movingToSearchPage: Bool = false
     
     let disposeBag = DisposeBag()
-    var viewModel = HomeViewModel()
+    var viewModel:HomeViewModel? = SwinjectStoryboard.getContainer().resolve(HomeViewModel.self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        bindMovieList(with: viewModel)
-        setupCollectionViewWhenTap(with: viewModel)
-        setupDidScroll(with: viewModel)
+        if let viewModel = viewModel {
+            bindMovieList(with: viewModel)
+            setupCollectionViewWhenTap(with: viewModel)
+            setupDidScroll(with: viewModel)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,9 +46,12 @@ class HomeViewController: BaseViewController {
             print("previours IndexPath: \(previoursIndexPath.row)")
             self.carousel.scrollToItem(at: previoursIndexPath, at: .centeredHorizontally, animated: false)
         }
-        if self.viewModel.arrMovie.value.count > 0 {
-            self.createTimerAutoScroll()
+        if let viewModel = self.viewModel {
+            if viewModel.arrMovie.value.count > 0 {
+                self.createTimerAutoScroll()
+            }
         }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -96,12 +103,12 @@ extension HomeViewController {
     }
     
     @objc func autoscrollForBannerView() {
-        guard let currentIndex = self.carousel.currentCenterCellIndex, self.viewModel.arrMovie.value.count > 0 else {
+        guard let currentIndex = self.carousel.currentCenterCellIndex, let viewModel = self.viewModel, viewModel.arrMovie.value.count > 0 else {
             return
         }
         if self.carousellScroll == false {
             self.carousel.scrollToItem(at: IndexPath(row: currentIndex.row, section: 0), at: .centeredHorizontally, animated: true)
-        } else if self.viewModel.arrMovie.value.count > 0 && currentIndex.row < self.viewModel.arrMovie.value.count - 1 {
+        } else if viewModel.arrMovie.value.count > 0 && currentIndex.row < viewModel.arrMovie.value.count - 1 {
             let nextIndex  = currentIndex.row + 1
             self.carousel.scrollToItem(at: IndexPath(row: nextIndex, section: 0), at: .centeredHorizontally, animated: true)
 
@@ -146,8 +153,8 @@ extension HomeViewController {
                     owner.movingToSearchPage == true {
                     return
                 }
-                guard let currentCenterIndex = owner.carousel.currentCenterCellIndex?.row else { return }
-                let movie = owner.viewModel.arrMovie.value[currentCenterIndex]
+                guard let currentCenterIndex = owner.carousel.currentCenterCellIndex?.row, let viewModel = owner.viewModel else { return }
+                let movie = viewModel.arrMovie.value[currentCenterIndex]
                 owner.lblMovieTitle.text = movie.title
                 if let genreIds = movie.genreIds {
                     owner.lblMovieGenre.text = genreIds.map{$0.name ?? ""}.joined(separator: ", ")
