@@ -29,18 +29,13 @@ class MovieCarouselCell: ScalingCarouselCell {
         self.btnBuyTicket.isHidden = true
     }
 
-    func binData(_ movie: MovieDTO) {
+    func binData(_ movieVM: MovieViewModel) {
         self.imvPoster.contentMode = .center
-        if let posterPath = movie.posterPath {
-            self.imvPoster.kf.setImage(with: URL(string: posterPath), placeholder: UIImage(named: "ic_placeholder"), options: [.backgroundDecode], progressBlock: nil) { (image, error, type, url) in
-                self.imvPoster.contentMode = .scaleToFill
-                self.imvPoster.image = image
-            }
+        self.imvPoster.kf.setImage(with: URL(string: movieVM.posterPath), placeholder: UIImage(named: "ic_placeholder"), options: [.backgroundDecode], progressBlock: nil) { (image, error, type, url) in
+            self.imvPoster.contentMode = .scaleToFill
+            self.imvPoster.image = image
         }
-        else {
-            self.imvPoster.image = UIImage(named: "ic_placeholder")
-        }
-        if movie.presaleFlag == 1 {
+        if movieVM.presaleFlag == 1 {
             self.lblPreSale.isHidden = false
         }
         else {

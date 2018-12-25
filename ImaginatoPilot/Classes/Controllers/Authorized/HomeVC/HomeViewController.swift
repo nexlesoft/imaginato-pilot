@@ -34,6 +34,7 @@ class HomeViewController: BaseViewController {
         setupUI()
         if let viewModel = viewModel {
             bindMovieList(with: viewModel)
+            bindCenteredMovie(with: viewModel)
             setupCollectionViewWhenTap(with: viewModel)
             setupDidScroll(with: viewModel)
             viewModel.fetchMovieList()
@@ -120,8 +121,11 @@ extension HomeViewController {
     }
     
     fileprivate func bindMovieList(with viewModel: HomeViewModel) {
-        viewModel.arrMovie.asObservable().bind(to: self.carousel.rx.items(cellIdentifier: "MovieCarouselCell", cellType: MovieCarouselCell.self)) { (row, element, cell) in
-            cell.binData(element)
+        viewModel.arrMovie.asDriver().drive(self.carousel.rx.items(cellIdentifier: "MovieCarouselCell")) { _, movieViewModel, cell in
+            if let movieCell = cell as? MovieCarouselCell {
+                movieCell.binData(movieViewModel)
+            }
+            Utils.dismissIndicator()
             }
             .disposed(by: disposeBag)
         viewModel.completionFetchData = { [weak self] in
@@ -131,6 +135,13 @@ extension HomeViewController {
             owner.carousel.setContentOffset(offset, animated: true)
             owner.createTimerAutoScroll()
         }
+    }
+    
+    fileprivate func bindCenteredMovie(with viewModel: HomeViewModel) {
+        viewModel.centeredTitle
+            .bind(to: self.lblMovieTitle.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.centeredType.bind(to: self.lblMovieGenre.rx.text).disposed(by: disposeBag)
     }
     
     fileprivate func setupCollectionViewWhenTap(with viewModel: HomeViewModel) {
@@ -155,11 +166,7 @@ extension HomeViewController {
                     return
                 }
                 guard let currentCenterIndex = owner.carousel.currentCenterCellIndex?.row, let viewModel = owner.viewModel else { return }
-                let movie = viewModel.arrMovie.value[currentCenterIndex]
-                owner.lblMovieTitle.text = movie.title
-                if let genreIds = movie.genreIds {
-                    owner.lblMovieGenre.text = genreIds.map{$0.name ?? ""}.joined(separator: ", ")
-                }
+                viewModel.centeredIndex = BehaviorSubject(value: currentCenterIndex)
                 
                 if let previousCenterIndexPath = owner.previousCenterIndexPath, let cell = owner.carousel.cellForItem(at: previousCenterIndexPath) as? MovieCarouselCell {
                     cell.hiddenBuyTicket(true)

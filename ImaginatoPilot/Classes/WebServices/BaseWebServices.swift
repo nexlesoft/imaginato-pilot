@@ -13,6 +13,10 @@ import SwiftyJSON
 
 class BaseWebServices {
     
+    enum GetMovieFailureReason: Int, Error {
+        case notFound = 404
+    }
+    
     let disposeBag = DisposeBag()
     
     func getMovieList(path: String, success: @escaping ([MovieDTO]) -> Void, failure: @escaping (String) -> Void) {
@@ -41,42 +45,33 @@ class BaseWebServices {
             .disposed(by: disposeBag)
     }
     
+    
     func getMovieList(path: String) -> Observable<[MovieDTO]> {
         return Observable.create { observer -> Disposable in
             RxAlamofire.requestJSON(.get, baseURL + path)
                 .observeOn(MainScheduler.instance)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .map { (r, json) -> [String: Any] in
-                    print("__________path: \(path), json: \(json)")
                     guard let jsonDict = json as? [String: Any] else {
                         return [:]
                     }
                     return jsonDict
                 }
                 .subscribe(onNext: { jsonDict in
-                    if let success = jsonDict["success"] {
-                        print("Get movie list success")
-                    } else {
-                        // Currently there's no error message returned from API so we use default description
-                        let error = NSError(domain: "FailureResponse", code: 201, userInfo: nil)
-                        observer.onError(error)
-                        return
-                    }
-                    guard let results = jsonDict["results"] as? [String: Any],
-                    let showing = results["showing"] as? [[String: Any]]
-                        else {
-                        observer.onNext([])
+                    guard let results = jsonDict["results"] as? [[String: Any]] else {
+                        observer.onError(GetMovieFailureReason.notFound)
                         return
                     }
                     var movies = [MovieDTO]()
-                    showing.forEach {
+                    results.forEach {
                         movies.append(MovieDTO(json: JSON($0)))
                     }
                     observer.onNext(movies)
                 }, onError: { error in
                     observer.onError(error)
                 })
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
         }
     }
-    
 }
