@@ -25,13 +25,14 @@ extension Application {
     func animationSwitchScreen(nav: UIViewController?, animation: Bool) {
         appdelegate.window?.rootViewController = nav
         if animation == true {
-            let snapShot = appdelegate.window?.snapshotView(afterScreenUpdates: true)
-            nav?.view.addSubview(snapShot!)
-            UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                snapShot?.layer.opacity = 0
-                snapShot?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
-            }) { (finished: Bool) -> Void in
-                snapShot?.removeFromSuperview()
+            if let snapShot = appdelegate.window?.snapshotView(afterScreenUpdates: true) {
+                nav?.view.addSubview(snapShot)
+                UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                    snapShot.layer.opacity = 0
+                    snapShot.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
+                }) { (finished: Bool) -> Void in
+                    snapShot.removeFromSuperview()
+                }
             }
         }
     }
