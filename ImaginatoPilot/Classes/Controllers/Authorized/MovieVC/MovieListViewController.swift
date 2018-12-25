@@ -10,9 +10,7 @@ import UIKit
 import RxSwift
 
 class MovieListViewController: BaseViewController {
-    
     var keyword = ""
-    
     @IBOutlet weak var showingButton: UIButton!
     @IBOutlet weak var showingIndicatorLine: UIView!
     @IBOutlet weak var comingSoonButton: UIButton!
@@ -158,6 +156,7 @@ extension MovieListViewController: UIPageViewControllerDataSource, UIPageViewCon
         guard let viewController = (pendingViewControllers.first as? MovieListContentViewController) else { return }
         let index = viewController.pageIndex
         selectSection(index: index)
+        viewController.viewModel = self.viewModel
         currentIndex = index
     }
 }

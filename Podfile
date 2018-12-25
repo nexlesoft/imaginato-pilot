@@ -12,6 +12,4 @@ pod 'RxSwift'
 pod 'RxCocoa'
 pod 'RxAlamofire'
 pod 'ScalingCarousel'
-pod 'Swinject'
-pod 'SwinjectStoryboard'
 end

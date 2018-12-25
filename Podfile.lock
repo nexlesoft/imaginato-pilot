@@ -15,9 +15,6 @@ PODS:
     - RxAtomic (~> 4.4)
   - ScalingCarousel (2.3)
   - SwiftyJSON (4.2.0)
-  - Swinject (2.5.0)
-  - SwinjectStoryboard (2.1.0):
-    - Swinject (~> 2.5)
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
@@ -28,8 +25,6 @@ DEPENDENCIES:
   - RxSwift
   - ScalingCarousel
   - SwiftyJSON
-  - Swinject
-  - SwinjectStoryboard
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -43,8 +38,6 @@ SPEC REPOS:
     - RxSwift
     - ScalingCarousel
     - SwiftyJSON
-    - Swinject
-    - SwinjectStoryboard
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
@@ -57,9 +50,7 @@ SPEC CHECKSUMS:
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   ScalingCarousel: ee866c34c01b784b6edf9009f12ea73935517e3e
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
-  SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: 9808672c2582c6584634e4a797bb572355c35c51
+PODFILE CHECKSUM: 96a95177f7c89e999d98b983365ad8816818c476
 
 COCOAPODS: 1.5.3
