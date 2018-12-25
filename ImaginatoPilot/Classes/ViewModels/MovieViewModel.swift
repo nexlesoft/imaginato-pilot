@@ -13,6 +13,11 @@ import SwiftyJSON
 
 class MovieViewModel {
     var movie: MovieDTO?
+    
+    init(movie: MovieDTO) {
+        self.movie = movie
+    }
+    
     var displayTitle: String {
         return movie?.title ?? ""
     }

@@ -22,39 +22,34 @@ class MovieListContentViewController: UIViewController {
         let obsKeyword = Observable<String>.just(self.keyword)
         obsKeyword.bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
-        
-        Utils.showIndicator()
-        
-        if pageIndex == 0 {
-            viewModel.showingData
-                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movieViewModel, cell in
-                    if let movieCell = cell as? MovieListCell {
-                        movieCell.loadFromViewModel(viewModel: movieViewModel)
-                    }
-                    Utils.dismissIndicator()
-                }
-                .disposed(by: disposeBag)
-            viewModel.showingData.drive(onNext: nil, onCompleted: {
-                Utils.dismissIndicator()
-            }, onDisposed: nil)
-                .disposed(by: self.disposeBag)
-        } else {
-            viewModel.upcomingData
-                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movieViewModel, cell in
-                    if let movieCell = cell as? MovieListCell {
-                        
-                        movieCell.loadFromViewModel(viewModel: movieViewModel)
-                    }
-                    Utils.dismissIndicator()
-                }
-                .disposed(by: disposeBag)
-            viewModel.upcomingData.drive(onNext: nil, onCompleted: {
-                Utils.dismissIndicator()
-            }, onDisposed: nil)
-                .disposed(by: self.disposeBag)
-        }
+        self.bindViewModel()
+        viewModel.fetchMovieList()
     }
     
+    func bindViewModel() {
+        viewModel.movieCells.bind(to: self.tableView.rx.items) { tableView, index, element in
+            let indexPath = IndexPath(item: index, section: 0)
+            switch element {
+            case .normal(let viewModel):
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListCell", for: indexPath) as? MovieListCell else {
+                    return UITableViewCell()
+                }
+                cell.viewModel = viewModel
+                return cell
+            case .error(let message):
+                let cell = UITableViewCell()
+                cell.isUserInteractionEnabled = false
+                cell.textLabel?.text = message
+                return cell
+            case .empty:
+                let cell = UITableViewCell()
+                cell.isUserInteractionEnabled = false
+                cell.textLabel?.text = "No data available"
+                return cell
+            }
+            }.disposed(by: disposeBag)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }

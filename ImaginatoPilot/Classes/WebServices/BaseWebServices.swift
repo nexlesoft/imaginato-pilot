@@ -13,6 +13,10 @@ import SwiftyJSON
 
 class BaseWebServices {
     
+    enum GetMovieFailureReason: Int, Error {
+        case notFound = 404
+    }
+    
     let disposeBag = DisposeBag()
     
     func getMovieList(path: String, success: @escaping ([MovieDTO]) -> Void, failure: @escaping (String) -> Void) {
@@ -41,4 +45,33 @@ class BaseWebServices {
             .disposed(by: disposeBag)
     }
     
+    
+    func getMovieList(path: String) -> Observable<[MovieDTO]> {
+        return Observable.create { observer -> Disposable in
+            RxAlamofire.requestJSON(.get, baseURL + path)
+                .observeOn(MainScheduler.instance)
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .map { (r, json) -> [String: Any] in
+                    guard let jsonDict = json as? [String: Any] else {
+                        return [:]
+                    }
+                    return jsonDict
+                }
+                .subscribe(onNext: { jsonDict in
+                    guard let results = jsonDict["results"] as? [[String: Any]] else {
+                        observer.onError(GetMovieFailureReason.notFound)
+                        return
+                    }
+                    var movies = [MovieDTO]()
+                    results.forEach {
+                        movies.append(MovieDTO(json: JSON($0)))
+                    }
+                    observer.onNext(movies)
+                }, onError: { error in
+                    observer.onError(error)
+                })
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+    }
 }
