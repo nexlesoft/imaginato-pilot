@@ -9,9 +9,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-
-
-
 class HistorySearchViewModel {
     let disposeBag = DisposeBag()
     var listSearchHistorys = Variable<[HistoryViewModel]>([])
@@ -23,7 +20,7 @@ class HistorySearchViewModel {
         self.fetchHistorysSearchList().map({$0}).subscribe(onNext: { [weak self](list) in
             self?.listSearchHistorys.value = list
         }, onError: { (error: Error) in
-            print("Error ==> ",error)
+            Utils.showAlert(message: error.localizedDescription)
         }, onCompleted: nil, onDisposed: nil).disposed(by: self.disposeBag)
     }
 
@@ -43,7 +40,6 @@ class HistorySearchViewModel {
     }
     
     public func fetchHistorysSearchList() -> Observable<[HistoryViewModel]> {
-//        let listSearch = self.fetchData()
         return Observable.from(optional: self.fetchData().0)
     }
     

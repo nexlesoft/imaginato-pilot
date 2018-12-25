@@ -45,7 +45,6 @@ class HomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         movingToSearchPage = false
         if let previoursIndexPath = self.previousCenterIndexPath {
-            print("previours IndexPath: \(previoursIndexPath.row)")
             self.carousel.scrollToItem(at: previoursIndexPath, at: .centeredHorizontally, animated: false)
         }
         if let viewModel = self.viewModel {
@@ -80,11 +79,11 @@ class HomeViewController: BaseViewController {
 // MARK: User Interaction
 extension HomeViewController {
     @IBAction func didTouchSearch(_ sender : UIButton) {
-        let searchVC = self.getViewController(storyboardName: "Main", className: "SearchViewController") as! SearchViewController
-        self.movingToSearchPage = true
-        self.navigationController?.pushViewController(searchVC, animated: true)
+        if let searchVC = self.getViewController(storyboardName: "Main", className: "SearchViewController") as? SearchViewController {
+            self.movingToSearchPage = true
+            self.navigationController?.pushViewController(searchVC, animated: true)
+        }
     }
-    
 }
 
 //MARK: - Private Func
@@ -130,9 +129,7 @@ extension HomeViewController {
         viewModel.arrMovie.asDriver().drive(self.carousel.rx.items(cellIdentifier: "MovieCarouselCell")) { _, movieViewModel, cell in
             if let movieCell = cell as? MovieCarouselCell {
                 movieCell.binData(movieViewModel)
-            }
-            Utils.dismissIndicator()
-            }
+            }}
             .disposed(by: disposeBag)
         viewModel.completionFetchData = { [weak self] in
             guard let owner = self else { return }
@@ -153,7 +150,6 @@ extension HomeViewController {
     fileprivate func setupCollectionViewWhenTap(with viewModel: HomeViewModel) {
         self.carousel.rx.itemSelected
             .subscribe(onNext : {[weak self] indexPath in
-                print(indexPath)
                 guard let owner = self else {return}
                 owner.carousel.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             })
@@ -199,9 +195,6 @@ extension HomeViewController {
                     owner.carousellScroll = true
                     owner.createTimerAutoScroll()
                     owner.previousCenterIndexPath = owner.carousel.currentCenterCellIndex
-                    if let previoursIndexPath = owner.previousCenterIndexPath {
-                        print("previours IndexPath: \(previoursIndexPath.row)")
-                    }
                 }
             })
     }

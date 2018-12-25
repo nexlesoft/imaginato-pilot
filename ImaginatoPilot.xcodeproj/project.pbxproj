@@ -249,7 +249,6 @@
 				FBA5F1AD20CE6DDA00D19C67 /* Unauthorize */,
 				FBA5F1AC20CE6DD000D19C67 /* Authorized */,
 				FBA5F1AB20CE6DC400D19C67 /* Base */,
-				FBA5F1A920CE6DAB00D19C67 /* Thirdparty */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -262,13 +261,6 @@
 				FBA5F1A420CE6D5800D19C67 /* Application.swift */,
 			);
 			path = Application;
-			sourceTree = "<group>";
-		};
-		FBA5F1A920CE6DAB00D19C67 /* Thirdparty */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Thirdparty;
 			sourceTree = "<group>";
 		};
 		FBA5F1AB20CE6DC400D19C67 /* Base */ = {
