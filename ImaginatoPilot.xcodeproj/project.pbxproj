@@ -38,6 +38,7 @@
 		FBA69F4621D0BD410058319A /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F4521D0BD410058319A /* SearchTableViewCell.swift */; };
 		FBA69F4C21D0D7420058319A /* HistorySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F4B21D0D7420058319A /* HistorySearchViewModel.swift */; };
 		FBA69F5021D0DF290058319A /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA69F4F21D0DF280058319A /* MovieDTO.swift */; };
+		FBE7466C21D236A50038B52F /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE7466B21D236A50038B52F /* HistoryViewModel.swift */; };
 		FBEE23B021CB566300D7AA44 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		FBA69F4521D0BD410058319A /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		FBA69F4B21D0D7420058319A /* HistorySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchViewModel.swift; sourceTree = "<group>"; };
 		FBA69F4F21D0DF280058319A /* MovieDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
+		FBE7466B21D236A50038B52F /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		FBEE23AF21CB566300D7AA44 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		FCB40C6D93D4270F96C45E33 /* Pods-ProjectTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTemplate.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTemplate/Pods-ProjectTemplate.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +104,7 @@
 				FB52001A21CB9F4D007CD973 /* MovieListViewModel.swift */,
 				FBA69F4B21D0D7420058319A /* HistorySearchViewModel.swift */,
 				8412114E21D0E9140005382D /* MovieViewModel.swift */,
+				FBE7466B21D236A50038B52F /* HistoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				FB52001821CB9C45007CD973 /* SearchViewController.swift in Sources */,
 				84ECCAA021CBE1AF00DF1233 /* HomeViewController.swift in Sources */,
 				FB42061E20CCC160003B785C /* AppDelegate.swift in Sources */,
+				FBE7466C21D236A50038B52F /* HistoryViewModel.swift in Sources */,
 				FBA5F23020CE707800D19C67 /* UIColor.swift in Sources */,
 				FBA69F4621D0BD410058319A /* SearchTableViewCell.swift in Sources */,
 				FBA5F1A320CE6D4800D19C67 /* Constant.swift in Sources */,
