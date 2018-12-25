@@ -36,6 +36,7 @@ class HomeViewController: BaseViewController {
             bindMovieList(with: viewModel)
             setupCollectionViewWhenTap(with: viewModel)
             setupDidScroll(with: viewModel)
+            viewModel.fetchMovieList()
         }
     }
 
