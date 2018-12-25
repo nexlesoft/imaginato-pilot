@@ -49,7 +49,8 @@ class MovieListViewModel {
     }
 
     func fetchMovieList(keyword: String) {
-        print("________FetMovieList:")
+        let keyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        
         loadInProgress.value = true
         baseWebServices.getMovieList(path: "search?keyword=\(keyword)&offset=\(MovieListViewModel.offset)")
             .subscribe(onNext: { [weak self] (movies) in
