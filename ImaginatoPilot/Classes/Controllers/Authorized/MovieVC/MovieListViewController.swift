@@ -38,11 +38,26 @@ class MovieListViewController: BaseViewController {
         self.pageView.addSubview(pageViewController?.view ?? UIView())
         pageViewController?.didMove(toParentViewController: self)
         
-        viewModel.fetchMovieList()
+        viewModel
+            .onShowLoadingHud
+            .map { [weak self] in self?.setLoadingHud(visible: $0) }
+            .subscribe()
+            .disposed(by: disposeBag)
+    }
+    
+    private func setLoadingHud(visible: Bool) {
+        if visible {
+            Utils.showIndicator()
+        }
+        else {
+            Utils.dismissIndicator()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        viewModel.fetchMovieList(keyword: self.keyword)
         if self.navigationController?.isNavigationBarHidden == false {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
