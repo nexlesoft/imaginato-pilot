@@ -6,10 +6,11 @@
 //  Copyright © 2018 GPThanh. All rights reserved.
 //
 import UIKit
+import RxSwift
 class SearchTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
-
+    let disposeBag = DisposeBag()
     override func awakeFromNib() {
         super.awakeFromNib()
     }
