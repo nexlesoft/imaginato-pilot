@@ -51,7 +51,6 @@ class BaseWebServices {
                 .observeOn(MainScheduler.instance)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .map { (r, json) -> [String: Any] in
-                    print("____path: \(path), json: \(json)")
                     guard let jsonDict = json as? [String: Any] else {
                         return [:]
                     }
