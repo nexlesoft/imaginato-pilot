@@ -20,6 +20,25 @@ class MovieListCell: UITableViewCell {
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var buyTicketButton: UIButton!
     
+    var viewModel: MovieViewModel? {
+        didSet {
+            bindViewModel()
+        }
+    }
+    
+    private func bindViewModel() {
+        if let viewModel = viewModel {
+            self.titleLabel.text = viewModel.displayTitle
+            self.posterImage.kf.setImage(with: URL(string: viewModel.posterPath))
+            self.posterImage.layer.cornerRadius = 8
+            self.posterImage.layer.masksToBounds = true
+            self.ratingLabel.text = "\(viewModel.rate)"
+            self.ratingDescription.text = viewModel.ageCategory
+            self.releaseDate.text = self.getDateFrom(timeStamp: viewModel.releaseDate)
+            self.content.text = viewModel.descriptionValue
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.buyTicketButton.layer.cornerRadius = self.buyTicketButton.frame.height / 2

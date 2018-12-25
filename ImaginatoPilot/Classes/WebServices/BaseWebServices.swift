@@ -41,4 +41,34 @@ class BaseWebServices {
             .disposed(by: disposeBag)
     }
     
+    func getMovieList(path: String) -> Observable<[MovieDTO]> {
+        return Observable.create { observer -> Disposable in
+            RxAlamofire.requestJSON(.get, baseURL + path)
+                .observeOn(MainScheduler.instance)
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .map { (r, json) -> [String: Any] in
+                    print("__________path: \(path), json: \(json)")
+                    guard let jsonDict = json as? [String: Any] else {
+                        return [:]
+                    }
+                    return jsonDict
+                }
+                .subscribe(onNext: { jsonDict in
+                    guard let results = jsonDict["results"] as? [String: Any],
+                    let showing = results["showing"] as? [[String: Any]]
+                        else {
+                        observer.onNext([])
+                        return
+                    }
+                    var movies = [MovieDTO]()
+                    showing.forEach {
+                        movies.append(MovieDTO(json: JSON($0)))
+                    }
+                    observer.onNext(movies)
+                }, onError: { error in
+                    observer.onError(error)
+                })
+        }
+    }
+    
 }
