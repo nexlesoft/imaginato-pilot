@@ -97,7 +97,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="H9d-4M-WSw"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="4hf-iZ-RLB"/>
                                 </connections>
                             </collectionView>
@@ -637,6 +636,6 @@
     <resources>
         <image name="ic_search-iPhone6P" width="30" height="30"/>
         <image name="icon-back-2" width="13" height="23"/>
-        <image name="icon-rating" width="49" height="15"/>
+        <image name="icon-rating" width="98" height="30"/>
     </resources>
 </document>

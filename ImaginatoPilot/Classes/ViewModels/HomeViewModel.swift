@@ -12,18 +12,34 @@ import RxCocoa
 import SwiftyJSON
 
 class HomeViewModel {
+    var arrMovie = Variable<[MovieDTO]>([])
+    var completionFetchData: (()->())?
     
-    lazy var Data: Driver<[MovieDTO]> = {
-        return HomeViewModel.moviesBy()
-            .asDriver(onErrorJustReturn: [])
-    }()
+    init() {
+        fetchAndUpdateObservableMovieList()
+    }
     
+    public func fetchAndUpdateObservableMovieList() {
+        _ = self.fetchMovieList().map({$0})
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(onNext: { [weak self](list) in
+            self?.arrMovie.value = list
+            }, onError: { (error: Error) in
+                print("Error ==> ",error)
+        }, onCompleted: { [weak self] in
+            print("onCompleted")
+            if let completion = self?.completionFetchData {
+                completion()
+            }
+            }, onDisposed: nil)
+    }
     
-    static func moviesBy() -> Observable<[MovieDTO]> {
+    public func fetchMovieList() -> Observable<[MovieDTO]> {
         if let url = URL(string: "https://easy-mock.com/mock/5c19c6ff64b4573fc81a61f3/movieapp/home"){
             return URLSession.shared.rx.json(url: url)
                 .retry(3)
-                .map(parse)
+                .map(HomeViewModel.parse)
         } else {
             return Observable.just([])
         }
