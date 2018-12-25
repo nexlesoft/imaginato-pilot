@@ -25,7 +25,7 @@ class HistorySearchViewModel {
             self?.listSearchHistorys.value = list
         }, onError: { (error: Error) in
             print("Error ==> ",error)
-        }, onCompleted: nil, onDisposed: nil)
+        }, onCompleted: nil, onDisposed: nil).disposed(by: self.disposeBag)
     }
 
     public func fetchData() -> NSMutableArray {
@@ -38,13 +38,10 @@ class HistorySearchViewModel {
     }
     
     public func fetchHistorysSearchList() -> Observable<NSMutableArray>? {
-//        let listSearchVariable = Variable<NSMutableArray>([])
-//        listSearchVariable.value = self.fetchData()
-//        return listSearchVariable.asObservable()//Observable.just([listSearch])
         return Observable.from(optional: self.fetchData())
     }
     
-    public func addTodo(withStr strSearch: String) {
+    public func addHistorySearh(withStr strSearch: String) {
         let listSearch = self.fetchData()
         let index = listSearch.index(of: strSearch)
         if index != NSNotFound {

@@ -79,7 +79,7 @@ extension SearchViewController {
             let keyword = strSearch
             movieListVC.keyword = keyword
             self.navigationController?.pushViewController(movieListVC, animated: true)
-            self.searchViewModel?.addTodo(withStr: keyword)
+            self.searchViewModel?.addHistorySearh(withStr: keyword)
         }
         self.tfSearch.text = ""
         self.tfSearch.resignFirstResponder()
@@ -159,9 +159,6 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action =  UIContextualAction(style: .normal, title: "", handler: { [weak self](action,view,completionHandler ) in
             guard let owner = self else {return}
-//            self?.listHistory.removeObject(at: indexPath.row)
-//            self?.saveDataSearch()
-//            self?.tableView.reloadData()
             owner.tableView.dataSource?.tableView!(owner.tableView , commit: .delete, forRowAt: indexPath)
         })
         action.image = UIImage(named: "icon_delete")
@@ -170,19 +167,18 @@ extension SearchViewController: UITableViewDelegate {
         
         return configuration
     }
-
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let strSearch = self.listHistory[indexPath.row] as? String ?? ""
-//        self.tfSearch.text = ""
-//        self.moveToMovieList(strSearch: strSearch)
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
 }
 
 // MARK: UITextFieldDelegate
 extension SearchViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text == "" {
+            let alertController = UIAlertController(title: "Error", message: "Please enter search movie", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                // do nothing...
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
             return false
         }
         self.moveToMovieList(strSearch: textField.text ?? "")
