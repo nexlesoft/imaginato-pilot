@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SDWebImage
+import Kingfisher
 import ScalingCarousel
 
 class MovieCarouselCell: ScalingCarouselCell {
@@ -32,7 +32,7 @@ class MovieCarouselCell: ScalingCarouselCell {
     func binData(_ movie: MovieDTO) {
         self.imvPoster.contentMode = .center
         if let posterPath = movie.posterPath {
-            self.imvPoster.sd_setImage(with: URL(string: posterPath), placeholderImage: UIImage(named: "ic_placeholder"), options: SDWebImageOptions.continueInBackground, progress: nil) { (image, error, type, url) in
+            self.imvPoster.kf.setImage(with: URL(string: posterPath), placeholder: UIImage(named: "ic_placeholder"), options: [.backgroundDecode], progressBlock: nil) { (image, error, type, url) in
                 self.imvPoster.contentMode = .scaleToFill
                 self.imvPoster.image = image
             }

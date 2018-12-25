@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieListCell: UITableViewCell {
 
@@ -29,15 +30,15 @@ class MovieListCell: UITableViewCell {
         self.ageCategoryContent.layer.borderWidth = 1
     }
     
-    func loadFromMovie(movie: MovieDTO) {
-        self.titleLabel.text = movie.title
-        self.posterImage.sd_setImage(with: URL(string: movie.posterPath!), completed: nil)
+    func loadFromViewModel(viewModel: MovieViewModel) {
+        self.titleLabel.text = viewModel.displayTitle
+        self.posterImage.kf.setImage(with: URL(string: viewModel.posterPath))
         self.posterImage.layer.cornerRadius = 8
         self.posterImage.layer.masksToBounds = true
-        self.ratingLabel.text = "\(movie.rate!)"
-        self.ratingDescription.text = movie.ageCategory
-        self.releaseDate.text = self.getDateFrom(timeStamp: movie.releaseDate)
-        self.content.text = movie.descriptionValue
+        self.ratingLabel.text = "\(viewModel.rate)"
+        self.ratingDescription.text = viewModel.ageCategory
+        self.releaseDate.text = self.getDateFrom(timeStamp: viewModel.releaseDate)
+        self.content.text = viewModel.descriptionValue
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

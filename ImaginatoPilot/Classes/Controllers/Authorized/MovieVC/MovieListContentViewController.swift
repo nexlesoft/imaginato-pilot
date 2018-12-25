@@ -27,9 +27,9 @@ class MovieListContentViewController: UIViewController {
         
         if pageIndex == 0 {
             viewModel.showingData
-                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
+                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movieViewModel, cell in
                     if let movieCell = cell as? MovieListCell {
-                        movieCell.loadFromMovie(movie: movie)
+                        movieCell.loadFromViewModel(viewModel: movieViewModel)
                     }
                     Utils.dismissIndicator()
                 }
@@ -37,12 +37,13 @@ class MovieListContentViewController: UIViewController {
             viewModel.showingData.drive(onNext: nil, onCompleted: {
                 Utils.dismissIndicator()
             }, onDisposed: nil)
-            .disposed(by: self.disposeBag)
+                .disposed(by: self.disposeBag)
         } else {
             viewModel.upcomingData
-                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movie, cell in
+                .drive(tableView.rx.items(cellIdentifier: "MovieListCell")) { _, movieViewModel, cell in
                     if let movieCell = cell as? MovieListCell {
-                        movieCell.loadFromMovie(movie: movie)
+                        
+                        movieCell.loadFromViewModel(viewModel: movieViewModel)
                     }
                     Utils.dismissIndicator()
                 }
