@@ -13,6 +13,10 @@ import SwiftyJSON
 
 class BaseWebServices {
     
+    enum GetMovieFailureReason: Int, Error {
+        case notFound = 404
+    }
+    
     let disposeBag = DisposeBag()
     
     func getMovieList(path: String, success: @escaping ([MovieDTO]) -> Void, failure: @escaping (String) -> Void) {
@@ -47,28 +51,37 @@ class BaseWebServices {
                 .observeOn(MainScheduler.instance)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .map { (r, json) -> [String: Any] in
-                    print("__________path: \(path), json: \(json)")
+                    print("_____________path: \(path), json: \(json)")
                     guard let jsonDict = json as? [String: Any] else {
                         return [:]
                     }
                     return jsonDict
                 }
                 .subscribe(onNext: { jsonDict in
-                    guard let results = jsonDict["results"] as? [String: Any],
-                    let showing = results["showing"] as? [[String: Any]]
-                        else {
-                            observer.onNext([:])
+                    guard let results = jsonDict["results"] as? [String: Any] else {
+                        observer.onError(GetMovieFailureReason.notFound)
                         return
                     }
-                    var movies = [MovieDTO]()
-                    showing.forEach {
-                        movies.append(MovieDTO(json: JSON($0)))
+                    
+                    var showingMovies = [MovieDTO]()
+                    var upcomingMovies = [MovieDTO]()
+                    if let showing = results["showing"] as? [[String: Any]] {
+                        showing.forEach {
+                            showingMovies.append(MovieDTO(json: JSON($0)))
+                        }
                     }
-                    observer.onNext(["showing": movies])
+                    if let upcoming = results["upcoming"] as? [[String: Any]] {
+                        upcoming.forEach {
+                            upcomingMovies.append(MovieDTO(json: JSON($0)))
+                        }
+                    }
+                    
+                    observer.onNext(["showing": showingMovies, "upcoming": upcomingMovies])
                 }, onError: { error in
                     observer.onError(error)
                 })
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
         }
     }
-    
 }

@@ -24,6 +24,7 @@ class MovieListContentViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         self.tableView.delegate = self
+
 //        let obsKeyword = Observable<String>.just(self.keyword)
 //        obsKeyword.bind(to: viewModel.searchText)
 //            .disposed(by: disposeBag)
@@ -59,6 +60,13 @@ class MovieListContentViewController: UIViewController {
 //            }, onDisposed: nil)
 //                .disposed(by: self.disposeBag)
 //        }
+
+//        let obsKeyword = Observable<String>.just(self.keyword)
+//        obsKeyword.bind(to: viewModel.searchText)
+//            .disposed(by: disposeBag)
+//        self.bindViewModel()
+//        viewModel.fetchMovieList()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,6 +76,8 @@ class MovieListContentViewController: UIViewController {
     
     func bindViewModel() {
         if self.tableView != nil && self.isBinded == false {
+            
+            print("___________viewModel: \(viewModel)")
             self.isBinded = true
             ((self.pageIndex == 0) ? viewModel?.upcomingMovieCells : viewModel?.showingMovieCells)?.bind(to: self.tableView.rx.items) { tableView, index, element in
                 let indexPath = IndexPath(item: index, section: 0)
