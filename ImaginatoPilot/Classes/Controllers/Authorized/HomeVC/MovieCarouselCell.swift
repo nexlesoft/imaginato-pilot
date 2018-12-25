@@ -9,12 +9,16 @@
 import UIKit
 import Kingfisher
 import ScalingCarousel
+import RxSwift
+import RxCocoa
 
 class MovieCarouselCell: ScalingCarouselCell {
     @IBOutlet fileprivate weak var imvPoster: UIImageView!
     @IBOutlet fileprivate weak var lblPreSale: UILabel!
     @IBOutlet fileprivate weak var btnBuyTicket: UIButton!
     @IBOutlet fileprivate weak var lctHeightBuyTicket: NSLayoutConstraint!
+    
+    let disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,12 +39,7 @@ class MovieCarouselCell: ScalingCarouselCell {
             self.imvPoster.contentMode = .scaleToFill
             self.imvPoster.image = image
         }
-        if movieVM.presaleFlag == 1 {
-            self.lblPreSale.isHidden = false
-        }
-        else {
-            self.lblPreSale.isHidden = true
-        }
+        movieVM.presaleFlag.bind(to: self.lblPreSale.rx.isHidden).disposed(by: disposeBag)
     }
     
     func hiddenBuyTicket(_ isHidden: Bool) {
