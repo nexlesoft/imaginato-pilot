@@ -18,8 +18,8 @@ class MovieViewModel {
         self.movie = movie
     }
     
-    var displayTitle: String {
-        return movie?.title ?? ""
+    var displayTitle: BehaviorSubject<String> {
+        return BehaviorSubject<String>(value: movie?.title ?? "")
     }
     var posterPath: String {
         return movie?.posterPath ?? ""
@@ -27,8 +27,8 @@ class MovieViewModel {
     var releaseDate: Int {
         return movie?.releaseDate ?? 0
     }
-    var id: String {
-        return movie?.id ?? ""
+    var id: BehaviorSubject<String> {
+        return BehaviorSubject<String>(value: movie?.id ?? "")
     }
     var presaleFlag: Int {
         return movie?.presaleFlag ?? 0
@@ -36,11 +36,11 @@ class MovieViewModel {
     var genreIds: [GenreIdsDTO] {
         return movie?.genreIds ?? []
     }
-    var ageCategory: String {
-        return movie?.ageCategory ?? ""
+    var ageCategory: BehaviorSubject<String> {
+        return BehaviorSubject<String>(value: movie?.ageCategory ?? "")
     }
-    var descriptionValue: String {
-        return movie?.descriptionValue ?? ""
+    var descriptionValue: BehaviorSubject<String> {
+        return BehaviorSubject<String>(value: movie?.descriptionValue ?? "")
     }
     var rate: Float {
         return movie?.rate ?? 0.0
