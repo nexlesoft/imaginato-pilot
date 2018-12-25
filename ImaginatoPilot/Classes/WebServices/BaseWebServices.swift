@@ -41,7 +41,7 @@ class BaseWebServices {
             .disposed(by: disposeBag)
     }
     
-    func getMovieList(path: String) -> Observable<[MovieDTO]> {
+    func getMovieList(path: String) -> Observable<[String: [MovieDTO]]> {
         return Observable.create { observer -> Disposable in
             RxAlamofire.requestJSON(.get, baseURL + path)
                 .observeOn(MainScheduler.instance)
@@ -57,14 +57,14 @@ class BaseWebServices {
                     guard let results = jsonDict["results"] as? [String: Any],
                     let showing = results["showing"] as? [[String: Any]]
                         else {
-                        observer.onNext([])
+                            observer.onNext([:])
                         return
                     }
                     var movies = [MovieDTO]()
                     showing.forEach {
                         movies.append(MovieDTO(json: JSON($0)))
                     }
-                    observer.onNext(movies)
+                    observer.onNext(["showing": movies])
                 }, onError: { error in
                     observer.onError(error)
                 })

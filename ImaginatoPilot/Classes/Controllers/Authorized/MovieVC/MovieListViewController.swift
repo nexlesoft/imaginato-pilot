@@ -20,17 +20,16 @@ class MovieListViewController: BaseViewController {
     @IBOutlet weak var pageView: UIView!
     var pageViewController: UIPageViewController?
     var currentIndex = 0
-    var viewModel = MovieListViewModel()
     let disposeBag = DisposeBag()
+    var viewModel = MovieListViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.selectSection(index: 0)
-        
         pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") as? UIPageViewController
         pageViewController?.dataSource = self
         pageViewController?.delegate = self
         let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0)!
+        startingViewController.viewModel = self.viewModel
         let viewControllers = [startingViewController]
         self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         self.pageViewController?.view.frame = CGRect(x: 0, y: 0, width: 320, height: pageView.frame.size.height)
@@ -38,6 +37,8 @@ class MovieListViewController: BaseViewController {
         self.addChildViewController(pageViewController ?? UIPageViewController())
         self.pageView.addSubview(pageViewController?.view ?? UIView())
         pageViewController?.didMove(toParentViewController: self)
+        
+        viewModel.fetchMovieList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +110,7 @@ extension MovieListViewController {
             return nil
         }
         let vc = storyboard?.instantiateViewController(withIdentifier: "MovieListContentViewController") as? MovieListContentViewController
+        
         vc?.pageIndex = index
         vc?.keyword = self.keyword
         return vc

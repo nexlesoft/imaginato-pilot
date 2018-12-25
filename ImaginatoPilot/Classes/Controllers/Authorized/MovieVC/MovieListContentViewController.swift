@@ -11,19 +11,24 @@ import RxSwift
 class MovieListContentViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var pageIndex: Int = 0
-    var viewModel = MovieListViewModel()
+    var viewModel: MovieListViewModel? {
+        didSet {
+            self.bindViewModel()
+        }
+    }
     let disposeBag = DisposeBag()
     var keyword = ""
+    var isBinded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         self.tableView.delegate = self
-        let obsKeyword = Observable<String>.just(self.keyword)
-        obsKeyword.bind(to: viewModel.searchText)
-            .disposed(by: disposeBag)
-        self.bindViewModel()
-        viewModel.fetchMovieList()
+//        let obsKeyword = Observable<String>.just(self.keyword)
+//        obsKeyword.bind(to: viewModel.searchText)
+//            .disposed(by: disposeBag)
+//
+        
 //        Utils.showIndicator()
 //
 //        if pageIndex == 0 {
@@ -56,28 +61,36 @@ class MovieListContentViewController: UIViewController {
 //        }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.bindViewModel()
+    }
+    
     func bindViewModel() {
-        viewModel.movieCells.bind(to: self.tableView.rx.items) { tableView, index, element in
-            let indexPath = IndexPath(item: index, section: 0)
-            switch element {
-            case .normal(let viewModel):
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListCell", for: indexPath) as? MovieListCell else {
-                    return UITableViewCell()
+        if self.tableView != nil && self.isBinded == false {
+            self.isBinded = true
+            ((self.pageIndex == 0) ? viewModel?.upcomingMovieCells : viewModel?.showingMovieCells)?.bind(to: self.tableView.rx.items) { tableView, index, element in
+                let indexPath = IndexPath(item: index, section: 0)
+                switch element {
+                case .normal(let viewModel):
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListCell", for: indexPath) as? MovieListCell else {
+                        return UITableViewCell()
+                    }
+                    cell.viewModel = viewModel
+                    return cell
+                case .error(let message):
+                    let cell = UITableViewCell()
+                    cell.isUserInteractionEnabled = false
+                    cell.textLabel?.text = message
+                    return cell
+                case .empty:
+                    let cell = UITableViewCell()
+                    cell.isUserInteractionEnabled = false
+                    cell.textLabel?.text = "No data available"
+                    return cell
                 }
-                cell.viewModel = viewModel
-                return cell
-            case .error(let message):
-                let cell = UITableViewCell()
-                cell.isUserInteractionEnabled = false
-                cell.textLabel?.text = message
-                return cell
-            case .empty:
-                let cell = UITableViewCell()
-                cell.isUserInteractionEnabled = false
-                cell.textLabel?.text = "No data available"
-                return cell
-            }
-            }.disposed(by: disposeBag)
+                }.disposed(by: disposeBag)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

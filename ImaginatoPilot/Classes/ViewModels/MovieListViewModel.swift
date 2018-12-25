@@ -12,8 +12,8 @@ import RxCocoa
 import SwiftyJSON
 
 enum MovieListType: String {
-    case Showing
-    case Upcoming
+    case showing
+    case upcoming
 }
 
 enum MovieTableViewCellType {
@@ -32,10 +32,14 @@ class MovieListViewModel {
     init(baseWebServices: BaseWebServices = BaseWebServices()) {
         self.baseWebServices = baseWebServices
     }
-    var movieCells: Observable<[MovieTableViewCellType]> {
-        return cells.asObservable()
+    var showingMovieCells: Observable<[MovieTableViewCellType]> {
+        return showingCells.asObservable()
     }
-    private let cells = Variable<[MovieTableViewCellType]>([])
+    var upcomingMovieCells: Observable<[MovieTableViewCellType]> {
+        return showingCells.asObservable()
+    }
+    private let showingCells = Variable<[MovieTableViewCellType]>([])
+    private let upcomingCells = Variable<[MovieTableViewCellType]>([])
     func fetchMovieList() {
         
 //        appServerClient
@@ -63,10 +67,15 @@ class MovieListViewModel {
         baseWebServices.getMovieList(path: "search?keyword=\("s")&offset=\(MovieListViewModel.offset)")
             .subscribe(onNext: { [weak self] (movies) in
                 guard movies.count > 0 else {
-                    self?.cells.value = [.empty]
+                    self?.showingCells.value = [.empty]
                     return
                 }
-                self?.cells.value = movies.compactMap { .normal(cellViewModel: MovieViewModel(movie: $0 )) }
+                if let showing = movies[MovieListType.showing.rawValue] {
+                    self?.showingCells.value = showing.compactMap { .normal(cellViewModel: MovieViewModel(movie: $0 )) }
+                }
+                if let upcoming = movies[MovieListType.upcoming.rawValue] {
+                    self?.showingCells.value = upcoming.compactMap { .normal(cellViewModel: MovieViewModel(movie: $0 )) }
+                }
             }, onError: { (error) in
                 //
             }, onCompleted: nil, onDisposed: nil)
