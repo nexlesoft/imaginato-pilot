@@ -13,6 +13,8 @@ import SwiftyJSON
 
 class BaseWebServices {
     
+    let disposeBag = DisposeBag()
+    
     func getMovieList(path: String, success: @escaping ([MovieDTO]) -> Void, failure: @escaping (String) -> Void) {
         RxAlamofire.requestJSON(.get, baseURL + path)
             .observeOn(MainScheduler.instance)
@@ -34,9 +36,9 @@ class BaseWebServices {
                 }
                 return success(movies)
             }, onError: { error in
-                failure("Error")
+                failure(error.localizedDescription)
             })
-            .disposed(by: DisposeBag())
+            .disposed(by: disposeBag)
     }
     
 }

@@ -23,6 +23,9 @@ class HomeViewModel {
     func fetchMovieList() {
         baseWebServices.getMovieList(path: "home", success: { (arrMovie) in
             self.arrMovie.value = arrMovie
+            if let completion = self.completionFetchData {
+                completion()
+            }
         }) { (errorMsg) in
             Utils.showAlert(message: errorMsg)
         }
