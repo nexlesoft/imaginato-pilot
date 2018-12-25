@@ -12,37 +12,44 @@ import RxCocoa
 import SwiftyJSON
 
 class MovieViewModel {
-    var movie: MovieDTO?
+    private let movie: MovieDTO
+    private let disposeBag = DisposeBag()
     
     init(movie: MovieDTO) {
         self.movie = movie
+        presaleFlag = BehaviorRelay<Bool>(value: !(movie.presaleFlag ?? false))
+        presaleFlag.subscribe(onNext: { (presaleFlag) in
+            movie.presaleFlag = !presaleFlag
+        }).disposed(by: disposeBag)
     }
     
     var displayTitle: String {
-        return movie?.title ?? ""
+        return movie.title ?? ""
     }
+    
     var posterPath: String {
-        return movie?.posterPath ?? ""
+        return movie.posterPath ?? ""
     }
+    
     var releaseDate: Int {
-        return movie?.releaseDate ?? 0
+        return movie.releaseDate ?? 0
     }
     var id: String {
-        return movie?.id ?? ""
+        return movie.id ?? ""
     }
-    var presaleFlag: Int {
-        return movie?.presaleFlag ?? 0
-    }
+    
+    let presaleFlag: BehaviorRelay<Bool>
+    
     var genreIds: [GenreIdsDTO] {
-        return movie?.genreIds ?? []
+        return movie.genreIds ?? []
     }
     var ageCategory: String {
-        return movie?.ageCategory ?? ""
+        return movie.ageCategory ?? ""
     }
     var descriptionValue: String {
-        return movie?.descriptionValue ?? ""
+        return movie.descriptionValue ?? ""
     }
     var rate: Float {
-        return movie?.rate ?? 0.0
+        return movie.rate ?? 0.0
     }
 }
