@@ -68,18 +68,11 @@ extension SearchViewController {
         self.heightNavibarCustomContaint.constant = heightOfNavibar! + heightOfStatusBar
     }
     
-    private func saveDataSearch() {
-        let data = NSKeyedArchiver.archivedData(withRootObject: self.listHistory)
-        UserDefaults.standard.setValue(data, forKey: keyListHistory)
-        UserDefaults.standard.synchronize()
-    }
-    
     private func moveToMovieList(strSearch:String) {
         if let movieListVC = self.getViewController(storyboardName: "Main", className: "MovieListViewController") as? MovieListViewController {
-            let keyword = strSearch
-            movieListVC.keyword = keyword
+            movieListVC.keyword = strSearch
             self.navigationController?.pushViewController(movieListVC, animated: true)
-            self.searchViewModel?.addHistorySearh(withStr: keyword)
+            self.searchViewModel?.addHistorySearh(strSearch : strSearch)
         }
         self.tfSearch.text = ""
         self.tfSearch.resignFirstResponder()
@@ -88,7 +81,7 @@ extension SearchViewController {
     private func bindHistorySearchList(with viewModel: HistorySearchViewModel) {
         viewModel.listSearchHistorys.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "SearchTableViewCell", cellType: SearchTableViewCell.self)) { (row, element, cell) in
             print("element === >>>> ",element)
-            cell.titleLabel.text = element as? String
+            cell.viewModel = element
             }
             .disposed(by: disposeBag)
     }
@@ -96,9 +89,11 @@ extension SearchViewController {
     private func setupTableViewCellWhenTapped(with viewModel: HistorySearchViewModel) {
         self.tableView.rx.itemSelected
             .subscribe(onNext: {[weak self] indexPath in
-                self?.tableView.deselectRow(at: indexPath, animated: false)
-                let keyword = viewModel.listSearchHistorys.value[indexPath.row] as? String ?? ""
-                self?.moveToMovieList(strSearch: keyword)
+                guard let owner = self else {return}
+                owner.tableView.deselectRow(at: indexPath, animated: false)
+                let historyViewModel = viewModel.listSearchHistorys.value[indexPath.row]
+                historyViewModel.titleLable.asObservable().bind(to: owner.tfSearch.rx.text).disposed(by: owner.disposeBag)
+                owner.moveToMovieList(strSearch: owner.tfSearch.text ?? "")
                 
             })
             .disposed(by: disposeBag)

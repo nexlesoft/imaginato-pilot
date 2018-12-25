@@ -15,6 +15,18 @@ class SearchTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    var viewModel: HistoryViewModel? {
+        didSet {
+            bindViewModel()
+        }
+    }
+    
+    private func bindViewModel() {
+        if let viewModel = viewModel {
+            viewModel.titleLable.asObservable().bind(to: self.titleLabel.rx.text).disposed(by: self.disposeBag)
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         

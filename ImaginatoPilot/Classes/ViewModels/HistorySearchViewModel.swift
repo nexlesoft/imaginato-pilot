@@ -14,35 +14,41 @@ import RxCocoa
 
 class HistorySearchViewModel {
     let disposeBag = DisposeBag()
-    var listSearchHistorys = Variable<NSMutableArray>([])
-
+    var listSearchHistorys = Variable<[HistoryViewModel]>([])
     init() {
         self.fetchAndUpdateObservableHistorysSearch()
     }
     
     public func fetchAndUpdateObservableHistorysSearch() {
-        self.fetchHistorysSearchList().map({$0})?.subscribe(onNext: { [weak self](list) in
+        self.fetchHistorysSearchList().map({$0}).subscribe(onNext: { [weak self](list) in
             self?.listSearchHistorys.value = list
         }, onError: { (error: Error) in
             print("Error ==> ",error)
         }, onCompleted: nil, onDisposed: nil).disposed(by: self.disposeBag)
     }
 
-    public func fetchData() -> NSMutableArray {
+    public func fetchData() -> ([HistoryViewModel],NSMutableArray){
+        var listSearchViewModel = [HistoryViewModel]()
+        var listSearch = NSMutableArray()
         if let data = UserDefaults.standard.object(forKey: keyListHistory) as? Data {
             if let array =  NSKeyedUnarchiver.unarchiveObject(with: data) as? NSMutableArray {
-                return array
+                for item in array {
+                    listSearchViewModel.append(HistoryViewModel(str: (item as? String) ?? ""))
+                }
+                listSearch = array
+                return (listSearchViewModel,listSearch)
             }
         }
-        return NSMutableArray()
+        return (listSearchViewModel,listSearch)
     }
     
-    public func fetchHistorysSearchList() -> Observable<NSMutableArray>? {
-        return Observable.from(optional: self.fetchData())
+    public func fetchHistorysSearchList() -> Observable<[HistoryViewModel]> {
+//        let listSearch = self.fetchData()
+        return Observable.from(optional: self.fetchData().0)
     }
     
-    public func addHistorySearh(withStr strSearch: String) {
-        let listSearch = self.fetchData()
+    public func addHistorySearh(strSearch:String) {
+        let listSearch = self.fetchData().1
         let index = listSearch.index(of: strSearch)
         if index != NSNotFound {
             listSearch.removeObject(at: index)
@@ -52,7 +58,7 @@ class HistorySearchViewModel {
         }
         listSearch.insert(strSearch.trim(), at: 0)
         self.savaData(listSearch: listSearch)
-        self.listSearchHistorys.value = fetchData()
+        self.listSearchHistorys.value = fetchData().0
     }
     
     public func savaData(listSearch:NSMutableArray) {
@@ -62,9 +68,9 @@ class HistorySearchViewModel {
     }
     
     public func removeHistorySearch(withIndex index: Int) {
-        let listSearch = self.listSearchHistorys.value
+        let listSearch = self.fetchData().1
         listSearch.removeObject(at: index)
         self.savaData(listSearch: listSearch)
-        self.listSearchHistorys.value = fetchData()
+        self.listSearchHistorys.value = fetchData().0
     }
 }
