@@ -173,12 +173,7 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text == "" {
-            let alertController = UIAlertController(title: "Error", message: "Please enter search movie", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-                // do nothing...
-            }
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
+            Utils.showAlert(message: "Please enter search text")
             return false
         }
         self.moveToMovieList(strSearch: textField.text ?? "")
