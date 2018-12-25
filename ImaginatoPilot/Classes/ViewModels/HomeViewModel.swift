@@ -21,7 +21,6 @@ class HomeViewModel {
     }
     private let loadInProgress = Variable(false)
     let disposeBag = DisposeBag()
-    
     var centeredTitle: BehaviorSubject<String> = BehaviorSubject<String>(value: "")
     var centeredType: BehaviorSubject<String> = BehaviorSubject<String>(value: "")
     var centeredIndex: BehaviorSubject<Int> = BehaviorSubject<Int>(value: -1) {

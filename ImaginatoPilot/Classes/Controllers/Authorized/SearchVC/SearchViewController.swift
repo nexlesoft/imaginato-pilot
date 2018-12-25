@@ -20,7 +20,7 @@ class SearchViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightNavibarCustomContaint: NSLayoutConstraint!
     @IBOutlet weak var bottomTableViewContraint: NSLayoutConstraint!
-    var listHistory:NSMutableArray = NSMutableArray()
+
     var searchViewModel:HistorySearchViewModel?
     let disposeBag = DisposeBag()
     override func viewDidLoad() {
@@ -80,7 +80,6 @@ extension SearchViewController {
     
     private func bindHistorySearchList(with viewModel: HistorySearchViewModel) {
         viewModel.listSearchHistorys.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "SearchTableViewCell", cellType: SearchTableViewCell.self)) { (row, element, cell) in
-            print("element === >>>> ",element)
             cell.viewModel = element
             }
             .disposed(by: disposeBag)
@@ -102,7 +101,6 @@ extension SearchViewController {
     private func setupTableViewCellWhenDeleted(with viewModel: HistorySearchViewModel) {
         self.tableView.rx.itemDeleted
             .subscribe(onNext : {[weak self] indexPath in
-                print(indexPath)
                 guard let owner = self else {return}
                 owner.searchViewModel?.removeHistorySearch(withIndex: indexPath.row)
             })
