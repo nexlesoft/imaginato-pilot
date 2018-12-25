@@ -12,37 +12,38 @@ import RxCocoa
 import SwiftyJSON
 
 class MovieViewModel {
-    var movie: MovieDTO?
+    private let movie: MovieDTO
+    private let disposeBag = DisposeBag()
     
     init(movie: MovieDTO) {
         self.movie = movie
+        id = BehaviorSubject<String>(value: movie.id ?? "")
+        displayTitle = BehaviorSubject<String>(value: movie.title ?? "")
+        releaseDate = BehaviorSubject<Int>(value: movie.releaseDate ?? 0)
+        presaleFlag = BehaviorRelay<Bool>(value: !(movie.presaleFlag ?? false))
+        presaleFlag.subscribe(onNext: { (presaleFlag) in
+            movie.presaleFlag = !presaleFlag
+        }).disposed(by: disposeBag)
+        ageCategory = BehaviorSubject<String>(value: movie.ageCategory ?? "")
+        descriptionValue = BehaviorSubject<String>(value: movie.descriptionValue ?? "")
+        rate = BehaviorSubject<String>(value: "\(movie.rate ?? 0.0)")
     }
     
-    var displayTitle: BehaviorSubject<String> {
-        return BehaviorSubject<String>(value: movie?.title ?? "")
-    }
+    let displayTitle: BehaviorSubject<String>
     var posterPath: String {
-        return movie?.posterPath ?? ""
+        return movie.posterPath ?? ""
     }
-    var releaseDate: Int {
-        return movie?.releaseDate ?? 0
-    }
-    var id: BehaviorSubject<String> {
-        return BehaviorSubject<String>(value: movie?.id ?? "")
-    }
-    var presaleFlag: Int {
-        return movie?.presaleFlag ?? 0
-    }
+    
+    let releaseDate: BehaviorSubject<Int>
+
+    let id: BehaviorSubject<String>
+    let presaleFlag: BehaviorRelay<Bool>
+    
     var genreIds: [GenreIdsDTO] {
-        return movie?.genreIds ?? []
+        return movie.genreIds ?? []
     }
-    var ageCategory: BehaviorSubject<String> {
-        return BehaviorSubject<String>(value: movie?.ageCategory ?? "")
-    }
-    var descriptionValue: BehaviorSubject<String> {
-        return BehaviorSubject<String>(value: movie?.descriptionValue ?? "")
-    }
-    var rate: Float {
-        return movie?.rate ?? 0.0
-    }
+
+    let ageCategory: BehaviorSubject<String>
+    let descriptionValue: BehaviorSubject<String>
+    let rate: BehaviorSubject<String>
 }

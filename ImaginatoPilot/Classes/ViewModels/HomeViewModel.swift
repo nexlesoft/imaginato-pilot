@@ -14,7 +14,12 @@ import SwiftyJSON
 class HomeViewModel {
     var arrMovie = Variable<[MovieViewModel]>([])
     var completionFetchData: (()->())?
-    
+    var onShowLoadingHud: Observable<Bool> {
+        return loadInProgress
+            .asObservable()
+            .distinctUntilChanged()
+    }
+    private let loadInProgress = Variable(false)
     let disposeBag = DisposeBag()
     
     var centeredTitle: BehaviorSubject<String> = BehaviorSubject<String>(value: "")
@@ -25,7 +30,7 @@ class HomeViewModel {
                 let value = try centeredIndex.value() as Int
                 if (value > -1) && (value < self.arrMovie.value.count) {
                     let movie = arrMovie.value[value]
-                    centeredTitle.onNext(movie.displayTitle)
+                    try centeredTitle.onNext(movie.displayTitle.value())
                     let type: String = movie.genreIds.map{$0.name ?? ""}.joined(separator: ", ")
                     centeredType.onNext(type)
                 }
@@ -41,15 +46,20 @@ class HomeViewModel {
     }
     
     func fetchMovieList() {
-        baseWebServices.getMovieList(path: "home", success: { (arrMovie) in
+        self.loadInProgress.value = true
+        baseWebServices.getMovieList(path: "home", success: { [weak self] (arrMovie) in
+            guard let owner = self else { return }
             arrMovie.forEach({ (movie) in
                 let vm = MovieViewModel(movie: movie)
-                self.arrMovie.value.append(vm)
+                owner.arrMovie.value.append(vm)
             })
-            if let completion = self.completionFetchData {
+            if let completion = owner.completionFetchData {
                 completion()
             }
-        }) { (errorMsg) in
+            owner.loadInProgress.value = false
+        }) { [weak self] (errorMsg) in
+            guard let owner = self else { return }
+            owner.loadInProgress.value = false
             Utils.showAlert(message: errorMsg)
         }
     }

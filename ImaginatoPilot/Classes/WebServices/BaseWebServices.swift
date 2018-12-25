@@ -51,7 +51,6 @@ class BaseWebServices {
                 .observeOn(MainScheduler.instance)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .map { (r, json) -> [String: Any] in
-                    print("_____________path: \(path), json: \(json)")
                     guard let jsonDict = json as? [String: Any] else {
                         return [:]
                     }
@@ -60,6 +59,7 @@ class BaseWebServices {
                 .subscribe(onNext: { jsonDict in
                     guard let results = jsonDict["results"] as? [String: Any] else {
                         observer.onError(GetMovieFailureReason.notFound)
+                        observer.onNext([:])
                         return
                     }
                     

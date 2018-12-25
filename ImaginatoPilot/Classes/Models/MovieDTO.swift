@@ -27,7 +27,7 @@ public final class MovieDTO: NSCoding {
   public var posterPath: String?
   public var releaseDate: Int?
   public var id: String?
-  public var presaleFlag: Int?
+  public var presaleFlag: Bool?
   public var genreIds: [GenreIdsDTO]?
   public var ageCategory: String?
   public var descriptionValue: String?
@@ -50,7 +50,7 @@ public final class MovieDTO: NSCoding {
     posterPath = json[SerializationKeys.posterPath].string
     releaseDate = json[SerializationKeys.releaseDate].int
     id = json[SerializationKeys.id].string
-    presaleFlag = json[SerializationKeys.presaleFlag].int
+    presaleFlag = json[SerializationKeys.presaleFlag].boolValue
     if let items = json[SerializationKeys.genreIds].array { genreIds = items.map { GenreIdsDTO(json: $0) } }
     ageCategory = json[SerializationKeys.ageCategory].string
     descriptionValue = json[SerializationKeys.descriptionValue].string
@@ -80,7 +80,7 @@ public final class MovieDTO: NSCoding {
     self.posterPath = aDecoder.decodeObject(forKey: SerializationKeys.posterPath) as? String
     self.releaseDate = aDecoder.decodeObject(forKey: SerializationKeys.releaseDate) as? Int
     self.id = aDecoder.decodeObject(forKey: SerializationKeys.id) as? String
-    self.presaleFlag = aDecoder.decodeObject(forKey: SerializationKeys.presaleFlag) as? Int
+    self.presaleFlag = aDecoder.decodeObject(forKey: SerializationKeys.presaleFlag) as? Bool
     self.genreIds = aDecoder.decodeObject(forKey: SerializationKeys.genreIds) as? [GenreIdsDTO]
     self.ageCategory = aDecoder.decodeObject(forKey: SerializationKeys.ageCategory) as? String
     self.descriptionValue = aDecoder.decodeObject(forKey: SerializationKeys.descriptionValue) as? String

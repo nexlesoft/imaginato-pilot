@@ -40,11 +40,20 @@ class MovieListViewModel {
     }
     private let showingCells = Variable<[MovieTableViewCellType]>([])
     private let upcomingCells = Variable<[MovieTableViewCellType]>([])
+    private let loadInProgress = Variable(false)
     
-    func fetchMovieList() {
+    var onShowLoadingHud: Observable<Bool> {
+        return loadInProgress
+            .asObservable()
+            .distinctUntilChanged()
+    }
+
+    func fetchMovieList(keyword: String) {
         print("________FetMovieList:")
-        baseWebServices.getMovieList(path: "search?keyword=\("s")&offset=\(MovieListViewModel.offset)")
+        loadInProgress.value = true
+        baseWebServices.getMovieList(path: "search?keyword=\(keyword)&offset=\(MovieListViewModel.offset)")
             .subscribe(onNext: { [weak self] (movies) in
+                self?.loadInProgress.value = false
                 guard movies.count > 0 else {
                     self?.showingCells.value = [.empty]
                     self?.upcomingCells.value = [.empty]
@@ -56,8 +65,9 @@ class MovieListViewModel {
                 if let upcoming = movies[MovieListType.upcoming.rawValue] {
                     self?.upcomingCells.value = upcoming.compactMap { .normal(cellViewModel: MovieViewModel(movie: $0 )) }
                 }
-            }, onError: { (error) in
-                //
+            }, onError: { [weak self] (error) in
+                self?.loadInProgress.value = false
+                Utils.showAlert(message: error.localizedDescription)
             }, onCompleted: nil, onDisposed: nil)
             .disposed(by: disposeBag)
     }

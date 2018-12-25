@@ -121,6 +121,12 @@ extension HomeViewController {
     }
     
     fileprivate func bindMovieList(with viewModel: HomeViewModel) {
+        viewModel
+            .onShowLoadingHud
+            .map { [weak self] in self?.setLoadingHud(visible: $0) }
+            .subscribe()
+            .disposed(by: disposeBag)
+        
         viewModel.arrMovie.asDriver().drive(self.carousel.rx.items(cellIdentifier: "MovieCarouselCell")) { _, movieViewModel, cell in
             if let movieCell = cell as? MovieCarouselCell {
                 movieCell.binData(movieViewModel)
@@ -152,6 +158,15 @@ extension HomeViewController {
                 owner.carousel.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func setLoadingHud(visible: Bool) {
+        if visible {
+            Utils.showIndicator()
+        }
+        else {
+            Utils.dismissIndicator()
+        }
     }
     
     fileprivate func setupDidScroll(with viewModel: HomeViewModel) {

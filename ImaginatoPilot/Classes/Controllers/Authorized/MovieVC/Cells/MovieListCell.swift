@@ -32,11 +32,12 @@ class MovieListCell: UITableViewCell {
     private func bindViewModel() {
         if let viewModel = viewModel {
             viewModel.displayTitle.asObserver().bind(to: self.titleLabel.rx.text).disposed(by: self.disposeBag)
-//            viewModel.rate.asObserver().bind(to: self.ratingLabel.rx.text)
+            viewModel.rate.asObserver().bind(to: self.ratingLabel.rx.text).disposed(by: self.disposeBag)
             self.posterImage.kf.setImage(with: URL(string: viewModel.posterPath))
-            self.ratingLabel.text = "\(viewModel.rate)"
             viewModel.ageCategory.asObserver().bind(to: self.ratingDescription.rx.text).disposed(by: self.disposeBag)
-            self.releaseDate.text = self.getDateFrom(timeStamp: viewModel.releaseDate)
+            viewModel.releaseDate.asObserver().map { (date) -> String in
+                return self.getDateFrom(timeStamp: date)
+            }.bind(to: self.releaseDate.rx.text).disposed(by: self.disposeBag)
             viewModel.descriptionValue.asObserver().bind(to: self.content.rx.text).disposed(by: self.disposeBag)
         }
     }
