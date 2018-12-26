@@ -15,7 +15,7 @@ extension UIViewController {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: alert.action.buttonTitle,
                                                 style: .default,
-                                                handler: { _ in alert.action.handler?() }))
+                                                handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
 }

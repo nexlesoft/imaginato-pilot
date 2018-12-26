@@ -50,6 +50,12 @@ class MovieListViewController: BaseViewController {
             .map { [weak self] in self?.setLoadingHud(visible: $0) }
             .subscribe()
             .disposed(by: disposeBag)
+        
+        viewModel
+            .onShowError
+            .map { [weak self] in self?.presentSingleButtonDialog(alert: $0)}
+            .subscribe()
+            .disposed(by: disposeBag)
     }
     
     private func setLoadingHud(visible: Bool) {

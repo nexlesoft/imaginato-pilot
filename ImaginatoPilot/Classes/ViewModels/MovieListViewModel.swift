@@ -41,7 +41,7 @@ class MovieListViewModel {
     private let showingCells = Variable<[MovieTableViewCellType]>([])
     private let upcomingCells = Variable<[MovieTableViewCellType]>([])
     private let loadInProgress = Variable(false)
-    
+    var onShowError =  PublishSubject<SingleButtonAlert>()
     var onShowLoadingHud: Observable<Bool> {
         return loadInProgress
             .asObservable()
@@ -68,7 +68,12 @@ class MovieListViewModel {
                 }
             }, onError: { [weak self] (error) in
                 self?.loadInProgress.value = false
-                Utils.showAlert(message: error.localizedDescription)
+                let errorAlert = SingleButtonAlert(
+                    title: "",
+                    message: error.localizedDescription,
+                    action: AlertAction(buttonTitle: "OK")
+                )
+                self?.onShowError.onNext(errorAlert)
             }, onCompleted: nil, onDisposed: nil)
             .disposed(by: disposeBag)
     }
