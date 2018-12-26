@@ -39,6 +39,9 @@ class HomeViewModel {
             }
         }
     }
+    var carousellScroll = BehaviorRelay<Bool>(value: true)
+    var movingToSearchPage = BehaviorRelay<Bool>(value: false)
+    var previousCenterIndexPath: BehaviorSubject<IndexPath>?
     
     let baseWebServices: BaseWebServices
     init(baseWebServices: BaseWebServices) {
