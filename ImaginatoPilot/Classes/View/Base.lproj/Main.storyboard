@@ -220,9 +220,6 @@
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="didTouchCancel:" destination="37i-VR-fhc" eventType="touchUpInside" id="oS9-8i-Nj3"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.098223991692066193" green="0.17327585816383362" blue="0.31023335456848145" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -292,7 +289,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomTableViewContraint" destination="j7Z-92-gOQ" id="Phc-Yo-eV1"/>
-                        <outlet property="btnSearch" destination="Gtl-oJ-YzK" id="phe-3q-fWF"/>
+                        <outlet property="btnSearch" destination="Gtl-oJ-YzK" id="ujJ-Vh-3Hm"/>
                         <outlet property="heightNavibarCustomContaint" destination="cch-BZ-a9y" id="mu0-4h-CPC"/>
                         <outlet property="navibarCustom" destination="XP1-zZ-Rin" id="ifY-GI-DLF"/>
                         <outlet property="tableView" destination="Nlw-zb-gkG" id="jdM-6I-y4M"/>
@@ -636,6 +633,6 @@
     <resources>
         <image name="ic_search-iPhone6P" width="30" height="30"/>
         <image name="icon-back-2" width="13" height="23"/>
-        <image name="icon-rating" width="98" height="30"/>
+        <image name="icon-rating" width="49" height="15"/>
     </resources>
 </document>

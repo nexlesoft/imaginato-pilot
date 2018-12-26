@@ -15,7 +15,7 @@ class SearchViewController: BaseViewController {
     
     @IBOutlet weak var navibarCustom: UIView!
     @IBOutlet weak var vSearch: UIView!
-    @IBOutlet weak var btnSearch: UIButton!
+    @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var tfSearch: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightNavibarCustomContaint: NSLayoutConstraint!
@@ -32,6 +32,7 @@ class SearchViewController: BaseViewController {
             self.bindHistorySearchList(with: viewModel)
             self.setupTableViewCellWhenTapped(with: viewModel)
             self.setupTableViewCellWhenDeleted(with: viewModel)
+            self.setupDidTouchCancel()
         }
     }
     
@@ -107,6 +108,13 @@ extension SearchViewController {
             .disposed(by: disposeBag)
     }
     
+    private func setupDidTouchCancel() {
+        self.btnCancel.rx.tap.subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
@@ -129,13 +137,6 @@ extension SearchViewController {
                            animations: { self.view.layoutIfNeeded() },
                            completion: nil)
         }
-    }
-}
-
-// MARK: User Interaction
-extension SearchViewController {
-    @IBAction func didTouchCancel(_ sender:UIButton) {
-        self.navigationController?.popViewController(animated: true)
     }
 }
 
