@@ -10,19 +10,28 @@ import UIKit
 import RxSwift
 
 class MovieListViewController: BaseViewController {
-    var keyword = ""
+    
     @IBOutlet weak var showingButton: UIButton!
     @IBOutlet weak var showingIndicatorLine: UIView!
     @IBOutlet weak var comingSoonButton: UIButton!
     @IBOutlet weak var comingSoonIndicatorLine: UIView!
     @IBOutlet weak var pageView: UIView!
+    @IBOutlet weak var backButton: UIButton!
+    
+    var keyword = ""
     var pageViewController: UIPageViewController?
     var currentIndex = 0
     let disposeBag = DisposeBag()
     var viewModel = MovieListViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.selectSection(index: 0)
+        
+        setUpEventTouchBackButton()
+        setUpEventTouchShowingButton()
+        setUpEventToushComingSoonButton()
+        
         pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") as? UIPageViewController
         pageViewController?.dataSource = self
         pageViewController?.delegate = self
@@ -68,33 +77,6 @@ class MovieListViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func touchBackButton(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func touchShowing(_ sender: Any) {
-        if currentIndex != 0 {
-            selectSection(index: 0)
-            currentIndex = 0
-            guard let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0) else { return }
-            startingViewController.viewModel = self.viewModel
-            let viewControllers = [startingViewController]
-            self.pageViewController?.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func touchComingSoon(_ sender: Any) {
-        if currentIndex != 1 {
-            selectSection(index: 1)
-            currentIndex = 1
-            guard let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 1) else { return }
-            startingViewController.viewModel = self.viewModel
-            let viewControllers = [startingViewController]
-            self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
-        }
-    }
-    
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -127,6 +109,41 @@ extension MovieListViewController {
         vc?.pageIndex = index
         vc?.keyword = self.keyword
         return vc
+    }
+    
+    private func setUpEventTouchBackButton() {
+        self.backButton.rx.tap
+            .subscribe() { event in
+                self.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
+    }
+    
+    private func setUpEventTouchShowingButton() {
+        self.showingButton.rx.tap
+            .subscribe() { event in
+                if self.currentIndex != 0 {
+                    self.selectSection(index: 0)
+                    self.currentIndex = 0
+                    guard let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0) else { return }
+                    startingViewController.viewModel = self.viewModel
+                    let viewControllers = [startingViewController]
+                    self.pageViewController?.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
+                }
+            }.disposed(by: disposeBag)
+    }
+    
+    private func setUpEventToushComingSoonButton() {
+        self.comingSoonButton.rx.tap
+            .subscribe() { event in
+                if self.currentIndex != 1 {
+                    self.selectSection(index: 1)
+                    self.currentIndex = 1
+                    guard let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 1) else { return }
+                    startingViewController.viewModel = self.viewModel
+                    let viewControllers = [startingViewController]
+                    self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+                }
+            }.disposed(by: disposeBag)
     }
 }
 
