@@ -46,4 +46,6 @@ class MovieViewModel {
     let ageCategory: BehaviorSubject<String>
     let descriptionValue: BehaviorSubject<String>
     let rate: BehaviorSubject<String>
+    
+    var isHiddenBuyTicket: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: true)
 }

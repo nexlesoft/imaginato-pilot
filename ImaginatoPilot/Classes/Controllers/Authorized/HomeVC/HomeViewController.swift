@@ -173,13 +173,15 @@ extension HomeViewController {
                 guard let currentCenterIndex = owner.carousel.currentCenterCellIndex?.row else { return }
                 owner.viewModel.centeredIndex = BehaviorSubject(value: currentCenterIndex)
                 
-                if let previousCenterIndexPath = owner.previousCenterIndexPath, let cell = owner.carousel.cellForItem(at: previousCenterIndexPath) as? MovieCarouselCell {
-                    cell.hiddenBuyTicket(true)
+                if let previousCenterIndexPath = owner.previousCenterIndexPath {
+                    let vm = viewModel.arrMovie.value[previousCenterIndexPath.row]
+                    vm.isHiddenBuyTicket.accept(true)
                     owner.carousellScroll = false
                     owner.carouselTimer?.invalidate()
                 }
-                if let cell = owner.carousel.currentCenterCell as? MovieCarouselCell {
-                    cell.hiddenBuyTicket(false)
+                if let curentIndexPath = owner.carousel.currentCenterCellIndex {
+                    let vm = viewModel.arrMovie.value[curentIndexPath.row]
+                    vm.isHiddenBuyTicket.accept(false)
                     owner.lblMovieTitle.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
                     owner.lblMovieGenre.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
                     UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
