@@ -28,6 +28,11 @@ class MovieListViewModel {
     static var offset = 20
     let disposeBag = DisposeBag()
     let baseWebServices: BaseWebServices
+    var sectionIndex: BehaviorSubject<Int> = BehaviorSubject<Int>(value: 0)
+    var showingButtonColor: BehaviorSubject<UIColor> = BehaviorSubject<UIColor>(value: .black)
+    var upcomingButtonColor: BehaviorSubject<UIColor> = BehaviorSubject<UIColor>(value: .black)
+    var showingLineIsHidden: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: true)
+    var upcomingLineIsHidden: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: true)
     
     init(baseWebServices: BaseWebServices = BaseWebServices()) {
         self.baseWebServices = baseWebServices
@@ -46,6 +51,10 @@ class MovieListViewModel {
         return loadInProgress
             .asObservable()
             .distinctUntilChanged()
+    }
+    
+    func setIndex(_ index: Int) {
+        self.sectionIndex.onNext(index)
     }
 
     func fetchMovieList(keyword: String) {
