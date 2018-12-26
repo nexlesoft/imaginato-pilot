@@ -91,7 +91,7 @@ extension SearchViewController {
             .subscribe(onNext: {[weak self] indexPath in
                 guard let owner = self else {return}
                 owner.tableView.deselectRow(at: indexPath, animated: false)
-                viewModel.textSearch = viewModel.listSearchHistorys.value[indexPath.row].titleLable
+                viewModel.textSearch.value = viewModel.listSearchHistorys.value[indexPath.row].titleLable.value
                 owner.moveToMovieList()
             })
             .disposed(by: disposeBag)

@@ -132,6 +132,11 @@ extension HomeViewController {
             owner.carousel.setContentOffset(offset, animated: true)
             owner.createTimerAutoScroll()
         }
+        viewModel
+            .onShowError
+            .map { [weak self] in self?.presentSingleButtonDialog(alert: $0)}
+            .subscribe()
+            .disposed(by: disposeBag)
     }
     
     fileprivate func bindCenteredMovie(with viewModel: HomeViewModel) {
