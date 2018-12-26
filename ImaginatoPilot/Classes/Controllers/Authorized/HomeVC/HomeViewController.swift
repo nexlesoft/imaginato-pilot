@@ -39,13 +39,7 @@ class HomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         viewModel.movingToSearchPage.accept(false)
         if let previoursIndexPath = self.viewModel.previousCenterIndexPath {
-            do {
-                let index = try previoursIndexPath.value()
-                self.carousel.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
-            }
-            catch {
-                print("Invalid index")
-            }
+            self.carousel.scrollToItem(at: previoursIndexPath, at: .centeredHorizontally, animated: false)
         }
         if viewModel.arrMovie.value.count > 0 {
             self.createTimerAutoScroll()
@@ -138,7 +132,7 @@ extension HomeViewController {
                     viewModel.carousellScroll.accept(true)
                     owner.createTimerAutoScroll()
                     if let currentCenterCellIndex = owner.carousel.currentCenterCellIndex {
-                        viewModel.previousCenterIndexPath = BehaviorSubject<IndexPath>(value: currentCenterCellIndex)
+                        viewModel.previousCenterIndexPath = currentCenterCellIndex
                     }
                 }
             }).disposed(by: self.disposeBag)
@@ -168,12 +162,10 @@ extension HomeViewController {
     }
     
     fileprivate func setupCollectionViewWhenTap(with viewModel: HomeViewModel) {
-        self.carousel.rx.itemSelected
-            .subscribe(onNext : {[weak self] indexPath in
-                guard let owner = self else {return}
-                owner.carousel.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            })
-            .disposed(by: disposeBag)
+        self.carousel.rx.itemSelected.subscribe(onNext : {[weak self] indexPath in
+            guard let owner = self else {return}
+            owner.carousel.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }).disposed(by: disposeBag)
     }
     
     private func setLoadingHud(visible: Bool) {
@@ -192,27 +184,16 @@ extension HomeViewController {
             .subscribe(onNext : {[weak self] in
                 guard let owner = self else { return }
                 if let previousCenterIndexPath = owner.viewModel.previousCenterIndexPath {
-                    do {
-                        if try previousCenterIndexPath.value() == owner.carousel.currentCenterCellIndex ||
-                            owner.viewModel.movingToSearchPage.value == true {
-                            return
-                        }
-                    }
-                    catch {
-                        print("Invalid")
+                    if previousCenterIndexPath == owner.carousel.currentCenterCellIndex ||
+                        owner.viewModel.movingToSearchPage.value == true {
+                        return
                     }
                 }
                 guard let currentCenterIndex = owner.carousel.currentCenterCellIndex?.row else { return }
                 owner.viewModel.centeredIndex = BehaviorSubject(value: currentCenterIndex)
                 if let previousCenterIndexPath = owner.viewModel.previousCenterIndexPath {
-                    do {
-                        let index = try previousCenterIndexPath.value()
-                        let vm = viewModel.arrMovie.value[index.row]
-                        vm.isHiddenBuyTicket.accept(true)
-                    }
-                    catch {
-                        print("Invalid index")
-                    }
+                    let vm = viewModel.arrMovie.value[previousCenterIndexPath.row]
+                    vm.isHiddenBuyTicket.accept(true)
                 }
                 if let curentIndexPath = owner.carousel.currentCenterCellIndex {
                     let vm = viewModel.arrMovie.value[curentIndexPath.row]
