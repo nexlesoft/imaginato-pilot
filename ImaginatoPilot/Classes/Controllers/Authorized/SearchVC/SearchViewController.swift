@@ -33,6 +33,7 @@ class SearchViewController: BaseViewController {
             self.setupTableViewCellWhenTapped(with: viewModel)
             self.setupTableViewCellWhenDeleted(with: viewModel)
             self.setupDidTouchCancel()
+            self.bindTextFieldSearch(with: viewModel)
         }
     }
     
@@ -69,13 +70,12 @@ extension SearchViewController {
         self.heightNavibarCustomContaint.constant = heightOfNavibar! + heightOfStatusBar
     }
     
-    private func moveToMovieList(strSearch:String) {
+    private func moveToMovieList() {
         if let movieListVC = self.getViewController(storyboardName: "Main", className: "MovieListViewController") as? MovieListViewController {
-            movieListVC.keyword = strSearch
+            movieListVC.keyword = self.searchViewModel?.textSearch.value ?? ""
             self.navigationController?.pushViewController(movieListVC, animated: true)
-            self.searchViewModel?.addHistorySearh(strSearch : strSearch)
+            self.searchViewModel?.addHistorySearh()
         }
-        self.tfSearch.text = ""
         self.tfSearch.resignFirstResponder()
     }
     
@@ -91,10 +91,8 @@ extension SearchViewController {
             .subscribe(onNext: {[weak self] indexPath in
                 guard let owner = self else {return}
                 owner.tableView.deselectRow(at: indexPath, animated: false)
-                let historyViewModel = viewModel.listSearchHistorys.value[indexPath.row]
-                historyViewModel.titleLable.asObservable().bind(to: owner.tfSearch.rx.text).disposed(by: owner.disposeBag)
-                owner.moveToMovieList(strSearch: owner.tfSearch.text ?? "")
-                
+                viewModel.textSearch = viewModel.listSearchHistorys.value[indexPath.row].titleLable
+                owner.moveToMovieList()
             })
             .disposed(by: disposeBag)
     }
@@ -113,6 +111,10 @@ extension SearchViewController {
                 self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    private func bindTextFieldSearch(with viewModel: HistorySearchViewModel) {
+        viewModel.textSearch.asObservable().bind(to: self.tfSearch.rx.text).disposed(by: self.disposeBag)
     }
     
     private func setupNotificationCenter() {
@@ -170,7 +172,8 @@ extension SearchViewController:UITextFieldDelegate {
             Utils.showAlert(message: "Please enter search text")
             return false
         }
-        self.moveToMovieList(strSearch: textField.text ?? "")
+        self.searchViewModel?.textSearch.value = textField.text ?? ""
+        self.moveToMovieList()
         return true
     }
 }

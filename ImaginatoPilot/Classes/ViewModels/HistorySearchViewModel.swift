@@ -12,6 +12,7 @@ import RxCocoa
 class HistorySearchViewModel {
     let disposeBag = DisposeBag()
     var listSearchHistorys = Variable<[HistoryViewModel]>([])
+    var textSearch = Variable<String>("")
     init() {
         self.fetchAndUpdateObservableHistorysSearch()
     }
@@ -43,16 +44,17 @@ class HistorySearchViewModel {
         return Observable.from(optional: self.fetchData().0)
     }
     
-    public func addHistorySearh(strSearch:String) {
+    public func addHistorySearh() {
         let listSearch = self.fetchData().1
-        let index = listSearch.index(of: strSearch)
+        let index = listSearch.index(of: self.textSearch.value)
         if index != NSNotFound {
             listSearch.removeObject(at: index)
         }
         if listSearch.count >= 10 {
             listSearch.removeLastObject()
         }
-        listSearch.insert(strSearch.trim(), at: 0)
+        listSearch.insert(self.textSearch.value.trim(), at: 0)
+        self.textSearch.value = ""
         self.savaData(listSearch: listSearch)
         self.listSearchHistorys.value = fetchData().0
     }
@@ -67,6 +69,7 @@ class HistorySearchViewModel {
         let listSearch = self.fetchData().1
         listSearch.removeObject(at: index)
         self.savaData(listSearch: listSearch)
+        self.textSearch.value = ""
         self.listSearchHistorys.value = fetchData().0
     }
 }
