@@ -113,35 +113,35 @@ extension MovieListViewController {
     
     private func setUpEventTouchBackButton() {
         self.backButton.rx.tap
-            .subscribe() { event in
-                self.navigationController?.popViewController(animated: true)
+            .subscribe() { [weak self] event in
+                self?.navigationController?.popViewController(animated: true)
             }.disposed(by: disposeBag)
     }
     
     private func setUpEventTouchShowingButton() {
         self.showingButton.rx.tap
-            .subscribe() { event in
-                if self.currentIndex != 0 {
-                    self.selectSection(index: 0)
-                    self.currentIndex = 0
-                    guard let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 0) else { return }
-                    startingViewController.viewModel = self.viewModel
+            .subscribe() { [weak self] event in
+                if self?.currentIndex != 0 {
+                    self?.selectSection(index: 0)
+                    self?.currentIndex = 0
+                    guard let startingViewController: MovieListContentViewController = self?.viewControllerAtIndex(index: 0) else { return }
+                    startingViewController.viewModel = self?.viewModel
                     let viewControllers = [startingViewController]
-                    self.pageViewController?.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
+                    self?.pageViewController?.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
                 }
             }.disposed(by: disposeBag)
     }
     
     private func setUpEventToushComingSoonButton() {
         self.comingSoonButton.rx.tap
-            .subscribe() { event in
-                if self.currentIndex != 1 {
-                    self.selectSection(index: 1)
-                    self.currentIndex = 1
-                    guard let startingViewController: MovieListContentViewController = self.viewControllerAtIndex(index: 1) else { return }
-                    startingViewController.viewModel = self.viewModel
+            .subscribe() { [weak self] event in
+                if self?.currentIndex != 1 {
+                    self?.selectSection(index: 1)
+                    self?.currentIndex = 1
+                    guard let startingViewController: MovieListContentViewController = self?.viewControllerAtIndex(index: 1) else { return }
+                    startingViewController.viewModel = self?.viewModel
                     let viewControllers = [startingViewController]
-                    self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+                    self?.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
                 }
             }.disposed(by: disposeBag)
     }
