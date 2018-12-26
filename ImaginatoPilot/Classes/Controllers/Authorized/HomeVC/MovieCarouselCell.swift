@@ -40,6 +40,9 @@ class MovieCarouselCell: ScalingCarouselCell {
             self.imvPoster.image = image
         }
         movieVM.presaleFlag.bind(to: self.lblPreSale.rx.isHidden).disposed(by: disposeBag)
+        _ = movieVM.isHiddenBuyTicket.bind { (isHidden) in
+            self.hiddenBuyTicket(isHidden)
+        }.disposed(by: disposeBag)
     }
     
     func hiddenBuyTicket(_ isHidden: Bool) {
