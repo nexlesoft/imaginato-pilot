@@ -121,6 +121,24 @@ extension HomeViewController {
             .disposed(by: disposeBag)
         
         viewModel.arrMovie.asDriver().drive(self.carousel.rx.items(cellIdentifier: "MovieCarouselCell")) { _, movieViewModel, cell in
+            movieViewModel.isHiddenBuyTicket.subscribe(onNext: { [weak self] (isHidden) in
+                guard let owner = self else { return }
+                if isHidden {
+                    owner.carousellScroll = false
+                    owner.carouselTimer?.invalidate()
+                }
+                else {
+                    owner.lblMovieTitle.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
+                    owner.lblMovieGenre.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
+                    UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
+                        owner.lblMovieTitle.transform = .identity
+                        owner.lblMovieGenre.transform = .identity
+                    }, completion: nil)
+                    owner.carousellScroll = true
+                    owner.createTimerAutoScroll()
+                    owner.previousCenterIndexPath = owner.carousel.currentCenterCellIndex
+                }
+            }).disposed(by: self.disposeBag)
             if let movieCell = cell as? MovieCarouselCell {
                 movieCell.binData(movieViewModel)
             }}
@@ -176,21 +194,10 @@ extension HomeViewController {
                 if let previousCenterIndexPath = owner.previousCenterIndexPath {
                     let vm = viewModel.arrMovie.value[previousCenterIndexPath.row]
                     vm.isHiddenBuyTicket.accept(true)
-                    owner.carousellScroll = false
-                    owner.carouselTimer?.invalidate()
                 }
                 if let curentIndexPath = owner.carousel.currentCenterCellIndex {
                     let vm = viewModel.arrMovie.value[curentIndexPath.row]
                     vm.isHiddenBuyTicket.accept(false)
-                    owner.lblMovieTitle.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
-                    owner.lblMovieGenre.transform = CGAffineTransform(scaleX: 0.3, y: 1.5)
-                    UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
-                        owner.lblMovieTitle.transform = .identity
-                        owner.lblMovieGenre.transform = .identity
-                    }, completion: nil)
-                    owner.carousellScroll = true
-                    owner.createTimerAutoScroll()
-                    owner.previousCenterIndexPath = owner.carousel.currentCenterCellIndex
                 }
             })
     }
