@@ -289,7 +289,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomTableViewContraint" destination="j7Z-92-gOQ" id="Phc-Yo-eV1"/>
-                        <outlet property="btnSearch" destination="Gtl-oJ-YzK" id="ujJ-Vh-3Hm"/>
+                        <outlet property="btnCancel" destination="Gtl-oJ-YzK" id="zom-Jw-K0A"/>
                         <outlet property="heightNavibarCustomContaint" destination="cch-BZ-a9y" id="mu0-4h-CPC"/>
                         <outlet property="navibarCustom" destination="XP1-zZ-Rin" id="ifY-GI-DLF"/>
                         <outlet property="tableView" destination="Nlw-zb-gkG" id="jdM-6I-y4M"/>
