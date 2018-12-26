@@ -63,7 +63,7 @@ class HomeViewModel {
             let errorAlert = SingleButtonAlert(
                 title: "",
                 message: errorMsg,
-                action: AlertAction(buttonTitle: "OK", handler: { print("Ok pressed!") })
+                action: AlertAction(buttonTitle: "OK")
             )
             self?.onShowError.onNext(errorAlert)
         }

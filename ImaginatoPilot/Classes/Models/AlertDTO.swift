@@ -9,7 +9,6 @@
 import UIKit
 struct AlertAction {
     let buttonTitle: String
-    let handler: (() -> Void)?
 }
 
 struct SingleButtonAlert {
