@@ -11,8 +11,8 @@ import RxSwift
 import RxCocoa
 
 class HistoryViewModel{
-    var titleLable = BehaviorSubject<String>(value: "")
+    var titleLable = Variable<String>("")
     init(str:String) {
-        self.titleLable = BehaviorSubject<String>(value: str)
+        self.titleLable = Variable<String>(str)
     }
 }
