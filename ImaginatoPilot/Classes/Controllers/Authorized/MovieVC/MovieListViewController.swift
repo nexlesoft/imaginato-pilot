@@ -26,11 +26,12 @@ class MovieListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.selectSection(index: 0)
         
         setUpEventTouchBackButton()
         setUpEventTouchShowingButton()
         setUpEventToushComingSoonButton()
+        bindViewModel()
+        self.viewModel.setIndex(0)
         
         pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") as? UIPageViewController
         pageViewController?.dataSource = self
@@ -56,6 +57,38 @@ class MovieListViewController: BaseViewController {
             .map { [weak self] in self?.presentSingleButtonDialog(alert: $0)}
             .subscribe()
             .disposed(by: disposeBag)
+    }
+    
+    func bindViewModel() {
+        viewModel.sectionIndex.subscribe(onNext: { [weak self](index) in
+            //index changed
+            if index == 0 {
+                self?.viewModel.showingButtonColor.onNext(.black)
+                self?.viewModel.upcomingButtonColor.onNext(.lightGray)
+                self?.viewModel.showingLineIsHidden.onNext(false)
+                self?.viewModel.upcomingLineIsHidden.onNext(true)
+            } else if index == 1 {
+                self?.viewModel.showingButtonColor.onNext(.lightGray)
+                self?.viewModel.upcomingButtonColor.onNext(.black)
+                self?.viewModel.showingLineIsHidden.onNext(true)
+                self?.viewModel.upcomingLineIsHidden.onNext(false)
+            } else {
+                print("Section not available")
+            }
+        }).disposed(by: disposeBag)
+        
+        viewModel.showingButtonColor.subscribe(onNext: { [weak self](color) in
+            self?.showingButton.setTitleColor(color, for: .normal)
+        }).disposed(by: disposeBag)
+        viewModel.upcomingButtonColor.subscribe(onNext: { [weak self](color) in
+            self?.comingSoonButton.setTitleColor(color, for: .normal)
+        }).disposed(by: disposeBag)
+        viewModel.showingLineIsHidden.subscribe(onNext: { [weak self](isHidden) in
+            self?.showingIndicatorLine.isHidden = isHidden
+        }).disposed(by: disposeBag)
+        viewModel.upcomingLineIsHidden.subscribe(onNext: { [weak self](isHidden) in
+            self?.comingSoonIndicatorLine.isHidden = isHidden
+        }).disposed(by: disposeBag)
     }
     
     private func setLoadingHud(visible: Bool) {
@@ -90,21 +123,6 @@ class MovieListViewController: BaseViewController {
 
 // MARK: User Interaction
 extension MovieListViewController {
-    func selectSection(index: Int) {
-        if index == 0 {
-            self.showingButton.setTitleColor(UIColor.black, for: .normal)
-            self.comingSoonButton.setTitleColor(UIColor.lightGray, for: .normal)
-            self.showingIndicatorLine.isHidden = false
-            self.comingSoonIndicatorLine.isHidden = true
-        } else if index == 1 {
-            self.showingButton.setTitleColor(UIColor.lightGray, for: .normal)
-            self.comingSoonButton.setTitleColor(UIColor.black, for: .normal)
-            self.showingIndicatorLine.isHidden = true
-            self.comingSoonIndicatorLine.isHidden = false
-        } else {
-            print("Section not available")
-        }
-    }
     
     func viewControllerAtIndex(index: Int) -> MovieListContentViewController? {
         if index < 0 || index > 1 {
@@ -128,7 +146,7 @@ extension MovieListViewController {
         self.showingButton.rx.tap
             .subscribe() { [weak self] event in
                 if self?.currentIndex != 0 {
-                    self?.selectSection(index: 0)
+                    self?.viewModel.setIndex(0)
                     self?.currentIndex = 0
                     guard let startingViewController: MovieListContentViewController = self?.viewControllerAtIndex(index: 0) else { return }
                     startingViewController.viewModel = self?.viewModel
@@ -142,7 +160,7 @@ extension MovieListViewController {
         self.comingSoonButton.rx.tap
             .subscribe() { [weak self] event in
                 if self?.currentIndex != 1 {
-                    self?.selectSection(index: 1)
+                    self?.viewModel.setIndex(1)
                     self?.currentIndex = 1
                     guard let startingViewController: MovieListContentViewController = self?.viewControllerAtIndex(index: 1) else { return }
                     startingViewController.viewModel = self?.viewModel
@@ -178,7 +196,7 @@ extension MovieListViewController: UIPageViewControllerDataSource, UIPageViewCon
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         guard let viewController = (pendingViewControllers.first as? MovieListContentViewController) else { return }
         let index = viewController.pageIndex
-        selectSection(index: index)
+        self.viewModel.setIndex(index)
         viewController.viewModel = self.viewModel
         currentIndex = index
     }

@@ -169,7 +169,8 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text == "" {
-            Utils.showAlert(message: "Please enter search text")
+            let alert = SingleButtonAlert(title: "", message: "Please enter search text", action: AlertAction(buttonTitle: "Ok"))
+            self.presentSingleButtonDialog(alert: alert)
             return false
         }
         self.searchViewModel?.textSearch.value = textField.text ?? ""
