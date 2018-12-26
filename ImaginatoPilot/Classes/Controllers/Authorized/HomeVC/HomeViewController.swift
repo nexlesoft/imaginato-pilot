@@ -30,6 +30,7 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupSearchButton()
         bindMovieList(with: viewModel)
         bindCenteredMovie(with: viewModel)
         setupCollectionViewWhenTap(with: viewModel)
@@ -69,16 +70,6 @@ class HomeViewController: BaseViewController {
     
 }
 
-// MARK: User Interaction
-extension HomeViewController {
-    @IBAction func didTouchSearch(_ sender : UIButton) {
-        if let searchVC = self.getViewController(storyboardName: "Main", className: "SearchViewController") as? SearchViewController {
-            self.movingToSearchPage = true
-            self.navigationController?.pushViewController(searchVC, animated: true)
-        }
-    }
-}
-
 //MARK: - Private Func
 extension HomeViewController {
     fileprivate func setupUI() {
@@ -87,6 +78,16 @@ extension HomeViewController {
         lblMovieTitle.text = ""
         lblMovieGenre.text = ""
         carousel.register(UINib(nibName: "MovieCarouselCell", bundle: nil), forCellWithReuseIdentifier: "MovieCarouselCell")
+    }
+    
+    fileprivate func setupSearchButton() {
+        self.btnSearch.rx.tap.subscribe(onNext: { [weak self] _ in
+            guard let owner = self else { return }
+            if let searchVC = owner.getViewController(storyboardName: "Main", className: "SearchViewController") as? SearchViewController {
+                owner.movingToSearchPage = true
+                owner.navigationController?.pushViewController(searchVC, animated: true)
+            }
+        }).disposed(by: self.disposeBag)
     }
     
     fileprivate func createTimerAutoScroll() {

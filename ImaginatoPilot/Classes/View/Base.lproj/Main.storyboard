@@ -52,9 +52,6 @@
                                             <constraint firstAttribute="width" constant="60" id="mI3-UY-XtJ"/>
                                         </constraints>
                                         <state key="normal" image="ic_search-iPhone6P"/>
-                                        <connections>
-                                            <action selector="didTouchSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ihf-Cv-QQQ"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -625,6 +622,6 @@
     <resources>
         <image name="ic_search-iPhone6P" width="30" height="30"/>
         <image name="icon-back-2" width="13" height="23"/>
-        <image name="icon-rating" width="49" height="15"/>
+        <image name="icon-rating" width="98" height="30"/>
     </resources>
 </document>
