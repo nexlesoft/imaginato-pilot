@@ -21,7 +21,7 @@ class HistorySearchViewModel {
         self.fetchHistorysSearchList().map({$0}).subscribe(onNext: { [weak self](list) in
             self?.listSearchHistorys.value = list
         }, onError: { (error: Error) in
-            Utils.showAlert(message: error.localizedDescription)
+            
         }, onCompleted: nil, onDisposed: nil).disposed(by: self.disposeBag)
     }
 

@@ -20,6 +20,7 @@ class HomeViewModel {
             .distinctUntilChanged()
     }
     private let loadInProgress = Variable(false)
+    var onShowError =  PublishSubject<SingleButtonAlert>()
     let disposeBag = DisposeBag()
     var centeredTitle: BehaviorSubject<String> = BehaviorSubject<String>(value: "")
     var centeredType: BehaviorSubject<String> = BehaviorSubject<String>(value: "")
@@ -38,6 +39,9 @@ class HomeViewModel {
             }
         }
     }
+    var carousellScroll = BehaviorRelay<Bool>(value: true)
+    var movingToSearchPage = BehaviorRelay<Bool>(value: false)
+    var previousCenterIndexPath: BehaviorSubject<IndexPath>?
     
     let baseWebServices: BaseWebServices
     init(baseWebServices: BaseWebServices) {
@@ -59,7 +63,12 @@ class HomeViewModel {
         }) { [weak self] (errorMsg) in
             guard let owner = self else { return }
             owner.loadInProgress.value = false
-            Utils.showAlert(message: errorMsg)
+            let errorAlert = SingleButtonAlert(
+                title: "",
+                message: errorMsg,
+                action: AlertAction(buttonTitle: "OK")
+            )
+            self?.onShowError.onNext(errorAlert)
         }
     }
 }
