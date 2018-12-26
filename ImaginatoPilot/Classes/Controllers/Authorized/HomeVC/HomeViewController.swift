@@ -19,10 +19,7 @@ class HomeViewController: BaseViewController {
     @IBOutlet fileprivate weak var lblMovieTitle: UILabel!
     @IBOutlet fileprivate weak var lblMovieGenre: UILabel!
     
-    fileprivate var previousCenterIndexPath: IndexPath?
-    fileprivate var carousellScroll : Bool = true
     fileprivate var carouselTimer : Timer?
-    fileprivate var movingToSearchPage: Bool = false
     
     let disposeBag = DisposeBag()
     var viewModel = HomeViewModel(baseWebServices: BaseWebServices())
@@ -40,9 +37,15 @@ class HomeViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        movingToSearchPage = false
-        if let previoursIndexPath = self.previousCenterIndexPath {
-            self.carousel.scrollToItem(at: previoursIndexPath, at: .centeredHorizontally, animated: false)
+        viewModel.movingToSearchPage.accept(false)
+        if let previoursIndexPath = self.viewModel.previousCenterIndexPath {
+            do {
+                let index = try previoursIndexPath.value()
+                self.carousel.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
+            }
+            catch {
+                print("Invalid index")
+            }
         }
         if viewModel.arrMovie.value.count > 0 {
             self.createTimerAutoScroll()
@@ -75,8 +78,6 @@ extension HomeViewController {
     fileprivate func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
         lctHeightHeader.constant = Application.sharedInstance.appTopOffset + 44
-        lblMovieTitle.text = ""
-        lblMovieGenre.text = ""
         carousel.register(UINib(nibName: "MovieCarouselCell", bundle: nil), forCellWithReuseIdentifier: "MovieCarouselCell")
     }
     
@@ -84,7 +85,7 @@ extension HomeViewController {
         self.btnSearch.rx.tap.subscribe(onNext: { [weak self] _ in
             guard let owner = self else { return }
             if let searchVC = owner.getViewController(storyboardName: "Main", className: "SearchViewController") as? SearchViewController {
-                owner.movingToSearchPage = true
+                owner.viewModel.movingToSearchPage.accept(true)
                 owner.navigationController?.pushViewController(searchVC, animated: true)
             }
         }).disposed(by: self.disposeBag)
@@ -101,7 +102,7 @@ extension HomeViewController {
         guard let currentIndex = self.carousel.currentCenterCellIndex, viewModel.arrMovie.value.count > 0 else {
             return
         }
-        if self.carousellScroll == false {
+        if self.viewModel.carousellScroll.value == false {
             self.carousel.scrollToItem(at: IndexPath(row: currentIndex.row, section: 0), at: .centeredHorizontally, animated: true)
         } else if self.viewModel.arrMovie.value.count > 0 && currentIndex.row < self.viewModel.arrMovie.value.count - 1 {
             let nextIndex  = currentIndex.row + 1
@@ -124,7 +125,7 @@ extension HomeViewController {
             movieViewModel.isHiddenBuyTicket.subscribe(onNext: { [weak self] (isHidden) in
                 guard let owner = self else { return }
                 if isHidden {
-                    owner.carousellScroll = false
+                    viewModel.carousellScroll.accept(false)
                     owner.carouselTimer?.invalidate()
                 }
                 else {
@@ -134,9 +135,11 @@ extension HomeViewController {
                         owner.lblMovieTitle.transform = .identity
                         owner.lblMovieGenre.transform = .identity
                     }, completion: nil)
-                    owner.carousellScroll = true
+                    viewModel.carousellScroll.accept(true)
                     owner.createTimerAutoScroll()
-                    owner.previousCenterIndexPath = owner.carousel.currentCenterCellIndex
+                    if let currentCenterCellIndex = owner.carousel.currentCenterCellIndex {
+                        viewModel.previousCenterIndexPath = BehaviorSubject<IndexPath>(value: currentCenterCellIndex)
+                    }
                 }
             }).disposed(by: self.disposeBag)
             if let movieCell = cell as? MovieCarouselCell {
@@ -188,17 +191,28 @@ extension HomeViewController {
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext : {[weak self] in
                 guard let owner = self else { return }
-                
-                if owner.previousCenterIndexPath == owner.carousel.currentCenterCellIndex ||
-                    owner.movingToSearchPage == true {
-                    return
+                if let previousCenterIndexPath = owner.viewModel.previousCenterIndexPath {
+                    do {
+                        if try previousCenterIndexPath.value() == owner.carousel.currentCenterCellIndex ||
+                            owner.viewModel.movingToSearchPage.value == true {
+                            return
+                        }
+                    }
+                    catch {
+                        print("Invalid")
+                    }
                 }
                 guard let currentCenterIndex = owner.carousel.currentCenterCellIndex?.row else { return }
                 owner.viewModel.centeredIndex = BehaviorSubject(value: currentCenterIndex)
-                
-                if let previousCenterIndexPath = owner.previousCenterIndexPath {
-                    let vm = viewModel.arrMovie.value[previousCenterIndexPath.row]
-                    vm.isHiddenBuyTicket.accept(true)
+                if let previousCenterIndexPath = owner.viewModel.previousCenterIndexPath {
+                    do {
+                        let index = try previousCenterIndexPath.value()
+                        let vm = viewModel.arrMovie.value[index.row]
+                        vm.isHiddenBuyTicket.accept(true)
+                    }
+                    catch {
+                        print("Invalid index")
+                    }
                 }
                 if let curentIndexPath = owner.carousel.currentCenterCellIndex {
                     let vm = viewModel.arrMovie.value[curentIndexPath.row]
